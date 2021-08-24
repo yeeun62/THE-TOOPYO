@@ -1,10 +1,10 @@
 # THE-TOOPYO
 
 
-프로젝트 소개팀명: the-NavyHouse 🟦
+프로젝트 소개팀명: The-NavyHouse 🟦
 <br>
 
-프로젝트명: THE TOO-PYO어플명: < 대국민 투표 >
+프로젝트명: THE TOO-PYO
 
 
 “누가 더 잘 생겼죠? 이 사람이 옷을 잘 입은건가요? 오늘의 데이트룩 괜찮나요? 제가 잘못했나요 제 친구가 잘못했나요?“
