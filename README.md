@@ -2,6 +2,7 @@
 
 
 프로젝트 소개팀명: the-NavyHouse 🟦
+<br>
 
 프로젝트명: THE TOO-PYO어플명: < 대국민 투표 >
 
