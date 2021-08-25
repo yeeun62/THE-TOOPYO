@@ -1,5 +1,5 @@
 ---
-name: Memory.log Issue Card
+name: Issue Card
 about: Use template to raise issue
 title: ''
 labels: ''
