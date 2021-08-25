@@ -1,5 +1,6 @@
 require('dotenv').config();
 const cors = require('cors');
+//const https = require('https');
 const cookieParser = require('cookie-parser');
 const express = require('express');
 const app = express();
@@ -22,19 +23,14 @@ app.post('/login', controllers.login);
 app.get('/signout', controllers.signOut);
 app.post('/signup', controllers.signUp);
 
-app.get('/user', controllers.userInfo.mypage);
-app.patch('/user/:id', controllers.userInfo.retouchMypage);
+app.all('/user', controllers.userInfo);
 
-app.get('/content', controllers.content.allContent);
-app.get('/content/:id', controllers.content.detailContent);
-app.post('/content', controllers.content.createContent);
-app.patch('/content/:id', controllers.content.retouchContent);
-app.delete('/content/:id', controllers.content.deleteContent);
+app.all('/content', controllers.content);
 
 const HTTPS_PORT = process.env.HTTPS_PORT || 4000;
 
 app.listen(HTTPS_PORT, () => {
-    console.log('server listen on 4000');
+    console.log('열려라 서버!');
 });
 
 module.exports = app;
