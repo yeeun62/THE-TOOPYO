@@ -1,1 +1,2 @@
-const { user } = require('');
+
+module.exports = (req, res) => {};

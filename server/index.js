@@ -10,22 +10,26 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(
     cors({
-        origin: ['https://'], //! 도메인 url 적어야함.
+        origin: ['https://the-toopyo.com'],
         credentials: true,
         methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
     }),
 );
 
 app.use(cookieParser());
-app.post('/login', controllers.login);
-app.get('/signout', controllers.signout);
-app.post('/signup', controllers.signup);
 
-app.get('/content', controllers.content);
-app.get('/content/:id', controllers.content);
-app.post('/content', controllers.content);
-app.patch('/content:id', controllers.content);
-app.delete('/content:id', controllers.content);
+app.post('/login', controllers.login);
+app.get('/signout', controllers.signOut);
+app.post('/signup', controllers.signUp);
+
+app.get('/user', controllers.userInfo.mypage);
+app.patch('/user/:id', controllers.userInfo.retouchMypage);
+
+app.get('/content', controllers.content.allContent);
+app.get('/content/:id', controllers.content.detailContent);
+app.post('/content', controllers.content.createContent);
+app.patch('/content/:id', controllers.content.retouchContent);
+app.delete('/content/:id', controllers.content.deleteContent);
 
 const HTTPS_PORT = process.env.HTTPS_PORT || 4000;
 
