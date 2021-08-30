@@ -12,6 +12,9 @@ import NewContent from './pages/newcontent/NewContent';
 export default function App() {
     const [isLogin, setIsLogin] = useState();
 
+    const [content, setContent] = useState({}); // 게시글 정보
+    console.log(content);
+
     const loginHandler = function () {
         console.log('로그인됐다');
         setIsLogin(true);
@@ -22,6 +25,19 @@ export default function App() {
     const getContentList = () => {
         axios.get('http://localhost:80/content').then((res) => {
             setContentList(res.data.content);
+        });
+    };
+    const [contentId, setContentId] = useState();
+    console.log(contentId);
+
+    const idChange = (change) => {
+        setContentId(change);
+    };
+
+    const getContentDetail = () => {
+        axios.get(`http://localhost:80/content/`).then((res) => {
+            console.log(res);
+            setContent(res.data.data);
         });
     };
 
@@ -39,14 +55,19 @@ export default function App() {
                     <Route path="/mypage" component={Mypage} />
                     <Route path="/signup" component={SignupPage} />
                     <Route path="/newContent" component={NewContent} />
-                    <Route path="/curContent" component={CurContent} />
+                    <Route path="/curContent">
+                        <CurContent content={content}></CurContent>
+                    </Route>
                     <Route exact path="/">
                         <div className="app-thumb-entire">
                             {contentList.map((list) => {
                                 return (
-                                    <Link to="/CurContent">
-                                        <Thumbnail list={list} key={list.id}></Thumbnail>
-                                    </Link>
+                                    <Thumbnail
+                                        list={list}
+                                        key={list.id}
+                                        idChange={idChange}
+                                        getContentDetail={getContentDetail}
+                                    />
                                 );
                             })}
                         </div>

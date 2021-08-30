@@ -7,14 +7,15 @@ module.exports = async (req, res) => {
         const userCheck = await user.findOne({ where: { email: email } });
         if (userCheck) {
             res.status(409).json({ message: 'email exist' });
-        } else if (nickName && email && password && phoneNumber && profile_img) {
-            const findNickname = user.findOne({
+        } else if (nickName && email && password && phoneNumber) {
+            //&& profile_img
+            const findNickname = await user.findOne({
                 where: {
                     nickName,
                 },
             });
             if (!findNickname) {
-                user.create({
+                await user.create({
                     nickName,
                     email,
                     password,
