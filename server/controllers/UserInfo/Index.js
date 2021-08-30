@@ -3,6 +3,6 @@ const user = express();
 const { mypage, retouchMypage } = require('./UserInfo');
 
 user.get('/', mypage);
-user.patch('/:id', retouchMypage);
+user.patch('/', retouchMypage);
 
 module.exports = user;
