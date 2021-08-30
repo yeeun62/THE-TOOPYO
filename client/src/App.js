@@ -7,7 +7,7 @@ import axios from 'axios';
 import SignupPage from './pages/signup/SignUpPage';
 import CurContent from './pages/curcontent/CurContent';
 import Mypage from './pages/mypage/Mypage';
-import NewContent from './pages/NewContent/NewContent';
+import NewContent from './pages/newcontent/NewContent';
 
 export default function App() {
     const [isLogin, setIsLogin] = useState();
