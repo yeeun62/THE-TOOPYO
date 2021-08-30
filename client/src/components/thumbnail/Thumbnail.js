@@ -10,7 +10,7 @@ function Thumbnail({ list, idChange, getContentDetail }) {
     };
 
     const contentDetail = () => {
-        getContentDetail();
+        getContentDetail(list.id);
     };
 
     return (
