@@ -4,30 +4,34 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import CurContent from '../../pages/curcontent/CurContent';
 
-function Thumbnail({ list }) {
-    const [content, setContent] = useState({}); // 게시글 정보
+function Thumbnail({ list, idChange, getContentDetail }) {
+    const change = (id) => {
+        idChange(id);
+    };
 
-    const getContentDetail = () => {
-        console.log('리스트!!!!! ' + list.id);
-        axios.get(`https://localhost:80/content/${list.id}`).then((res) => {
-            console.log('알이에스 ' + res);
-            setContent(res.data);
-            return <CurContent content={content} id={list.id}></CurContent>;
-        });
+    const contentDetail = () => {
+        getContentDetail();
     };
 
     return (
         <div>
-            <div className="container" onClick={getContentDetail}>
-                <h1 className="thumbTitle">{list.title}title</h1>
-                <img className="picture_1" src={list.picture_1}></img>
-                <img
-                    id="versus"
-                    src="https://cdn.discordapp.com/attachments/881710985335934979/881711027425787914/vs.png"
-                    alt="versus"></img>
-                <img className="picture_2" src={list.picture_2}></img>
-                <div className="descript">{list.description}</div>
-            </div>
+            <Link to="/curContent">
+                <div
+                    className="container"
+                    onClick={() => {
+                        change(list.id);
+                        contentDetail();
+                    }}>
+                    <h1 className="thumbTitle">{list.title}title</h1>
+                    <img className="picture_1" src={list.picture_1}></img>
+                    <img
+                        id="versus"
+                        src="https://cdn.discordapp.com/attachments/881710985335934979/881711027425787914/vs.png"
+                        alt="versus"></img>
+                    <img className="picture_2" src={list.picture_2}></img>
+                    <div className="descript">{list.description}</div>
+                </div>
+            </Link>
         </div>
     );
 }
