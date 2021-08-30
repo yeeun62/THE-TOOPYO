@@ -1,0 +1,49 @@
+nav {
+    position: fixed;
+    height: 4.17vw;
+    width: 100%;
+    background-color: #060a7d;
+}
+
+.navInner {
+    margin: 0 auto;
+    width: 70vw;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.logo {
+    width: 42px;
+    height: 42px;
+    margin-top: 10px;
+    position: absolute;
+    left: 0;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 0.52vw;
+}
+
+.navBtn {
+    height: 3vw;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    border-radius: 2vw;
+    border: none;
+    outline: none;
+    font-size: 1vw;
+    font-weight: bold;
+    word-break: keep-all;
+    background-color: #fff;
+    color: #060a7d;
+    transition: all 0.125s;
+    cursor: pointer;
+}
+
+.navBtn:hover {
+    background-color: #060a7d;
+    color: #fff;
+    border: 1px solid #fff;
+}

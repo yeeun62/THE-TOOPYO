@@ -10,9 +10,9 @@ content.post('/', createContent);
 content.patch('/:id', retouchContent);
 content.delete('/:id', deleteContent);
 
-content.get('deadline/:id', close);
+content.patch('/deadline/:id', close);
 
-content.get('agree/:id', agree);
-content.get('disagree/:id', disagree);
+content.get('/agree/:id', agree);
+content.get('/disagree/:id', disagree);
 
 module.exports = content;

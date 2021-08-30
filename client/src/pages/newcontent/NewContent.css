@@ -1,0 +1,62 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#inner {
+    width: 62.5vw;
+    margin: auto;
+    padding: 2.6vw 1.04vw 0 1.04vw;
+    /* border-right: 1px solid red;
+    border-left: 1px solid red; */
+    position: relative;
+}
+
+#newTitle {
+    display: block;
+    text-align: center;
+    width: 52.08vw;
+    height: 2.6vw;
+    margin: 1.56vw auto;
+}
+
+#NewSubmit {
+    width: 3.65vw;
+    background-color: #fff;
+    border: none;
+    position: absolute;
+    top: 7vw;
+    margin-left: 1.04vw;
+}
+
+.title {
+    width: 26.04vw;
+    border: 1px solid #ccc;
+    width: 55.73vw;
+}
+
+.NewContentFrame {
+    margin-bottom: 5.21vw;
+    position: relative;
+    /* border: 1px solid red; */
+    margin-top: 2.6vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+.pic {
+    width: 28.65vw;
+    height: 28.65vw;
+    border: 1px solid #ccc;
+}
+
+.NewDesc {
+    width: 60.42vw;
+    height: 5.21vw;
+    display: block;
+    position: absolute;
+    top: 30vw;
+    left: 1.04vw;
+    border: 1px solid #ccc;
+    margin-bottom: 10vw;
+}

@@ -1,0 +1,15 @@
+/* @media screen and (min-width: 768px) { */
+
+.sidebarBtn {
+    padding-top: 0.5vw;
+    display: flex;
+    cursor: pointer;
+    outline: none;
+    text-decoration: none;
+    height: 30px;
+    width: 30px;
+    justify-content: center;
+    text-align: right;
+    background-color: #ffffff00;
+}
+/* } */
