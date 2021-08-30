@@ -34,8 +34,8 @@ export default function App() {
         setContentId(change);
     };
 
-    const getContentDetail = () => {
-        axios.get(`http://localhost:80/content/`).then((res) => {
+    const getContentDetail = (contentId) => {
+        axios.get(`http://localhost:80/content/${contentId}`).then((res) => {
             console.log(res);
             setContent(res.data.data);
         });
