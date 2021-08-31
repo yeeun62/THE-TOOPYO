@@ -52,7 +52,7 @@ function CurContent({ content, id }) {
                         id="editContent"
                         src="https://cdn.discordapp.com/attachments/881710985335934979/881927360398655518/edit.png"></img>
                 </button>
-                <button className="deleteContent curBtn" onClick={deleteContent}>
+                <button className="deleteContentBtn curBtn" onClick={deleteContent}>
                     <img
                         id="deleteContent"
                         src="https://cdn.discordapp.com/attachments/837593576955052072/881931904486621204/delete.png"></img>

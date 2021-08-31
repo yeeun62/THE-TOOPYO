@@ -9,7 +9,7 @@ import axios from 'axios';
 import Mypage from '../../pages/mypage/Mypage';
 import Tab from '../tab/Tab';
 
-function Nav({ isLogin, loginHandler, contentList }) {
+function Nav({ isLogin, loginHandler, contentList, getContentDetail }) {
     const myPage = () => {
         axios.post('http://localhost:80/user', { email: '확인중' }).then((a) => {
             console.log(a);
@@ -47,7 +47,7 @@ function Nav({ isLogin, loginHandler, contentList }) {
                 <div>
                     <ul className="buttonContainer">
                         <li>
-                            <SearchButton contentList={contentList} />
+                            <SearchButton contentList={contentList} getContentDetail={getContentDetail} />
                         </li>
                         <li>
                             <Link to="/NewContent">
@@ -59,9 +59,11 @@ function Nav({ isLogin, loginHandler, contentList }) {
                         </li>
                         {isLogin ? (
                             <li>
-                                <button className="navBtn" onClick={myPage}>
-                                    my page
-                                </button>
+                                <Link to="/mypage">
+                                    <button className="navBtn" onClick={myPage}>
+                                        my page
+                                    </button>
+                                </Link>
                             </li>
                         ) : (
                             <div>

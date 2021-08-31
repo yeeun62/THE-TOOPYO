@@ -4,6 +4,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const express = require('express');
 const app = express();
+const imgRouter = require('./multer');
 
 const controllers = require('./controllers');
 
@@ -17,7 +18,10 @@ app.use(
         methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
     }),
 );
+
 app.use(cookieParser());
+
+app.patch('/upload', imgRouter);
 
 app.post('/login', controllers.login);
 app.get('/signout', controllers.signOut);
