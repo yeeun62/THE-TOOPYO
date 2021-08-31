@@ -5,6 +5,7 @@
         width: 100%;
         background-color: #060a7d;
         z-index: 9999;
+        margin-bottom: 5vw;
     }
 
     .navInner {
@@ -58,6 +59,8 @@
         border: 1px solid #fff;
     }
 }
+
+/* ===================pc 끝 !!! mobile 시작!!! ================= */
 
 @media screen and (max-width: 769px) {
     .newContentBtn {
