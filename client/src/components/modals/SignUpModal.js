@@ -6,7 +6,6 @@ import { useHistory, Link } from 'react-router-dom';
 function Signup({ isOpen, close, loginHandler }) {
     const [signupInfo, setSignupInfo] = useState({
         profile_img: '',
-        provider: 'origin',
         nickName: '',
         email: '',
         password: '',
@@ -46,7 +45,6 @@ function Signup({ isOpen, close, loginHandler }) {
                     'http://localhost:80/signup',
                     {
                         profile_img: signupInfo.profile_img,
-                        provider: signupInfo.provider,
                         nickName: signupInfo.nickName,
                         email: signupInfo.email,
                         password: signupInfo.password,
@@ -55,7 +53,10 @@ function Signup({ isOpen, close, loginHandler }) {
                     { 'Content-Type': 'application/json', withCredentials: true },
                 )
                 .then((res) => {
-                    if (res.message === 'ok') return loginHandler(true);
+                    console.log(res);
+                    if (res.data.message === 'ok') {
+                        return close();
+                    }
                 });
         }
     };
