@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './SignUp.css';
+import '../../components/modals/Modal.css';
 import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
 
@@ -125,7 +125,9 @@ function SignupPage() {
                             </button>
                             <div className="loginLine">
                                 이미 아이디가 있으신가요?
-                                <Link to="/">로그인</Link>
+                                <Link to="/login">
+                                    <button className="link">로그인</button>
+                                </Link>
                             </div>
                         </div>
                     </form>

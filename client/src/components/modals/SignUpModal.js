@@ -117,7 +117,11 @@ function Signup({ isOpen, close, loginHandler }) {
                                 </button>
                                 <div className="loginLine">
                                     이미 아이디가 있으신가요?
-                                    <buttonon onClick={close}>로그인</buttonon>
+                                    <Link to="/login">
+                                        <button className="link" onClick={close}>
+                                            로그인
+                                        </button>
+                                    </Link>
                                 </div>
                             </div>
                         </form>

@@ -24,12 +24,24 @@ const Desc = styled.div`
     text-align: center;
 `;
 
-export default function Tab({ userInfo, getUserInfo }) {
+export default function Tab({ userInfo, getUserInfo, id, contentList, idChange, getContentDetail }) {
     console.log(userInfo);
     const [currentTab, setCurrentTab] = useState(0);
     const tabMenu = [
         { name: 'mypage', content: <MypageDetail getUserInfo={getUserInfo} userInfo={userInfo.userInfo} /> },
-        { name: 'mycontent', content: <Mycontent userInfo={userInfo.content} /> },
+        {
+            name: 'mycontent',
+            content: (
+                <Mycontent
+                    content={userInfo.content}
+                    userInfo={userInfo.userInfo}
+                    id={id}
+                    contentList={contentList}
+                    idChange={idChange}
+                    getContentDetail={getContentDetail}
+                />
+            ),
+        },
     ];
     const selectMenuHandler = (index) => {
         setCurrentTab(index);

@@ -16,7 +16,7 @@ function LoginPage({ loginHandler }) {
     const loginRequestHandler = () => {
         axios
             .post(
-                'https://localhost:4000/login',
+                'https://localhost:80/login',
                 {
                     email: loginInfo.email,
                     password: loginInfo.password,
@@ -25,7 +25,7 @@ function LoginPage({ loginHandler }) {
             )
             .then((res) => {
                 if (res.message === 'ok') {
-                    return loginHandler(res.cookies);
+                    loginHandler();
                 }
             })
             .catch((err) => alert(err));
@@ -58,16 +58,11 @@ function LoginPage({ loginHandler }) {
                         <button className="loginBtn" onClick={loginRequestHandler}>
                             로그인
                         </button>
-                        <button className="kakaoBtn" href={process.env.KAKAO_AUTH_URL}>
-                            <img
-                                className="kakaoLogo"
-                                src="https://developers.kakao.com/tool/resource/static/img/button/kakaolink/kakaolink_btn_medium.png"
-                            />
-                            <div className="kakaoText">카카오 계정으로 가입</div>
-                        </button>
                         <div className="signUpLine">
                             회원이 아니신가요?
-                            <Link to="/signup">회원가입</Link>
+                            <Link to="/signup">
+                                <button className="link">회원가입</button>
+                            </Link>
                         </div>
                     </div>
                 </div>
