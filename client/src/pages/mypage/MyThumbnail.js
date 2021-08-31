@@ -1,5 +1,5 @@
 import '../../components/thumbnail/Thumbnail.css';
-
+import './Mypage.css';
 import { Link } from 'react-router-dom';
 
 function MyThumbnail({ list, getContentDetail }) {
@@ -11,7 +11,7 @@ function MyThumbnail({ list, getContentDetail }) {
         <div>
             <Link to="/curContent">
                 <div
-                    className="container"
+                    className="myThumnailContainer"
                     onClick={() => {
                         contentDetail();
                     }}>

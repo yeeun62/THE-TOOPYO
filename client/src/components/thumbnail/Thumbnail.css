@@ -8,8 +8,9 @@
     }
 
     .container {
-        width: 19.43vw;
-        height: 43.5vw;
+        width: 22.43vw;
+        height: 50.5vw;
+        border-radius: 1vw;
     }
 }
 
@@ -37,23 +38,27 @@
     margin-top: 0.8vw;
     text-align: center;
 }
-
+.thumbPicContainer {
+    margin: 0 2.21vw;
+}
 .thumbPicture {
     width: 18vw;
     height: 15vw;
     border: 1px solid #ccc;
-    margin: 0.8vw 0.715vw;
+    margin: 0.8vw auto;
 }
 
 .descript {
     border: 1px solid #ccc;
     width: 18vw;
-    height: 4vw;
+    height: 5vw;
     margin: auto;
     text-align: left;
     overflow: scroll;
 }
-
+.iconContainer {
+    margin: 0 9.5vw;
+}
 #thumbVersus {
-    margin: 0 8.4vw;
+    transform: scale(1.2vw);
 }

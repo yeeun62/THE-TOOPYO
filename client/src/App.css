@@ -16,7 +16,7 @@
         flex-wrap: wrap;
     }
 
-    .mainBanner {
+    #banner {
         display: block;
         width: 70vw;
         padding-top: 6.3vw;
