@@ -10,15 +10,20 @@ export default function Mycontent({ contentList, userInfo, getContentDetail }) {
 
     return (
         <>
-            <h1>안녕하세요 {userInfo.nickName}</h1>
+            <h1 className="mypageTitle">안녕하세요 {userInfo.nickName}</h1>
             <div>
-                {filteredContents.map((list) => {
-                    return (
-                        <li>
-                            <MyThumbnail list={list} key={list.id} getContentDetail={getContentDetail}></MyThumbnail>
-                        </li>
-                    );
-                })}
+                <div className="filteredContainer">
+                    {filteredContents.map((list) => {
+                        return (
+                            <li className="mycontentContainer">
+                                <MyThumbnail
+                                    list={list}
+                                    key={list.id}
+                                    getContentDetail={getContentDetail}></MyThumbnail>
+                            </li>
+                        );
+                    })}
+                </div>
             </div>
         </>
     );
