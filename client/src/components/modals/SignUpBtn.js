@@ -16,7 +16,7 @@ function SignUpButton() {
 
     return (
         <>
-            <button className="modalBtn" onClick={openModal}>
+            <button className="navBtn signup" onClick={openModal}>
                 회원가입
             </button>
             <Signup isOpen={isModalOpen} close={closeModal} />

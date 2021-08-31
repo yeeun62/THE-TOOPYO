@@ -14,7 +14,7 @@ function LoginButton({ loginHandler }) {
 
     return (
         <>
-            <button className="modalBtn" onClick={openModal}>
+            <button className="modalBtn navBtn" onClick={openModal}>
                 로그인
             </button>
             <Login isOpen={isModalOpen} close={closeModal} open={openModal} loginHandler={loginHandler} />
