@@ -2,20 +2,15 @@ import axios from 'axios';
 import React from 'react';
 import MyThumbnail from './MyThumbnail';
 
-export default function Mycontent({ contentList, userInfo, getContentDetail }) {
-    const filteredContents = contentList.filter((el) => {
-        return el.nickName === userInfo.nickName;
-    });
-    console.log(filteredContents);
-
+export default function Mycontent({ MycontentList, userInfo }) {
     return (
         <>
             <h1>안녕하세요 {userInfo.nickName}</h1>
             <div>
-                {filteredContents.map((list) => {
+                {MycontentList.map((list) => {
                     return (
                         <li>
-                            <MyThumbnail list={list} key={list.id} getContentDetail={getContentDetail}></MyThumbnail>
+                            <MyThumbnail list={list} key={list.id}></MyThumbnail>
                         </li>
                     );
                 })}

@@ -2,19 +2,11 @@ import '../../components/thumbnail/Thumbnail.css';
 
 import { Link } from 'react-router-dom';
 
-function MyThumbnail({ list, getContentDetail }) {
-    const contentDetail = () => {
-        getContentDetail(list.id);
-    };
-
+function MyThumbnail({ list }) {
     return (
         <div>
             <Link to="/curContent">
-                <div
-                    className="container"
-                    onClick={() => {
-                        contentDetail();
-                    }}>
+                <div className="container">
                     <h1 className="thumbTitle">{list.title}</h1>
                     <img className="thumbPicture thumbPicture_1" src={list.picture_1}></img>
                     <img

@@ -6,16 +6,16 @@ require('dotenv').config();
 module.exports = {
     // 내정보 입니다.
     mypage: async (req, res) => {
+        const accessToken = req.cookies.accessToken;
+        console.log('!!!!!!!!!!!!!!', req);
         try {
-            const accessToken = req.cookies.accessToken;
-
             if (!accessToken) {
                 res.status(404).json({ message: 'invalid access token' });
             } else {
                 const userData = await jwt.verify(accessToken, process.env.ACCESS_SECRET);
                 delete userData.iat;
                 delete userData.exp;
-                const findcontent = await content.findOne({ where: { userId: userData.id } });
+                const findcontent = await content.findAll({ where: { userId: userData.id } });
                 res.status(200).json({ message: 'ok', data: { userInfo: userData, content: findcontent } });
             }
         } catch (err) {

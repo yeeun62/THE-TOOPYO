@@ -22,11 +22,10 @@ function Login({ isOpen, close, loginHandler }) {
                     email: loginInfo.email,
                     password: loginInfo.password,
                 },
-                { 'Content-Type': 'application/json', withCredentials: true },
+                { withCredentials: true },
             )
             .then((res) => {
                 if (res.data.message === 'ok') {
-                    console.log(res.headers);
                     loginHandler(res);
                 }
             })
