@@ -1,37 +1,24 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
-import Thumbnail from '../../components/thumbnail/Thumbnail';
+import React from 'react';
+import MyThumbnail from './MyThumbnail';
 
-export default function Mycontent(props) {
-    const info = props.userInfo;
-    const [contentList, setContentList] = useState([]);
-    const [auth, setAuth] = useState('');
-
-    const getContentList = () => {
-        axios.get('https://localhost:80/content').then((res) => {
-            setContentList(res.data.content);
-        });
-    };
-  
+export default function Mycontent({ contentList, userInfo, getContentDetail }) {
     const filteredContents = contentList.filter((el) => {
-        return el.writer.id === info.nickName;
+        return el.nickName === userInfo.nickName;
     });
-
-    useEffect(() => {
-        getContentList();
-    }, []);
+    console.log(filteredContents);
 
     return (
         <>
-            <h1>안녕하세요 info.name님</h1>
+            <h1>안녕하세요 {userInfo.nickName}</h1>
             <div>
-                <ul>
-                    {filteredContents.map((list) => {
+                {filteredContents.map((list) => {
+                    return (
                         <li>
-                            <Thumbnail list={list} auth={auth}></Thumbnail>
-                        </li>;
-                    })}
-                </ul>
+                            <MyThumbnail list={list} key={list.id} getContentDetail={getContentDetail}></MyThumbnail>
+                        </li>
+                    );
+                })}
             </div>
         </>
     );

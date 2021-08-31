@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import './SignUp.css';
+import '../../components/modals/Modal.css';
 import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
 
 function SignupPage() {
     const [signupInfo, setSignupInfo] = useState({
-        picture: '',
-        provider: 'origin',
+        profile_img: '',
         nickName: '',
         email: '',
         password: '',
         phoneNumber: '',
     });
+    console.log(signupInfo);
     const [errorMessage, setErrorMessage] = useState(false);
     const [isLogin, setIsLogin] = useState({
         isLogin: false,
@@ -25,7 +25,7 @@ function SignupPage() {
     const fileEvent = (e) => {
         const reader = new FileReader();
         reader.onload = () => {
-            setSignupInfo({ ...signupInfo, [e.target.name]: e.target.picture });
+            setSignupInfo({ ...signupInfo, [e.target.name]: e.target.files });
             console.log('파일 업로드 완료.');
         };
         reader.readAsText(e.target.files[0]);
@@ -36,8 +36,8 @@ function SignupPage() {
 
     const signUpRequestHandler = () => {
         if (
-            // !signupInfo.picture ||
-            !signupInfo.provider ||
+            // !signupInfo.profile_img ||
+            // !signupInfo.provider ||
             !signupInfo.nickName ||
             !signupInfo.email ||
             !signupInfo.password ||
@@ -51,7 +51,7 @@ function SignupPage() {
                 .post(
                     'http://localhost:80/signup',
                     {
-                        profile_img: 'signupInfo.picture',
+                        profile_img: signupInfo.profile_img,
                         provider: signupInfo.provider,
                         nickName: signupInfo.nickName,
                         email: signupInfo.email,
@@ -62,8 +62,8 @@ function SignupPage() {
                 )
                 .then((res) => {
                     history.push('/');
-                    if (res.message === 'ok') return loginHandler(true);
-                    console.log('eeeeeee');
+                    if (res.data.message === 'ok') {
+                    }
                 });
         }
     };
@@ -113,20 +113,19 @@ function SignupPage() {
                             />
                             <div className="profileUploader">프로필 사진을 선택하세요.</div>
                             <input
-                                name="picture"
+                                name="profile_img"
                                 className="signUpPic"
                                 type="file"
-                                placeholder="picture"
-                                onChange={fileEvent}
-                                value={signupInfo.picture}
+                                onChange={(e) => fileEvent(e)}
                             />
                             <button className="signUpB" onClick={signUpRequestHandler}>
-                                {' '}
                                 회원가입
                             </button>
                             <div className="loginLine">
                                 이미 아이디가 있으신가요?
-                                <Link to="/">로그인</Link>
+                                <Link to="/login">
+                                    <button className="link">로그인</button>
+                                </Link>
                             </div>
                         </div>
                     </form>
