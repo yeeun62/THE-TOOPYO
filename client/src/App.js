@@ -8,10 +8,10 @@ import SignupPage from './pages/signup/SignUpPage';
 import CurContent from './pages/curcontent/CurContent';
 import Mypage from './pages/mypage/Mypage';
 import NewContent from './pages/newcontent/NewContent';
+import LoginPage from './pages/login/LoginPage';
 
 export default function App() {
     const [isLogin, setIsLogin] = useState();
-
     const [content, setContent] = useState({}); // 게시글 정보
     console.log(content);
 
@@ -56,7 +56,7 @@ export default function App() {
     useEffect(() => {
         getUserInfo();
     }, []);
-
+    console.log(localStorage);
     // useEffect(() => {
     //     localStorage.setItem('thetoopyo', userInfo.userInfo);
     // }, []);
@@ -70,9 +70,19 @@ export default function App() {
 
                 <Switch>
                     <Route path="/mypage">
-                        <Mypage onClick={getUserInfo} userInfo={userInfo} getUserInfo={getUserInfo} />
+                        <Mypage
+                            onClick={getUserInfo}
+                            userInfo={userInfo}
+                            getUserInfo={getUserInfo}
+                            contentList={contentList}
+                            idChange={idChange}
+                            getContentDetail={getContentDetail}
+                        />
                     </Route>
                     <Route path="/signup" component={SignupPage} />
+                    <Route path="/login">
+                        <LoginPage loginHandler={loginHandler} />
+                    </Route>
                     <Route path="/newContent" component={NewContent} />
                     <Route path="/curContent">
                         <CurContent content={content}></CurContent>

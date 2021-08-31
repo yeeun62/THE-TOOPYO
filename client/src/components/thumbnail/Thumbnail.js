@@ -1,14 +1,8 @@
 import './Thumbnail.css';
-import axios from 'axios';
-import { useState } from 'react';
+
 import { Link } from 'react-router-dom';
-import CurContent from '../../pages/curcontent/CurContent';
 
-function Thumbnail({ list, idChange, getContentDetail }) {
-    const change = (id) => {
-        idChange(id);
-    };
-
+function Thumbnail({ list, getContentDetail }) {
     const contentDetail = () => {
         getContentDetail(list.id);
     };
@@ -19,16 +13,15 @@ function Thumbnail({ list, idChange, getContentDetail }) {
                 <div
                     className="container"
                     onClick={() => {
-                        change(list.id);
                         contentDetail();
                     }}>
-                    <h1 className="thumbTitle">{list.title}title</h1>
-                    <img className="picture_1" src={list.picture_1}></img>
+                    <h1 className="thumbTitle">{list.title}</h1>
+                    <img className="thumbPicture thumbPicture_1" src={list.picture_1}></img>
                     <img
-                        id="versus"
+                        id="thumbVersus"
                         src="https://cdn.discordapp.com/attachments/881710985335934979/881711027425787914/vs.png"
                         alt="versus"></img>
-                    <img className="picture_2" src={list.picture_2}></img>
+                    <img className="thumbPicture thumbPicture_2" src={list.picture_2}></img>
                     <div className="descript">{list.description}</div>
                 </div>
             </Link>

@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './NewContent.css';
+import CurContent from '../curcontent/CurContent';
 
 function NewContent() {
     const [information, setInformation] = useState({
@@ -9,7 +10,7 @@ function NewContent() {
         description: '',
         picture_1: '',
         picture_2: '',
-        votingDeadLine: '',
+        votingDeadLine: true,
     });
 
     const [isErr, setIsErr] = useState(false);
@@ -41,7 +42,9 @@ function NewContent() {
                 votingDeadLine: information.votingDeadLine,
             })
             .then((res) => {
+                console.log(res.message);
                 if (res.message === 'please rewrite') return isErrHandler();
+                // else if (res.message === 'ok') return <CurContent id={res.data.content.id}></CurContent>;
             });
     };
 
@@ -56,7 +59,7 @@ function NewContent() {
             <form action="" method="post">
                 {/*action="데이터보낼 서버의 파일"*/}
                 <input
-                    className="title"
+                    className="inputTitle"
                     maxlength="20"
                     autoFocus
                     required
@@ -67,12 +70,15 @@ function NewContent() {
                         src="https://cdn.discordapp.com/attachments/881710985335934979/881719851356409896/verify.png"
                         id="NewSubmit"></img>
                 </button>
+                {/* --------------------- 상단 제목과 버튼 부분 ----------------- */}
                 <div className="NewContentFrame">
                     <div className="pic Left">
                         <img className="picBg"></img>
                         <input id="pic_1" type="file"></input>
                     </div>
-                    {/* <progress id="uploadPic_1" max="100"></progress> */}
+                    <img
+                        id="newVersus"
+                        src="https://cdn.discordapp.com/attachments/881710985335934979/881711027425787914/vs.png"></img>
                     <div className="pic Right">
                         <img className="picBg" src=""></img>
                         <input id="pic_2" type="file"></input>
