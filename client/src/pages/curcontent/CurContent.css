@@ -1,4 +1,104 @@
 .curContent {
+    margin-bottom: 5vw;
+}
+
+.curCotainerTitle {
     width: 70vw;
     margin: auto;
+
+    margin-top: 4vw; /*w지울거*/
+    position: relative;
+}
+
+#curTitle {
+    text-align: center;
+}
+
+/* --------------button 시작--------------- */
+
+.curBtn {
+    width: 3.65vw;
+    height: 3.65vw;
+    background-color: #fff;
+    border: none;
+}
+
+#editContent {
+    width: 2.6vw;
+    position: absolute;
+    right: 6vw;
+}
+
+#deleteContent {
+    width: 2.6vw;
+    position: absolute;
+    right: 2.6vw;
+}
+
+/* --------------button 끝--------------- */
+
+/* =------------------컨텐츠 내용------------------- */
+
+.contentInner {
+    width: 70vw;
+    margin: auto;
+    margin-top: 4vw;
+    border-top: 2vw solid rgba(6, 10, 125, 60%);
+    padding-top: 4vw;
+}
+
+#curPicContainer {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin-bottom: 4vw;
+}
+
+.curPic {
+    width: 30vw;
+    height: 30vw;
+    border: 1px solid #ccc; /*지우기*/
+}
+
+.curPic:hover {
+    cursor: pointer;
+    transform: scale(1.01);
+    border: 2px solid #060a7d;
+}
+
+.curVersus {
+    position: absolute;
+    top: 14vw;
+    left: 49%;
+}
+
+/* ---------------------작성자프로필-------------------- */
+
+.contentInfo {
+    border: 1px solid #ccc;
+    height: 6.5vw;
+}
+
+.curWriter {
+    display: flex;
+    justify-content: space-between;
+    width: 14vw;
+}
+
+.curWriterImg {
+    background: red;
+    width: 3vw;
+    height: 3vw;
+    border-radius: 50%;
+}
+
+.curWriterName {
+    font-size: 2vw;
+}
+
+.curDesc {
+    display: block;
+    height: 6.5vw;
+    overflow: scroll;
+    border: 1px solid #bbb;
 }

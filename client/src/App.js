@@ -1,6 +1,6 @@
 import './App.css';
 import { useState, useEffect } from 'react';
-import { BrowserRouter, Switch, Route, Redirect, useParams, Link } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Nav from './components/nav/Nav';
 import Thumbnail from './components/thumbnail/Thumbnail';
 import axios from 'axios';
@@ -13,10 +13,9 @@ export default function App() {
     const [isLogin, setIsLogin] = useState();
 
     const [content, setContent] = useState({}); // 게시글 정보
-    console.log(content);
 
     const loginHandler = function () {
-        console.log('로그인됐다');
+        console.log('로그인성공');
         setIsLogin(true);
     };
 
@@ -28,15 +27,10 @@ export default function App() {
         });
     };
     const [contentId, setContentId] = useState();
-    console.log(contentId);
 
-    const idChange = (change) => {
-        setContentId(change);
-    };
-
-    const getContentDetail = () => {
-        axios.get(`http://localhost:80/content/`).then((res) => {
-            console.log(res);
+    const getContentDetail = (contentId) => {
+        setContentId(contentId);
+        axios.get(`http://localhost:80/content/${contentId}`).then((res) => {
             setContent(res.data.data);
         });
     };
@@ -65,14 +59,24 @@ export default function App() {
                                     <Thumbnail
                                         list={list}
                                         key={list.id}
-                                        idChange={idChange}
+                                        id={contentId}
                                         getContentDetail={getContentDetail}
                                     />
                                 );
                             })}
+                            {/* <div ref={observer} />
+                            <>
+                                {isLoading && (
+                                    <Thumbnail
+                                        list={list}
+                                        key={list.id}
+                                        id={contentId}
+                                        getContentDetail={getContentDetail}
+                                    />
+                                )}
+                            </> */}
                         </div>
                     </Route>
-                    ;
                 </Switch>
             </div>
         </BrowserRouter>

@@ -13,6 +13,13 @@
         color: #060a7d;
         transition: all 0.125s;
         cursor: pointer;
+        margin-right: 1.04vw;
+    }
+
+    .modalBtn:hover {
+        background-color: #060a7d;
+        color: #fff;
+        border: 1px solid #fff;
     }
 
     .modal {

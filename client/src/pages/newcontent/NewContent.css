@@ -4,7 +4,7 @@
 }
 
 #inner {
-    width: 62.5vw;
+    width: 70vw;
     margin: auto;
     padding: 2.6vw 1.04vw 0 1.04vw;
     /* border-right: 1px solid red;
@@ -25,18 +25,29 @@
     background-color: #fff;
     border: none;
     position: absolute;
-    top: 7vw;
+    top: 8vw;
     margin-left: 1.04vw;
 }
 
-.title {
+.inputTitle {
     width: 26.04vw;
+    height: 3vw;
+    font-size: 1.8vw;
+    vertical-align: middle;
     border: 1px solid #ccc;
     width: 55.73vw;
 }
 
+#newVersus {
+    width: 3vw;
+    height: 3vw;
+    position: absolute;
+    top: 10vw;
+    left: 48%;
+}
+
 .NewContentFrame {
-    margin-bottom: 5.21vw;
+    margin: 10vw 0;
     position: relative;
     /* border: 1px solid red; */
     margin-top: 2.6vw;
@@ -51,12 +62,10 @@
 }
 
 .NewDesc {
-    width: 60.42vw;
-    height: 5.21vw;
+    width: 70vw;
+    height: 8vw;
     display: block;
     position: absolute;
-    top: 30vw;
-    left: 1.04vw;
+    top: 32vw;
     border: 1px solid #ccc;
-    margin-bottom: 10vw;
 }

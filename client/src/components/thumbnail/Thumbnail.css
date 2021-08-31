@@ -14,8 +14,7 @@
     margin-bottom: 1.04vw;
 }
 
-.picture_1:hover,
-.picture_2:hover {
+.thumbPicture:hover {
     transform: scale(1.05);
 }
 
@@ -28,14 +27,13 @@
 } */
 
 .thumbTitle {
-    font-size: 1.56vw;
+    font-size: 1.4vw;
     overflow: scroll;
     margin-top: 0.8vw;
     text-align: center;
 }
 
-.picture_1,
-.picture_2 {
+.thumbPicture {
     width: 18vw;
     height: 15vw;
     border: 1px solid #ccc;
@@ -51,6 +49,6 @@
     overflow: scroll;
 }
 
-#versus {
+#thumbVersus {
     margin: 0 8.4vw;
 }
