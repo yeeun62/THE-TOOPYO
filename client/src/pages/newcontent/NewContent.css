@@ -15,9 +15,12 @@
 #newTitle {
     display: block;
     text-align: center;
-    width: 52.08vw;
+    width: 70vw;
     height: 2.6vw;
     margin: 1.56vw auto;
+    border-bottom: 3vw solid rgba(6, 10, 125, 60%);
+    padding: 5vw 0 7vw 0;
+    margin-bottom: 3vw;
 }
 
 #NewSubmit {
@@ -39,11 +42,11 @@
 }
 
 #newVersus {
-    width: 3vw;
-    height: 3vw;
+    width: 4vw;
+    height: 4vw;
     position: absolute;
-    top: 10vw;
-    left: 48%;
+    top: 13vw;
+    left: 47%;
 }
 
 .NewContentFrame {

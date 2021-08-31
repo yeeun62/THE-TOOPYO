@@ -1,14 +1,19 @@
-#inner {
-    width: 70vw;
-    /* border: 1px solid red; */
-    margin: auto;
-    margin-top: 2vw;
-    text-align: center;
+@media screen and (min-width: 769px) {
+    #inner {
+        width: 70vw;
+        /* border: 1px solid red; */
+        margin: auto;
+        margin-top: 2vw;
+        text-align: center;
+    }
+
+    .container {
+        width: 19.43vw;
+        height: 43.5vw;
+    }
 }
 
 .container {
-    width: 19.43vw;
-    height: 43.5vw;
     border: 1px solid #ccc;
     flex: 1 1 30%;
     margin-bottom: 1.04vw;
