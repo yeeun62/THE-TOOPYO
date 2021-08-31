@@ -9,7 +9,7 @@ import axios from 'axios';
 import Mypage from '../../pages/mypage/Mypage';
 import Tab from '../tab/Tab';
 
-function Nav({ isLogin, loginHandler, contentList }) {
+function Nav({ isLogin, loginHandler, contentList, getContentDetail }) {
     const myPage = () => {
         axios.post('http://localhost:80/user', { email: '확인중' }).then((a) => {
             console.log(a);
@@ -17,6 +17,19 @@ function Nav({ isLogin, loginHandler, contentList }) {
     };
 
     const [login, setLogin] = useState('로그인');
+
+    // const [currentTab, setCurrentTab] = useState(0);
+    // const tabMenu = [
+    //     { name: 'mypage', content: <MypageDetail /> },
+    //     { name: 'mycontent', content: <Mycontent /> },
+    // ];
+    // const selectMenuHandler = (index) => {
+    //     setCurrentTab(index);
+    // };
+
+    // const aaa () => {
+
+    // }
 
     return (
         <nav>
@@ -34,7 +47,7 @@ function Nav({ isLogin, loginHandler, contentList }) {
                 <div>
                     <ul className="buttonContainer">
                         <li>
-                            <SearchButton contentList={contentList} />
+                            <SearchButton contentList={contentList} getContentDetail={getContentDetail} />
                         </li>
                         <li>
                             <Link to="/NewContent">

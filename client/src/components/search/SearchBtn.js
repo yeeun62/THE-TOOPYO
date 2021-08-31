@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Search from '../search/Search';
 import './Search.css';
 
-function SearchButton({ contentList }) {
+function SearchButton({ contentList, getContentDetail }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const openModal = () => {
@@ -22,7 +22,12 @@ function SearchButton({ contentList }) {
                         fill="white"></path>
                 </svg>
             </button>
-            <Search isOpen={isModalOpen} close={closeModal} contentList={contentList} />
+            <Search
+                isOpen={isModalOpen}
+                close={closeModal}
+                contentList={contentList}
+                getContentDetail={getContentDetail}
+            />
         </>
     );
 }

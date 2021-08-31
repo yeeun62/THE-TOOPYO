@@ -59,7 +59,11 @@ export default function App() {
     return (
         <BrowserRouter>
             <div className="app">
-                <Nav isLogin={isLogin} loginHandler={loginHandler} contentList={contentList}></Nav>
+                <Nav
+                    isLogin={isLogin}
+                    loginHandler={loginHandler}
+                    contentList={contentList}
+                    getContentDetail={getContentDetail}></Nav>
                 <img className="mainBanner" src="" alt=""></img>
 
                 <Switch>
