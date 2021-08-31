@@ -13,10 +13,8 @@ export default function App() {
     const [isLogin, setIsLogin] = useState();
 
     const [content, setContent] = useState({}); // 게시글 정보
-    console.log(content);
 
     const loginHandler = function () {
-        console.log('로그인됐다');
         setIsLogin(true);
     };
 
@@ -28,7 +26,6 @@ export default function App() {
         });
     };
     const [contentId, setContentId] = useState();
-    console.log(contentId);
 
     const idChange = (change) => {
         setContentId(change);

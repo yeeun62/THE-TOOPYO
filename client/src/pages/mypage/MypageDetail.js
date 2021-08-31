@@ -12,6 +12,7 @@ export default function MypageDetail({ userInfo, getUserInfo }) {
         phoneNumber: userInfo.phoneNumber,
     });
     console.log(user);
+
     const [isClick, setIsClick] = useState(false);
     const [patchInfo, setPatchInfo] = useState({
         // nickName: userInfo.nickName,
