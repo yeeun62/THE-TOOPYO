@@ -18,7 +18,7 @@ function Signup({ isOpen, close, loginHandler }) {
     const fileEvent = (e) => {
         const reader = new FileReader();
         reader.onload = () => {
-            setSignupInfo({ ...signupInfo, [e.target.name]: e.target.profile_img });
+            setSignupInfo({ ...signupInfo, [e.target.name]: e.target.files });
             console.log('파일 업로드 완료.');
         };
         reader.readAsText(e.target.files[0]);
@@ -45,7 +45,7 @@ function Signup({ isOpen, close, loginHandler }) {
                 .post(
                     'http://localhost:80/signup',
                     {
-                        profile_img: 'signupInfo.picture',
+                        profile_img: signupInfo.profile_img,
                         provider: signupInfo.provider,
                         nickName: signupInfo.nickName,
                         email: signupInfo.email,
@@ -110,7 +110,7 @@ function Signup({ isOpen, close, loginHandler }) {
                                     className="signUpPic"
                                     type="file"
                                     placeholder="picture"
-                                    onChange={fileEvent}
+                                    onChange={(e) => fileEvent(e)}
                                 />
                                 <button className="signUpB" onClick={signUpRequestHandler}>
                                     회원가입
