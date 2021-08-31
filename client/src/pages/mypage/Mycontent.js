@@ -8,7 +8,7 @@ export default function Mycontent(props) {
     const [auth, setAuth] = useState('');
 
     const getContentList = () => {
-        axios.get('https://localhost:4000/content').then((res) => {
+        axios.get('https://localhost:80/content').then((res) => {
             setContentList(res.data.content);
         });
     };
