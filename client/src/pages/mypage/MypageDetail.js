@@ -62,7 +62,7 @@ export default function MypageDetail({ userInfo, getUserInfo }) {
         <>
             {isClick ? (
                 <form onSubmit={(e) => e.preventDefault()}>
-                    <h1>안녕하세요 {user.name}님</h1>
+                    <h1 className="mypageTitle">안녕하세요 {user.name}님</h1>
                     <div className="pf-input-area">
                         <a className="profile_img">
                             <div className="label">프로필 사진</div>

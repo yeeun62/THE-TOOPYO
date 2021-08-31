@@ -1,10 +1,11 @@
 @media screen and (min-width: 769px) {
     nav {
         position: fixed;
-        height: 4.17vw;
+        height: 5vw;
         width: 100%;
         background-color: #060a7d;
         z-index: 9999;
+        margin-bottom: 5vw;
     }
 
     .navInner {
@@ -21,9 +22,9 @@
     }
 
     .logo {
-        width: 42px;
-        height: 42px;
-        margin-top: 10px;
+        width: 3.5vw;
+        height: 3.5vw;
+        margin-top: 0.6vw;
         position: absolute;
         left: 0;
         margin-left: 1.04vw;
@@ -36,6 +37,7 @@
     }
 
     .navBtn {
+        margin-top: 0.3vw;
         height: 3vw;
         padding-left: 1vw;
         padding-right: 1vw;
@@ -47,7 +49,6 @@
         word-break: keep-all;
         background-color: #fff;
         color: #060a7d;
-        transition: all 0.125s;
         cursor: pointer;
         margin-right: 1.04vw;
     }
@@ -58,6 +59,8 @@
         border: 1px solid #fff;
     }
 }
+
+/* ===================pc 끝 !!! mobile 시작!!! ================= */
 
 @media screen and (max-width: 769px) {
     .newContentBtn {
