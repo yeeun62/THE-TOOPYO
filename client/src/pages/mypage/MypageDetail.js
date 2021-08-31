@@ -3,7 +3,7 @@ import axios from 'axios';
 import './Mypage.css';
 
 export default function MypageDetail(props) {
-    const info = props.data.userInfo;
+    //const info = props.data.userInfo;
     const [isClick, setIsClick] = useState(false);
     const [patchInfo, setPatchInfo] = useState({
         nickName: '',
