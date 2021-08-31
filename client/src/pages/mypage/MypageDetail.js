@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Mypage.css';
 
+
 export default function MypageDetail({ userInfo, getUserInfo }) {
     console.log(userInfo);
     const [user, setUser] = useState({

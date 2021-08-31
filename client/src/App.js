@@ -1,6 +1,6 @@
 import './App.css';
 import { useState, useEffect } from 'react';
-import { BrowserRouter, Switch, Route, Redirect, useParams, Link } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Nav from './components/nav/Nav';
 import Thumbnail from './components/thumbnail/Thumbnail';
 import axios from 'axios';
@@ -32,8 +32,8 @@ export default function App() {
     };
 
     const getContentDetail = (contentId) => {
+        setContentId(contentId);
         axios.get(`http://localhost:80/content/${contentId}`).then((res) => {
-            console.log(res);
             setContent(res.data.data);
         });
     };
@@ -81,14 +81,24 @@ export default function App() {
                                     <Thumbnail
                                         list={list}
                                         key={list.id}
-                                        idChange={idChange}
+                                        id={contentId}
                                         getContentDetail={getContentDetail}
                                     />
                                 );
                             })}
+                            {/* <div ref={observer} />
+                            <>
+                                {isLoading && (
+                                    <Thumbnail
+                                        list={list}
+                                        key={list.id}
+                                        id={contentId}
+                                        getContentDetail={getContentDetail}
+                                    />
+                                )}
+                            </> */}
                         </div>
                     </Route>
-                    ;
                 </Switch>
             </div>
         </BrowserRouter>

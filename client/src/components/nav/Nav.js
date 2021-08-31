@@ -35,13 +35,15 @@ function Nav({ isLogin, loginHandler, contentList }) {
         <nav>
             <div className="navInner">
                 <Sidebar />
-                <div className="logoContainer">
-                    <h1>
-                        <img
-                            className="logo"
-                            src="https://cdn.discordapp.com/attachments/877171336508739646/881725307579674664/1.png"></img>
-                    </h1>
-                </div>
+                <Link to="/">
+                    <div className="logoContainer">
+                        <h1>
+                            <img
+                                className="logo"
+                                src="https://cdn.discordapp.com/attachments/877171336508739646/881725307579674664/1.png"></img>
+                        </h1>
+                    </div>
+                </Link>
                 <div>
                     <ul className="buttonContainer">
                         <li>
