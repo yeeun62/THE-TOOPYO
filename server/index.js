@@ -5,6 +5,7 @@ const session = require('express-session');
 // const cookieParser = require('cookie-parser');
 const express = require('express');
 const app = express();
+const imgRouter = require('./multer');
 
 const controllers = require('./controllers');
 const { sequelize } = require('./models');
@@ -48,7 +49,7 @@ app.use(
 );
 
 //app.use(cookieParser());
-
+app.patch('/upload', imgRouter);
 app.post('/login', controllers.login);
 app.get('/signout', controllers.signOut);
 app.post('/signup', controllers.signUp);

@@ -25,7 +25,8 @@ function Login({ isOpen, close, loginHandler }) {
             )
             .then((res) => {
                 if (res.data.message === 'ok') {
-                    loginHandler();
+                    console.log(res.headers);
+                    loginHandler(res);
                 }
             })
             .catch((err) => alert(err));
