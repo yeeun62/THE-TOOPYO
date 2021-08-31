@@ -44,7 +44,13 @@ export default function Search({ isOpen, close, contentList, getContentDetail })
                         <button className="closeBtn" onClick={close}>
                             X
                         </button>
-                        <div>{contentList ? <div>{filteredContent(contentList)}</div> : '검색 결과가 없습니다.'}</div>
+                    </div>
+                    <div className="searchThumbnail">
+                        {contentList ? (
+                            <div className="filteredContainer">{filteredContent(contentList)}</div>
+                        ) : (
+                            '검색 결과가 없습니다.'
+                        )}
                     </div>
                 </div>
             ) : null}
