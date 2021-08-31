@@ -10,7 +10,7 @@ import Mypage from '../../pages/mypage/Mypage';
 import Tab from '../tab/Tab';
 
 function Nav({ isLogin, loginHandler, contentList, getContentDetail }) {
-    const [login, setLogin] = useState('로그인');
+    //const [login, setLogin] = useState('로그인');
 
     // const [currentTab, setCurrentTab] = useState(0);
     // const tabMenu = [
@@ -44,12 +44,24 @@ function Nav({ isLogin, loginHandler, contentList, getContentDetail }) {
                             <SearchButton contentList={contentList} getContentDetail={getContentDetail} />
                         </li>
                         <li>
-                            <Link to="/NewContent newcontent">
-                                <button className="newContentBtn navBtn">새 글 작성</button>
-                            </Link>
+                            {isLogin ? (
+                                <Link to="/newcontent">
+                                    <button className="newContentBtn navBtn">
+                                        new
+                                        <br />
+                                        content
+                                    </button>
+                                </Link>
+                            ) : null}
                         </li>
                         <li>
-                            <SignUpButton loginHandler={loginHandler} />
+                            {isLogin ? (
+                                <button className="navBtn" onClick={loginHandler}>
+                                    log out
+                                </button>
+                            ) : (
+                                <SignUpButton loginHandler={loginHandler} />
+                            )}
                         </li>
                         {isLogin ? (
                             <li>

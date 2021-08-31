@@ -19,7 +19,7 @@ export default function App() {
     const [contentList, setContentList] = useState([]);
 
     const loginHandler = function () {
-        setIsLogin(true);
+        setIsLogin(!isLogin);
     };
 
     const getContentList = () => {
@@ -73,11 +73,7 @@ export default function App() {
                     loginHandler={loginHandler}
                     contentList={contentList}
                     getContentDetail={getContentDetail}></Nav>
-                <div className="mainBanner">
-                    <img
-                        id="banner"
-                        src="https://cdn.discordapp.com/attachments/881710985335934979/882192949079851008/2021-08-31_6.19.17.png"></img>
-                </div>
+
                 <Switch>
                     <Route path="/mypage">
                         <Mypage userInfo={userInfo} MycontentList={MycontentList} />
@@ -90,7 +86,13 @@ export default function App() {
                     <Route path="/curContent">
                         <CurContent content={content}></CurContent>
                     </Route>
+
                     <Route exact path="/">
+                        <div className="mainBanner">
+                            <img
+                                id="banner"
+                                src="https://cdn.discordapp.com/attachments/881710985335934979/882192949079851008/2021-08-31_6.19.17.png"></img>
+                        </div>
                         <div className="app-thumb-entire">
                             {contentList.map((list) => {
                                 return <Thumbnail list={list} key={list.id} getContentDetail={getContentDetail} />;
