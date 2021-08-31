@@ -73,8 +73,11 @@ export default function App() {
                     loginHandler={loginHandler}
                     contentList={contentList}
                     getContentDetail={getContentDetail}></Nav>
-                <img className="mainBanner" src="" alt=""></img>
-
+                <div className="mainBanner">
+                    <img
+                        id="banner"
+                        src="https://cdn.discordapp.com/attachments/881710985335934979/882192949079851008/2021-08-31_6.19.17.png"></img>
+                </div>
                 <Switch>
                     <Route path="/mypage">
                         <Mypage userInfo={userInfo} MycontentList={MycontentList} />
@@ -94,7 +97,6 @@ export default function App() {
                             })}
                         </div>
                     </Route>
-                    ;
                 </Switch>
             </div>
         </BrowserRouter>

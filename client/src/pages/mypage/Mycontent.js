@@ -5,11 +5,11 @@ import MyThumbnail from './MyThumbnail';
 export default function Mycontent({ MycontentList, userInfo }) {
     return (
         <>
-            <h1>안녕하세요 {userInfo.nickName}</h1>
-            <div>
+            <h1 className="mypageTitle">안녕하세요 {userInfo.nickName}</h1>
+            <div className="filteredContainer">
                 {MycontentList.map((list) => {
                     return (
-                        <li>
+                        <li className="mycontentContainer">
                             <MyThumbnail list={list} key={list.id}></MyThumbnail>
                         </li>
                     );

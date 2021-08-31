@@ -8,10 +8,12 @@
     background-color: rgba(6, 10, 125, 1);
     color: white;
 }
+.mypageTitle {
+    margin: 10%;
+}
 .mycontent {
     width: 50%;
     padding: 20px;
-    float: left;
     cursor: pointer;
 }
 .mycontent:hover {
@@ -39,4 +41,27 @@
     height: 30px;
     padding: 0 20px;
     width: 15%;
+}
+
+.filteredContainer {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 70vw;
+    margin: auto;
+    border: 0;
+    background-color: white;
+}
+.myThumnailContainer {
+    margin: 0.5vw 0;
+    flex: 1 1 30%;
+    width: 22.43vw;
+    height: 50vw;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 1vw;
+}
+
+#thumbVersus {
+    margin: 2vw 0;
 }
