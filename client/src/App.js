@@ -9,24 +9,41 @@ import CurContent from './pages/curcontent/CurContent';
 import Mypage from './pages/mypage/Mypage';
 import NewContent from './pages/newcontent/NewContent';
 import LoginPage from './pages/login/LoginPage';
+axios.defaults.withCredentials = true;
 
 export default function App() {
     const [isLogin, setIsLogin] = useState();
     const [content, setContent] = useState({}); // 게시글 정보
-    console.log(content);
+    const [userInfo, setUserInfo] = useState({});
+    const [MycontentList, setMyContentList] = useState([]);
+    const [contentList, setContentList] = useState([]);
 
     const loginHandler = function () {
-        console.log('로그인됐다');
-        setIsLogin(true);
+        setIsLogin(!isLogin);
     };
-
-    const [contentList, setContentList] = useState([]);
 
     const getContentList = () => {
         axios.get('http://localhost:80/content').then((res) => {
             setContentList(res.data.content);
         });
     };
+
+    // function getUserInfo() {
+    //     axios.get('http://localhost:80/user').then((res) => {
+    //         console.log(res);
+    //         setIsLogin(true);
+    //         setUserInfo(res.data.data);
+    //     });
+    // }
+
+    useEffect(() => {
+        axios.get('http://localhost:80/user', { withCredentials: true }).then((res) => {
+            console.log('어쩔숟없어', res);
+            setIsLogin(true);
+            setUserInfo(res.data.data.userInfo);
+            setMyContentList(res.data.data.content);
+        });
+    }, []);
 
     const getContentDetail = (contentId) => {
         axios.get(`http://localhost:80/content/${contentId}`).then((res) => {
@@ -39,18 +56,10 @@ export default function App() {
         getContentList();
     }, []);
 
-    const [userInfo, setUserInfo] = useState([]);
-    console.log(userInfo);
-
-    function getUserInfo() {
-        axios.post('http://localhost:80/user', { email: '확인중' }).then((res) => {
-            setUserInfo(res.data.data);
-        });
-    }
     useEffect(() => {
-        getUserInfo();
-    }, []);
-    console.log(localStorage);
+        console.log(userInfo);
+    }, [userInfo]);
+
     // useEffect(() => {
     //     localStorage.setItem('thetoopyo', userInfo.userInfo);
     // }, []);
@@ -64,20 +73,10 @@ export default function App() {
                     loginHandler={loginHandler}
                     contentList={contentList}
                     getContentDetail={getContentDetail}></Nav>
-                <div className="mainBanner">
-                    <img
-                        id="banner"
-                        src="https://cdn.discordapp.com/attachments/881710985335934979/882192949079851008/2021-08-31_6.19.17.png"></img>
-                </div>
+
                 <Switch>
                     <Route path="/mypage">
-                        <Mypage
-                            onClick={getUserInfo}
-                            userInfo={userInfo}
-                            getUserInfo={getUserInfo}
-                            contentList={contentList}
-                            getContentDetail={getContentDetail}
-                        />
+                        <Mypage userInfo={userInfo} MycontentList={MycontentList} />
                     </Route>
                     <Route path="/signup" component={SignupPage} />
                     <Route path="/login">
@@ -87,7 +86,13 @@ export default function App() {
                     <Route path="/curContent">
                         <CurContent content={content}></CurContent>
                     </Route>
+
                     <Route exact path="/">
+                        <div className="mainBanner">
+                            <img
+                                id="banner"
+                                src="https://cdn.discordapp.com/attachments/881710985335934979/882192949079851008/2021-08-31_6.19.17.png"></img>
+                        </div>
                         <div className="app-thumb-entire">
                             {contentList.map((list) => {
                                 return <Thumbnail list={list} key={list.id} getContentDetail={getContentDetail} />;

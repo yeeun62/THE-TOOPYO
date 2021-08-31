@@ -24,27 +24,22 @@ const Desc = styled.div`
     text-align: center;
 `;
 
-export default function Tab({ userInfo, getUserInfo, id, contentList, getContentDetail }) {
-    console.log(userInfo);
+export default function Tab({ userInfo, MycontentList }) {
     const [currentTab, setCurrentTab] = useState(0);
     const tabMenu = [
-        { name: 'mypage', content: <MypageDetail getUserInfo={getUserInfo} userInfo={userInfo.userInfo} /> },
+        { name: 'mypage', content: <MypageDetail MycontentList={MycontentList} userInfo={userInfo} /> },
         {
             name: 'mycontent',
-            content: (
-                <Mycontent
-                    content={userInfo.content}
-                    userInfo={userInfo.userInfo}
-                    id={id}
-                    contentList={contentList}
-                    getContentDetail={getContentDetail}
-                />
-            ),
+            content: <Mycontent MycontentList={MycontentList} userInfo={userInfo} />,
         },
     ];
     const selectMenuHandler = (index) => {
         setCurrentTab(index);
     };
+
+    useEffect(() => {
+        console.log('여기는텝', userInfo);
+    });
 
     return (
         <>
@@ -56,7 +51,6 @@ export default function Tab({ userInfo, getUserInfo, id, contentList, getContent
                                 className={currentTab === index ? 'mypage' : 'mycontent'}
                                 onClick={() => {
                                     selectMenuHandler(index);
-                                    getUserInfo();
                                 }}>
                                 {el.name}
                             </li>
