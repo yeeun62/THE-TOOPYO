@@ -15,7 +15,6 @@ export default function App() {
     const [content, setContent] = useState({}); // 게시글 정보
 
     const loginHandler = function () {
-        console.log('로그인성공');
         setIsLogin(true);
     };
 
@@ -28,6 +27,10 @@ export default function App() {
     };
     const [contentId, setContentId] = useState();
 
+    const idChange = (change) => {
+        setContentId(change);
+    };
+
     const getContentDetail = (contentId) => {
         setContentId(contentId);
         axios.get(`http://localhost:80/content/${contentId}`).then((res) => {
@@ -39,6 +42,23 @@ export default function App() {
         getContentList();
     }, []);
 
+    const [userInfo, setUserInfo] = useState([]);
+    console.log(userInfo);
+
+    function getUserInfo() {
+        axios.post('http://localhost:80/user', { email: '확인중' }).then((res) => {
+            setUserInfo(res.data.data);
+        });
+    }
+    useEffect(() => {
+        getUserInfo();
+    }, []);
+
+    // useEffect(() => {
+    //     localStorage.setItem('thetoopyo', userInfo.userInfo);
+    // }, []);
+    // console.log(localStorage);
+
     return (
         <BrowserRouter>
             <div className="app">
@@ -46,7 +66,9 @@ export default function App() {
                 <img className="mainBanner" src="" alt=""></img>
 
                 <Switch>
-                    <Route path="/mypage" component={Mypage} />
+                    <Route path="/mypage">
+                        <Mypage onClick={getUserInfo} userInfo={userInfo} getUserInfo={getUserInfo} />
+                    </Route>
                     <Route path="/signup" component={SignupPage} />
                     <Route path="/newContent" component={NewContent} />
                     <Route path="/curContent">

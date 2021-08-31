@@ -8,10 +8,11 @@ export default function Mycontent(props) {
     const [auth, setAuth] = useState('');
 
     const getContentList = () => {
-        axios.post('https://localhost:4000/content', 'peb4010@naver.com').then((res) => {
+        axios.get('https://localhost:80/content').then((res) => {
             setContentList(res.data.content);
         });
     };
+  
     const filteredContents = contentList.filter((el) => {
         return el.writer.id === info.nickName;
     });

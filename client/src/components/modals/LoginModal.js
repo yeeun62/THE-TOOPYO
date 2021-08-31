@@ -24,7 +24,6 @@ function Login({ isOpen, close, loginHandler }) {
                 { 'Content-Type': 'application/json', withCredentials: true },
             )
             .then((res) => {
-                console.log(res);
                 if (res.data.message === 'ok') {
                     loginHandler();
                 }
