@@ -1,17 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Mypage.css';
 
-export default function MypageDetail(props) {
-    const info = props.data.userInfo;
+export default function MypageDetail({ userInfo, getUserInfo }) {
+    console.log(userInfo);
+    const [user, setUser] = useState({
+        nickName: userInfo.nickName,
+        email: userInfo.email,
+        password: userInfo.password,
+        profile_img: userInfo.profile_img,
+        phoneNumber: userInfo.phoneNumber,
+    });
+    console.log(user);
     const [isClick, setIsClick] = useState(false);
     const [patchInfo, setPatchInfo] = useState({
-        nickName: '',
-        email: '',
-        password: '',
-        profile_img: '',
-        phone: '', // 초기값에 info.data.userInfo
+        // nickName: userInfo.nickName,
+        // email: userInfo.email,
+        // password: userInfo.password,
+        // profile_img: userInfo.profile_img,
+        // phoneNumber: userInfo.phoneNumber, // 초기값에 info.data.userInfo
     });
+    console.log(userInfo);
+    console.log(patchInfo);
     const clickHandler = () => {
         setIsClick(!isClick);
     };
@@ -23,26 +33,23 @@ export default function MypageDetail(props) {
         };
         reader.readAsText(e.target.files[0]);
     };
+    useEffect(() => {
+        getUserInfo();
+    }, []);
     const inputHandler = (e) => {
         setPatchInfo({ ...patchInfo, [e.target.name]: e.target.value });
     };
     const patchRequestHandler = () => {
-        if (
-            !patchInfo.nickname ||
-            !patchInfo.email ||
-            !patchInfo.password ||
-            !patchInfo.profile_img ||
-            !patchInfo.phone
-        ) {
+        if (!patchInfo.nickname || !patchInfo.password || !patchInfo.profile_img || !patchInfo.phoneNumber) {
         } else {
             axios.patch(
-                'https://localhost:4000/user/:id',
+                'https://localhost:80/user/:id',
                 {
                     nickName: patchInfo.nickName,
                     email: patchInfo.email,
                     password: patchInfo.password,
                     profile_img: patchInfo.profile_img,
-                    phone: patchInfo.phone,
+                    phoneNumber: patchInfo.phoneNumber,
                 },
                 { 'Content-Type': 'application/json', withCredentials: true },
             ); // 또 뭐 담아야하징 헤더 auth?
@@ -53,7 +60,7 @@ export default function MypageDetail(props) {
         <>
             {isClick ? (
                 <form>
-                    <h1>안녕하세요 info.name님</h1>
+                    <h1>안녕하세요 {user.name}님</h1>
                     <div className="pf-input-area">
                         <a className="profile_img">
                             <div className="label">프로필 사진</div>
@@ -65,8 +72,8 @@ export default function MypageDetail(props) {
                                 value={patchInfo.profile_img}></input>
                         </a>
                         <div className="id">
-                            <div className="label">아이디</div>
-                            <div>info.id</div>
+                            <div className="label">이메일</div>
+                            <div>이메일</div>
                         </div>
                         <div className="password">
                             <div className="label">비밀번호</div>
@@ -89,56 +96,41 @@ export default function MypageDetail(props) {
                                 onChange={(e) => inputHandler(e)}
                                 value={patchInfo.nickName}></input>
                         </div>
-                        <div className="email">
-                            <div className="label">이메일</div>
-                            <input
-                                className="inputBox"
-                                name="email"
-                                type="text"
-                                maxLength="20"
-                                placeholder="이메일을 입력해주세요"
-                                onChange={(e) => inputHandler(e)}
-                                value={patchInfo.email}></input>
-                        </div>
-                        <div className="phone">
+                        <div className="phoneNumber">
                             <div className="label">전화번호</div>
                             <input
                                 className="inputBox"
-                                name="phone"
+                                name="phoneNumber"
                                 type="text"
                                 maxLength="20"
                                 placeholder="전화번호를 입력해주세요"
                                 onChange={(e) => inputHandler(e)}
-                                value={patchInfo.phone}></input>
+                                value={patchInfo.phoneNumber}></input>
                         </div>
                         <input type="submit" value="저장" onClick={patchRequestHandler} />
                     </div>
                 </form>
             ) : (
                 <div>
-                    <h1>안녕하세요 info.nickName님</h1>
+                    <h1>안녕하세요 {user.nickName}님</h1>
                     <div className="pfArea">
                         <a className="pfImg">
                             <div className="label">프로필 사진</div>
                             <div type="file" className="avatar">
-                                이미지
+                                {user.profile_img}
                             </div>
                         </a>
-                        <div className="id">
-                            <div className="label">아이디</div>
-                            <div className="id">info.id</div>
+                        <div className="email">
+                            <div className="label">이메일</div>
+                            <div>{user.email}</div>
                         </div>
                         <div className="nickName">
                             <div className="label">닉네임</div>
-                            <div>info.nickName</div>
+                            <div>{user.nickName}</div>
                         </div>
-                        <div className="email">
-                            <div className="label">이메일</div>
-                            <div>info.email</div>
-                        </div>
-                        <div className="phone">
+                        <div className="phoneNumber">
                             <div className="label">전화번호</div>
-                            <div>info.phone</div>
+                            <div>{user.phoneNumber}</div>
                         </div>
                     </div>
                     <button classname="editBtn" onClick={clickHandler}>
