@@ -3,15 +3,17 @@ import axios from 'axios';
 import './Mypage.css';
 
 export default function MypageDetail({ userInfo, getUserInfo }) {
-    console.log(userInfo);
-    const [user, setUser] = useState({
-        nickName: userInfo.nickName,
-        email: userInfo.email,
-        password: userInfo.password,
-        profile_img: userInfo.profile_img,
-        phoneNumber: userInfo.phoneNumber,
-    });
-    console.log(user);
+    useEffect(() => {
+        console.log('여기는 마이페이지디테일', userInfo);
+    }, [userInfo]);
+    // const [user, setUser] = useState({
+    //     nickName: userInfo.nickName,
+    //     email: userInfo.email,
+    //     password: userInfo.password,
+    //     profile_img: userInfo.profile_img,
+    //     phoneNumber: userInfo.phoneNumber,
+    // });
+    // console.log(user);
 
     const [isClick, setIsClick] = useState(false);
     const [patchInfo, setPatchInfo] = useState({
@@ -34,9 +36,6 @@ export default function MypageDetail({ userInfo, getUserInfo }) {
         };
         reader.readAsText(e.target.files[0]);
     };
-    useEffect(() => {
-        getUserInfo();
-    }, []);
 
     const inputHandler = (e) => {
         setPatchInfo({ ...patchInfo, [e.target.name]: e.target.value });
@@ -57,12 +56,15 @@ export default function MypageDetail({ userInfo, getUserInfo }) {
             ); // 또 뭐 담아야하징 헤더 auth?
         }
     };
+    if (!userInfo) {
+        return 'dㅇㅇㅇㅇ';
+    }
 
     return (
         <>
             {isClick ? (
                 <form onSubmit={(e) => e.preventDefault()}>
-                    <h1 className="mypageTitle">안녕하세요 {user.name}님</h1>
+                    <h1 className="mypageTitle">안녕하세요 {userInfo.name}님</h1>
                     <div className="pf-input-area">
                         <a className="profile_img">
                             <div className="label">프로필 사진</div>
@@ -109,25 +111,25 @@ export default function MypageDetail({ userInfo, getUserInfo }) {
                 </form>
             ) : (
                 <div>
-                    <h1>안녕하세요 {user.nickName}님</h1>
+                    <h1>안녕하세요 {userInfo.nickName}님</h1>
                     <div className="pfArea">
                         <a className="pfImg">
                             <div className="label">프로필 사진</div>
                             <div type="file" className="avatar">
-                                {user.profile_img}
+                                {userInfo.profile_img}
                             </div>
                         </a>
                         <div className="email">
                             <div className="label">이메일</div>
-                            <div>{user.email}</div>
+                            <div>{userInfo.email}</div>
                         </div>
                         <div className="nickName">
                             <div className="label">닉네임</div>
-                            <div>{user.nickName}</div>
+                            <div>{userInfo.nickName}</div>
                         </div>
                         <div className="phoneNumber">
                             <div className="label">전화번호</div>
-                            <div>{user.phoneNumber}</div>
+                            <div>{userInfo.phoneNumber}</div>
                         </div>
                     </div>
                     <button classname="editBtn" onClick={clickHandler}>

@@ -10,12 +10,6 @@ import Mypage from '../../pages/mypage/Mypage';
 import Tab from '../tab/Tab';
 
 function Nav({ isLogin, loginHandler, contentList, getContentDetail }) {
-    const myPage = () => {
-        axios.post('http://localhost:80/user', { email: '확인중' }).then((a) => {
-            console.log(a);
-        });
-    };
-
     const [login, setLogin] = useState('로그인');
 
     // const [currentTab, setCurrentTab] = useState(0);
@@ -60,9 +54,7 @@ function Nav({ isLogin, loginHandler, contentList, getContentDetail }) {
                         {isLogin ? (
                             <li>
                                 <Link to="/mypage">
-                                    <button className="navBtn" onClick={myPage}>
-                                        my page
-                                    </button>
+                                    <button className="navBtn">my page</button>
                                 </Link>
                             </li>
                         ) : (
