@@ -6,7 +6,6 @@ import { Link, useHistory } from 'react-router-dom';
 function SignupPage() {
     const [signupInfo, setSignupInfo] = useState({
         profile_img: '',
-        provider: 'origin',
         nickName: '',
         email: '',
         password: '',
@@ -63,8 +62,8 @@ function SignupPage() {
                 )
                 .then((res) => {
                     history.push('/');
-                    if (res.message === 'ok') return loginHandler(true);
-                    console.log('eeeeeee');
+                    if (res.data.message === 'ok') {
+                    }
                 });
         }
     };
@@ -117,7 +116,6 @@ function SignupPage() {
                                 name="profile_img"
                                 className="signUpPic"
                                 type="file"
-                                placeholder="picture"
                                 onChange={(e) => fileEvent(e)}
                             />
                             <button className="signUpB" onClick={signUpRequestHandler}>

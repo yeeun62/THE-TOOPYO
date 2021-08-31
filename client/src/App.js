@@ -27,12 +27,6 @@ export default function App() {
             setContentList(res.data.content);
         });
     };
-    const [contentId, setContentId] = useState();
-    console.log(contentId);
-
-    const idChange = (change) => {
-        setContentId(change);
-    };
 
     const getContentDetail = (contentId) => {
         axios.get(`http://localhost:80/content/${contentId}`).then((res) => {
@@ -75,7 +69,6 @@ export default function App() {
                             userInfo={userInfo}
                             getUserInfo={getUserInfo}
                             contentList={contentList}
-                            idChange={idChange}
                             getContentDetail={getContentDetail}
                         />
                     </Route>
@@ -90,14 +83,7 @@ export default function App() {
                     <Route exact path="/">
                         <div className="app-thumb-entire">
                             {contentList.map((list) => {
-                                return (
-                                    <Thumbnail
-                                        list={list}
-                                        key={list.id}
-                                        idChange={idChange}
-                                        getContentDetail={getContentDetail}
-                                    />
-                                );
+                                return <Thumbnail list={list} key={list.id} getContentDetail={getContentDetail} />;
                             })}
                         </div>
                     </Route>

@@ -24,7 +24,7 @@ const Desc = styled.div`
     text-align: center;
 `;
 
-export default function Tab({ userInfo, getUserInfo, id, contentList, idChange, getContentDetail }) {
+export default function Tab({ userInfo, getUserInfo, id, contentList, getContentDetail }) {
     console.log(userInfo);
     const [currentTab, setCurrentTab] = useState(0);
     const tabMenu = [
@@ -37,7 +37,6 @@ export default function Tab({ userInfo, getUserInfo, id, contentList, idChange, 
                     userInfo={userInfo.userInfo}
                     id={id}
                     contentList={contentList}
-                    idChange={idChange}
                     getContentDetail={getContentDetail}
                 />
             ),
