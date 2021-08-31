@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Mycontent from '../../pages/mypage/Mycontent';
 import MypageDetail from '../../pages/mypage/MypageDetail';
@@ -24,15 +24,17 @@ const Desc = styled.div`
     text-align: center;
 `;
 
-export default function Tab() {
+export default function Tab({ userInfo, getUserInfo }) {
+    console.log(userInfo);
     const [currentTab, setCurrentTab] = useState(0);
     const tabMenu = [
-        { name: 'mypage', content: <MypageDetail /> },
-        { name: 'mycontent', content: <Mycontent /> },
+        { name: 'mypage', content: <MypageDetail getUserInfo={getUserInfo} userInfo={userInfo.userInfo} /> },
+        { name: 'mycontent', content: <Mycontent userInfo={userInfo.content} /> },
     ];
     const selectMenuHandler = (index) => {
         setCurrentTab(index);
     };
+
     return (
         <>
             <div>
@@ -41,7 +43,10 @@ export default function Tab() {
                         return (
                             <li
                                 className={currentTab === index ? 'mypage' : 'mycontent'}
-                                onClick={() => selectMenuHandler(index)}>
+                                onClick={() => {
+                                    selectMenuHandler(index);
+                                    getUserInfo();
+                                }}>
                                 {el.name}
                             </li>
                         );
