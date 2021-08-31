@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import '../../pages/signup/SignUp.css';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 function Signup({ isOpen, close, loginHandler }) {
     const [signupInfo, setSignupInfo] = useState({
         profile_img: '',
-        provider: '',
+        provider: 'origin',
         nickName: '',
         email: '',
         password: '',
         phoneNumber: '',
     });
-
+    const [errorMessage, setErrorMessage] = useState(false);
     const history = useHistory();
 
     const fileEvent = (e) => {
@@ -37,12 +37,15 @@ function Signup({ isOpen, close, loginHandler }) {
             !signupInfo.password ||
             !signupInfo.phoneNumber
         ) {
+            setErrorMessage(true);
+            console.log(signupInfo);
         } else {
+            console.log(signupInfo);
             axios
                 .post(
-                    'https://localhost:80/signup',
+                    'http://localhost:80/signup',
                     {
-                        profile_img: 'dddd',
+                        profile_img: 'signupInfo.picture',
                         provider: signupInfo.provider,
                         nickName: signupInfo.nickName,
                         email: signupInfo.email,
@@ -52,7 +55,6 @@ function Signup({ isOpen, close, loginHandler }) {
                     { 'Content-Type': 'application/json', withCredentials: true },
                 )
                 .then((res) => {
-                    history.push('/');
                     if (res.message === 'ok') return loginHandler(true);
                 });
         }
@@ -68,7 +70,7 @@ function Signup({ isOpen, close, loginHandler }) {
                         <form onSubmit={(e) => e.preventDefault()}>
                             <div className="modalContents">
                                 <img className="signUpIcon" />
-                                <span className="title">Sign Up</span>
+                                <h1>Sign Up</h1>
                                 <div>모든 항목은 필수입니다.</div>
                                 <input
                                     name="email"
@@ -107,14 +109,16 @@ function Signup({ isOpen, close, loginHandler }) {
                                     name="profile_img"
                                     className="signUpPic"
                                     type="file"
+                                    placeholder="picture"
                                     onChange={fileEvent}
-                                    value={signupInfo.profile_img}
                                 />
                                 <button className="signUpB" onClick={signUpRequestHandler}>
-                                    {' '}
                                     회원가입
                                 </button>
-                                <div className="loginLine"></div>
+                                <div className="loginLine">
+                                    이미 아이디가 있으신가요?
+                                    <buttonon onClick={close}>로그인</buttonon>
+                                </div>
                             </div>
                         </form>
                     </div>

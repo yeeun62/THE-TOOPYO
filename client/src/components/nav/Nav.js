@@ -18,19 +18,6 @@ function Nav({ isLogin, loginHandler, contentList }) {
 
     const [login, setLogin] = useState('로그인');
 
-    // const [currentTab, setCurrentTab] = useState(0);
-    // const tabMenu = [
-    //     { name: 'mypage', content: <MypageDetail /> },
-    //     { name: 'mycontent', content: <Mycontent /> },
-    // ];
-    // const selectMenuHandler = (index) => {
-    //     setCurrentTab(index);
-    // };
-
-    // const aaa () => {
-
-    // }
-
     return (
         <nav>
             <div className="navInner">
@@ -59,9 +46,11 @@ function Nav({ isLogin, loginHandler, contentList }) {
                         </li>
                         {isLogin ? (
                             <li>
-                                <button className="navBtn" onClick={myPage}>
-                                    my page
-                                </button>
+                                <Link to="/mypage">
+                                    <button className="navBtn" onClick={myPage}>
+                                        my page
+                                    </button>
+                                </Link>
                             </li>
                         ) : (
                             <div>

@@ -68,8 +68,8 @@ function Login({ isOpen, close, loginHandler }) {
                             </button>
                             <div className="signUpLine">
                                 회원이 아니신가요?
-                                <Link to="/signup" onClick={close}>
-                                    회원가입
+                                <Link to="/signup">
+                                    <buttonon onClick={close}>회원가입</buttonon>
                                 </Link>
                             </div>
                         </div>

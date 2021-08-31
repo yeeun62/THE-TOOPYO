@@ -36,8 +36,8 @@ function SignupPage() {
 
     const signUpRequestHandler = () => {
         if (
-            // !signupInfo.picture ||
-            !signupInfo.provider ||
+            // !signupInfo.profile_img ||
+            // !signupInfo.provider ||
             !signupInfo.nickName ||
             !signupInfo.email ||
             !signupInfo.password ||
@@ -113,15 +113,13 @@ function SignupPage() {
                             />
                             <div className="profileUploader">프로필 사진을 선택하세요.</div>
                             <input
-                                name="picture"
+                                name="profile_img"
                                 className="signUpPic"
                                 type="file"
                                 placeholder="picture"
                                 onChange={fileEvent}
-                                value={signupInfo.picture}
                             />
                             <button className="signUpB" onClick={signUpRequestHandler}>
-                                {' '}
                                 회원가입
                             </button>
                             <div className="loginLine">
