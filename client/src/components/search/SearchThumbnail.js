@@ -1,5 +1,5 @@
 import '../../components/thumbnail/Thumbnail.css';
-
+import './Search.css';
 import { Link } from 'react-router-dom';
 
 function SearchThumbnail({ list, getContentDetail, close }) {
@@ -11,7 +11,7 @@ function SearchThumbnail({ list, getContentDetail, close }) {
         <div>
             <Link to="/curContent">
                 <div
-                    className="container"
+                    className="searchThumbContainer"
                     onClick={() => {
                         contentDetail();
                         close();
