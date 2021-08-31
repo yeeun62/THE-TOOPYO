@@ -5,8 +5,32 @@ import LoginButton from '../modals/LoginBtn';
 import SignUpButton from '../modals/SignUpBtn';
 import Sidebar from '../sidebar/SideBar';
 import SearchButton from '../search/SearchBtn';
+import axios from 'axios';
+import Mypage from '../../pages/mypage/Mypage';
+import Tab from '../tab/Tab';
 
 function Nav({ isLogin, loginHandler, contentList }) {
+    const myPage = () => {
+        axios.post('http://localhost:80/user', { email: '확인중' }).then((a) => {
+            console.log(a);
+        });
+    };
+
+    const [login, setLogin] = useState('로그인');
+
+    // const [currentTab, setCurrentTab] = useState(0);
+    // const tabMenu = [
+    //     { name: 'mypage', content: <MypageDetail /> },
+    //     { name: 'mycontent', content: <Mycontent /> },
+    // ];
+    // const selectMenuHandler = (index) => {
+    //     setCurrentTab(index);
+    // };
+
+    // const aaa () => {
+
+    // }
+
     return (
         <nav>
             <div className="navInner">
@@ -33,9 +57,9 @@ function Nav({ isLogin, loginHandler, contentList }) {
                         </li>
                         {isLogin ? (
                             <li>
-                                <Link to="/Mypage">
-                                    <button className="navBtn">my page</button>
-                                </Link>
+                                <button className="navBtn" onClick={myPage}>
+                                    my page
+                                </button>
                             </li>
                         ) : (
                             <div>

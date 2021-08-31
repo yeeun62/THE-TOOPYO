@@ -33,6 +33,7 @@ export default function Tab() {
     const selectMenuHandler = (index) => {
         setCurrentTab(index);
     };
+
     return (
         <>
             <div>
@@ -41,7 +42,9 @@ export default function Tab() {
                         return (
                             <li
                                 className={currentTab === index ? 'mypage' : 'mycontent'}
-                                onClick={() => selectMenuHandler(index)}>
+                                onClick={() => {
+                                    selectMenuHandler(index);
+                                }}>
                                 {el.name}
                             </li>
                         );
