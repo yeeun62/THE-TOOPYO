@@ -10,7 +10,7 @@ export default function Mycontent({ contentList, userInfo, getContentDetail }) {
 
     return (
         <>
-            <h1 className="mypageTitle">안녕하세요 {userInfo.nickName}</h1>
+            <h1 className="mypageTitle">안녕하세요 {userInfo.nickName}님</h1>
             <div>
                 <div className="filteredContainer">
                     {filteredContents.map((list) => {
