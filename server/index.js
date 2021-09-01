@@ -5,8 +5,9 @@ const cookieParser = require('cookie-parser');
 const express = require('express');
 const app = express();
 const imgRouter = require('./multer');
+const contentImgRouter = require('./contentmulter');
 const jwt = require('jsonwebtoken');
-
+const contentImgRouter = require('./contentmulter');
 const controllers = require('./controllers');
 
 app.use(express.json());
@@ -22,7 +23,7 @@ app.use(
 );
 
 app.patch('/upload', imgRouter);
-
+app.patch('/uploads', contentImgRouter);
 app.post('/login', controllers.login);
 app.get('/signout', controllers.signOut);
 app.post('/signup', controllers.signUp);
