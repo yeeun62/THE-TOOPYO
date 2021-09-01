@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './CurContent.css';
 import { useHistory, useParams } from 'react-router-dom';
@@ -14,7 +15,7 @@ function CurContent({ userInfo }) {
 
     useEffect(() => {
         axios.get(`http://localhost:80/content/${id}`).then((res) => {
-            console.log('res', res);
+            //console.log('res', res);
             setContent(res.data.data);
             if (res.data.data.voting_deadline === 'true') {
                 setVotingdead(true);
