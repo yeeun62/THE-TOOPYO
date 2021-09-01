@@ -37,7 +37,7 @@ module.exports = {
 
                 let deTailContent = await sequelize.query(
                     `
-                        SELECT contents.userId, contents.title, contents.picture_1, contents.picture_2, contents.description,contents.voting_deadline, users.nickName, users.profile_img, COUNT(agrees.userId) AS agree,  COUNT(disagrees.userId) AS disagree FROM contents
+                        SELECT contents.id, contents.userId, contents.title, contents.picture_1, contents.picture_2, contents.description,contents.voting_deadline, users.nickName, users.profile_img, COUNT(agrees.userId) AS agree,  COUNT(disagrees.userId) AS disagree FROM contents
                         LEFT JOIN agrees ON contents.id = agrees.contentId
                         LEFT JOIN disagrees ON disagrees.contentId = contents.id
                         JOIN users ON contents.userId = users.id

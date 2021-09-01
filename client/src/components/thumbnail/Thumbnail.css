@@ -34,7 +34,7 @@
 
 .thumbTitle {
     font-size: 1.4vw;
-    overflow: scroll;
+    /* overflow: scroll; */
     margin-top: 0.8vw;
     text-align: center;
 }

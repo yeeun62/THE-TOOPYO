@@ -1,6 +1,7 @@
 import './App.css';
+import 'antd/dist/antd.css';
 import { useState, useEffect } from 'react';
-import { BrowserRouter, Switch, Route, Redirect, useParams, Link } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect, Link } from 'react-router-dom';
 import Nav from './components/nav/Nav';
 import Thumbnail from './components/thumbnail/Thumbnail';
 import axios from 'axios';
@@ -9,15 +10,30 @@ import CurContent from './pages/curcontent/CurContent';
 import Mypage from './pages/mypage/Mypage';
 import NewContent from './pages/newcontent/NewContent';
 import LoginPage from './pages/login/LoginPage';
+import { Pagination } from 'antd';
 axios.defaults.withCredentials = true;
 
 export default function App() {
     const [isLogin, setIsLogin] = useState();
-    const [content, setContent] = useState({}); // 게시글 정보
     const [userInfo, setUserInfo] = useState({});
     const [MycontentList, setMyContentList] = useState([]);
     const [contentList, setContentList] = useState([]);
+    const [currentPageList, setCurrentPageList] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const PAGE_SIZE = 6;
 
+    const handlePageChange = (page) => {
+        if (contentList) {
+            setCurrentPage(page);
+            setCurrentPageList(contentList.slice(PAGE_SIZE * (page - 1), PAGE_SIZE * page));
+        }
+    };
+    useEffect(() => {
+        if (contentList) {
+            setCurrentPage(1);
+            setCurrentPageList(contentList.slice(0, PAGE_SIZE));
+        }
+    }, [contentList]);
     const loginHandler = function () {
         setIsLogin(!isLogin);
     };
@@ -45,13 +61,6 @@ export default function App() {
         });
     }, []);
 
-    const getContentDetail = (contentId) => {
-        axios.get(`http://localhost:80/content/${contentId}`).then((res) => {
-            console.log(res);
-            setContent(res.data.data);
-        });
-    };
-
     useEffect(() => {
         getContentList();
     }, []);
@@ -75,6 +84,31 @@ export default function App() {
                     getContentDetail={getContentDetail}></Nav>
 
                 <Switch>
+                    <Route exact path="/">
+                        <div className="app-thumb-entire">
+                            <div className="mainbnner">
+                                <img
+                                    id="banner"
+                                    src="https://cdn.discordapp.com/attachments/881710985335934979/882192949079851008/2021-08-31_6.19.17.png"></img>
+                            </div>
+                            {currentPageList.map((list) => {
+                                return (
+                                    <Link to={`/curContent/${list.id}`}>
+                                        <Thumbnail list={list} key={list.id} />
+                                    </Link>
+                                );
+                            })}
+                            <div className="Pagination">
+                                <Pagination
+                                    defaultCurrent={1}
+                                    current={currentPage}
+                                    pageSize={PAGE_SIZE}
+                                    onChange={handlePageChange}
+                                    total={contentList.length}
+                                />
+                            </div>
+                        </div>
+                    </Route>
                     <Route path="/mypage">
                         <Mypage userInfo={userInfo} MycontentList={MycontentList} />
                     </Route>
@@ -83,21 +117,8 @@ export default function App() {
                         <LoginPage loginHandler={loginHandler} />
                     </Route>
                     <Route path="/newContent" component={NewContent} />
-                    <Route path="/curContent">
-                        <CurContent content={content}></CurContent>
-                    </Route>
-
-                    <Route exact path="/">
-                        <div className="mainBanner">
-                            <img
-                                id="banner"
-                                src="https://cdn.discordapp.com/attachments/881710985335934979/882192949079851008/2021-08-31_6.19.17.png"></img>
-                        </div>
-                        <div className="app-thumb-entire">
-                            {contentList.map((list) => {
-                                return <Thumbnail list={list} key={list.id} getContentDetail={getContentDetail} />;
-                            })}
-                        </div>
+                    <Route path="/curContent/:id">
+                        <CurContent userInfo={userInfo}></CurContent>
                     </Route>
                 </Switch>
             </div>
