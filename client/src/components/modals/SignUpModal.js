@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useHistory, Link } from 'react-router-dom';
 
 function Signup({ isOpen, close, loginHandler }) {
+    const [img, setImg] = useState(null);
     const [signupInfo, setSignupInfo] = useState({
         profile_img: '',
         nickName: '',
@@ -14,13 +15,13 @@ function Signup({ isOpen, close, loginHandler }) {
     const [errorMessage, setErrorMessage] = useState(false);
     const history = useHistory();
 
-    const fileEvent = (e) => {
-        const reader = new FileReader();
-        reader.onload = () => {
-            setSignupInfo({ ...signupInfo, [e.target.name]: e.target.files });
-            console.log('파일 업로드 완료.');
-        };
-        reader.readAsText(e.target.files[0]);
+    const fileEvent = async (e) => {
+        setImg(e.target.files[0]);
+        // const formData = new FormData();
+        // formData.set('file', img);
+        // const res = await axios.patch('/upload', formData);
+        // return res;
+        console.log('파일 업로드 완료.', e.target.files[0].name);
     };
 
     const inputHandler = (e) => {
@@ -44,7 +45,7 @@ function Signup({ isOpen, close, loginHandler }) {
                 .post(
                     'http://localhost:80/signup',
                     {
-                        profile_img: signupInfo.profile_img,
+                        profile_img: img.name,
                         nickName: signupInfo.nickName,
                         email: signupInfo.email,
                         password: signupInfo.password,

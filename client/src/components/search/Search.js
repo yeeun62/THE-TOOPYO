@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Search.css';
 import SearchThumbnail from './SearchThumbnail';
 
@@ -20,7 +21,12 @@ export default function Search({ isOpen, close, contentList, getContentDetail })
         return data.map((list) => {
             return (
                 <li>
-                    <SearchThumbnail close={close} list={list} key={list.id} getContentDetail={getContentDetail} />
+                    <Link
+                        to={{
+                            pathname: `/curContent/${list.id}`,
+                        }}>
+                        <SearchThumbnail close={close} list={list} key={list.id} />
+                    </Link>
                 </li>
             );
         });
