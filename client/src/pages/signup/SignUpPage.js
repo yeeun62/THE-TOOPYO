@@ -35,7 +35,7 @@ function SignupPage() {
         setSignupInfo({ ...signupInfo, [e.target.name]: e.target.value });
     };
 
-    const signUpRequestHandler = () => {
+    const signUpRequestHandler = async () => {
         if (
             // !signupInfo.profile_img ||
             // !signupInfo.provider ||
@@ -48,11 +48,11 @@ function SignupPage() {
             console.log(signupInfo);
         } else {
             console.log(signupInfo);
-            axios
+            await axios
                 .post(
                     'http://localhost:80/signup',
                     {
-                        profile_img: signupInfo.profile_img,
+                        profile_img: img.name,
                         provider: signupInfo.provider,
                         nickName: signupInfo.nickName,
                         email: signupInfo.email,
