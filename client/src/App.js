@@ -23,6 +23,12 @@ export default function App() {
     const [currentPageList, setCurrentPageList] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const PAGE_SIZE = 6;
+    const [isClick, setIsClick] = useState(false);
+
+    const mainClick = () => {
+        setIsClick(!isClick);
+    };
+
     const handleLogout = () => {
         axios.get('http://localhost:80/signout', {}).then((res) => {
             setUserInfo(null);
@@ -68,56 +74,68 @@ export default function App() {
     // useEffect(() => {}, [userInfo]);
 
     return (
-        <BrowserRouter>
-            <div className="app">
-                <Nav
-                    isLogin={isLogin}
-                    loginHandler={loginHandler}
-                    contentList={contentList}
-                    handleLogout={handleLogout}></Nav>
+        <>
+            {!isClick ? (
+                <div className="coverContainer">
+                    <img
+                        onClick={mainClick}
+                        className="coverimg"
+                        src="https://cdn.discordapp.com/attachments/877171336508739646/882685235731501146/2021-09-02_2.55.55.png"
+                    />
+                </div>
+            ) : (
+                <BrowserRouter>
+                    <div className="app">
+                        <Nav
+                            isLogin={isLogin}
+                            loginHandler={loginHandler}
+                            contentList={contentList}
+                            handleLogout={handleLogout}></Nav>
 
-                <Switch>
-                    <Route exact path="/">
-                        <div className="app-thumb-entire">
-                            <div>
-                                <img
-                                    id="banner"
-                                    src="https://cdn.discordapp.com/attachments/881710985335934979/882192949079851008/2021-08-31_6.19.17.png"></img>
-                            </div>
-                            {currentPageList.map((list) => {
-                                return (
-                                    <Link to={`/curContent/${list.id}`}>
-                                        <Thumbnail list={list} key={list.id} />
-                                    </Link>
-                                );
-                            })}
-                            <div className="Pagination">
-                                <Pagination
-                                    defaultCurrent={1}
-                                    current={currentPage}
-                                    pageSize={PAGE_SIZE}
-                                    onChange={handlePageChange}
-                                    total={contentList.length}
-                                />
-                            </div>
-                        </div>
-                    </Route>
-                    <Route path="/editContent">
-                        <EditContent></EditContent>
-                    </Route>
-                    <Route path="/mypage">
-                        <Mypage userInfo={userInfo} MycontentList={MycontentList} setUserInfo={setUserInfo} />
-                    </Route>
-                    <Route path="/signup" component={SignupPage} />
-                    <Route path="/login">
-                        <LoginPage loginHandler={loginHandler} />
-                    </Route>
-                    <Route path="/newContent" component={NewContent} />
-                    <Route path="/curContent/:id">
-                        <CurContent userInfo={userInfo}></CurContent>
-                    </Route>
-                </Switch>
-            </div>
-        </BrowserRouter>
+                        <Switch>
+                            <Route exact path="/">
+                                <div className="app-thumb-entire">
+                                    <div>
+                                        <img
+                                            id="banner"
+                                            src="https://cdn.discordapp.com/attachments/881710985335934979/882192949079851008/2021-08-31_6.19.17.png"></img>
+                                    </div>
+                                    {currentPageList.map((list) => {
+                                        return (
+                                            <Link to={`/curContent/${list.id}`}>
+                                                <Thumbnail list={list} key={list.id} />
+                                            </Link>
+                                        );
+                                    })}
+                                    <div className="Pagination">
+                                        <Pagination
+                                            defaultCurrent={1}
+                                            current={currentPage}
+                                            pageSize={PAGE_SIZE}
+                                            onChange={handlePageChange}
+                                            total={contentList.length}
+                                        />
+                                    </div>
+                                </div>
+                            </Route>
+                            <Route path="/editContent">
+                                <EditContent></EditContent>
+                            </Route>
+                            <Route path="/mypage">
+                                <Mypage userInfo={userInfo} MycontentList={MycontentList} setUserInfo={setUserInfo} />
+                            </Route>
+                            <Route path="/signup" component={SignupPage} />
+                            <Route path="/login">
+                                <LoginPage loginHandler={loginHandler} />
+                            </Route>
+                            <Route path="/newContent" component={NewContent} />
+                            <Route path="/curContent/:id">
+                                <CurContent userInfo={userInfo}></CurContent>
+                            </Route>
+                        </Switch>
+                    </div>
+                </BrowserRouter>
+            )}
+        </>
     );
 }
