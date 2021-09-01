@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
     const { email, password } = req.body;
     let findUser = await user.findOne({ where: { email: email, password: password } });
 
-    if (!user) {
+    if (!findUser) {
         res.status(404).json({ message: 'not authorized' });
     } else {
         delete findUser.dataValues.password;
