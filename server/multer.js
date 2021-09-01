@@ -6,17 +6,17 @@ const { user } = require('./models');
 
 const router = express.Router();
 
-fs.readdir('upload', (error) => {
-    // upload 폴더 없으면 생성
-    if (error) {
-        fs.mkdirSync('upload');
-    }
-});
+// fs.readdir('upload', (error) => {
+//     // upload 폴더 없으면 생성
+//     if (error) {
+//         fs.mkdirSync('upload');
+//     }
+// });
 
 const upload = multer({
     storage: multer.diskStorage({
         destination(req, file, cb) {
-            cb(null, 'upload/');
+            cb(null, '../client/public/upload');
         },
         filename(req, file, cb) {
             cb(null, file.originalname);
@@ -35,14 +35,15 @@ router.patch('/upload', upload.single('file'), async (req, res) => {
         console.log(originalname, filepath);
         if (originalname && filepath) {
             await user.update(
-                { profile_img: filepath },
+                { profile_img: originalname },
                 {
                     where: {
                         profile_img: originalname, //토큰의 아이디로
                     },
                 },
             );
-            res.status(200).send('되나'); //포스트맨으로 실험 불가능(파일)
+            res.status(200).send('ee');
+            //포스트맨으로 실험 불가능(파일)
         } else {
             res.status(400).send('업로드 문제');
         }

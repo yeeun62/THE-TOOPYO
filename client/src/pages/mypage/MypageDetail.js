@@ -36,7 +36,9 @@ export default function MypageDetail({ userInfo, getUserInfo }) {
             patchInfo.password &&
             patchInfo.phoneNumber &&
             userInfo.email
-        ) {
+        )
+            return console.log(patchInfo);
+        {
             axios
                 .patch(`http://localhost:80/user`, {
                     nickName: patchInfo.nickName,
@@ -46,6 +48,7 @@ export default function MypageDetail({ userInfo, getUserInfo }) {
                     phoneNumber: patchInfo.phoneNumber,
                 })
                 .then((res) => {
+                    console.log(res);
                     history.push('/');
                 });
         }
@@ -120,7 +123,7 @@ export default function MypageDetail({ userInfo, getUserInfo }) {
                             <a className="profile_img">
                                 <div className="label">프로필 사진</div>
                                 <img
-                                    src="/img/kakao.png"
+                                    src={`/upload/${userInfo.profile_img}`}
                                     alt={userInfo.nickName}
                                     name="profile_img"
                                     className="avatar"
