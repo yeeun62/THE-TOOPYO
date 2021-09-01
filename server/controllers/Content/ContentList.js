@@ -69,19 +69,16 @@ module.exports = {
     createContent: async (req, res) => {
         const accessToken = req.cookies.accessToken;
         const userInfo = await jwt.verify(accessToken, process.env.ACCESS_SECRET);
-        console.log('~~~~~~~~~~~~~~~', userInfo);
-        const { title, description, voting_deadline } = req.body; //picture_1, picture_2,
-        console.log('!!!!!!!!!!!!', req.body);
+        const { title, description, voting_deadline, picture_1, picture_2 } = req.body;
         if (title && description && voting_deadline) {
-            //picture_1 && picture_2 &&
             try {
                 const createContent = await content.create({
                     userId: userInfo.id,
                     title,
                     description,
                     voting_deadline,
-                    picture_1: '아직사진이안된데',
-                    picture_2: '아직사진이안된데',
+                    picture_1,
+                    picture_2,
                 });
                 res.status(201).json({ message: 'ok', contentId: createContent.id });
             } catch (err) {
