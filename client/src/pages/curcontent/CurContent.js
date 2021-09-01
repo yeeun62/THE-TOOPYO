@@ -132,7 +132,7 @@ function CurContent({ userInfo }) {
                         <li>
                             <div className="curPic" onClick={getAgree}>
                                 <img
-                                    src={content.picture_1}
+                                    src={`/upload/${content.picture_1}`}
                                     alt={content.description}
                                     className="curPicture_1 curPic"></img>
                             </div>
@@ -144,7 +144,7 @@ function CurContent({ userInfo }) {
                         <li>
                             <div className="curPic" onClick={getDisagree}>
                                 <img
-                                    src={content.picture_2}
+                                    src={`/upload/${content.picture_2}`}
                                     alt={content.description}
                                     className="curPicture_2 curPic"></img>
                             </div>

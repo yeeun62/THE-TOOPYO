@@ -106,7 +106,7 @@ export default function App() {
                         <EditContent></EditContent>
                     </Route>
                     <Route path="/mypage">
-                        <Mypage userInfo={userInfo} MycontentList={MycontentList} />
+                        <Mypage userInfo={userInfo} MycontentList={MycontentList} setUserInfo={setUserInfo} />
                     </Route>
                     <Route path="/signup" component={SignupPage} />
                     <Route path="/login">
