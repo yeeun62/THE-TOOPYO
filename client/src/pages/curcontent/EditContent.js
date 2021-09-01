@@ -1,25 +1,18 @@
-import axios from 'axios';
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './NewContent.css';
-import CurContent from '../curcontent/CurContent';
+import { useState } from 'react';
+import axios from 'axios';
+import '../../pages/newcontent/NewContent.css';
 axios.defaults.withCredentials = true;
 
-function NewContent() {
+function EditContent({ content, userInfo }) {
     const [information, setInformation] = useState({
-        title: '',
-        description: '',
-        // picture_1: '',
-        // picture_2: '',
-        votingDeadLine: 'false', //! 나중에 변경해야될수도있음
+        title: content.title,
+        description: content.description,
+        // picture_1: content.picture_1,
+        // picture_2: content.picture_2,
+        votingDeadLine: content.voting_deadline,
     });
     console.log(information);
-
-    const [isOk, setIsOk] = useState(false);
-
-    const isOkHandler = () => {
-        setIsOk(isOk ? false : true);
-    };
 
     const [isErr, setIsErr] = useState(false);
     const isErrHandler = () => {
@@ -30,23 +23,18 @@ function NewContent() {
         setInformation({ ...information, [e.target.name]: e.target.value });
     };
 
-    // const handleInputfile = (e) => {
-    //     setInformation({ ...information, [e.target.name]: e.target.file });
-    // };
-
     const uploadHandler = async () => {
         if (information.title && information.description && information.voting_deadline) {
             console.log(information.title, information.description, information.voting_deadline);
             //|| !information.picture_1 || !information.picture_2
             // return isErrHandler();
-            await axios.post(
-                'http://localhost:80/content/',
+            await axios.patch(
+                `http://localhost:80/content:`,
                 {
                     title: information.title,
                     // picture_1: information.picture_1,
                     // picture_2: information.picture_2,
                     description: information.description,
-                    voting_deadline: information.votingDeadLine,
                 },
                 { 'Content-Type': 'application/json', withCredentials: true },
             );
@@ -118,5 +106,4 @@ function NewContent() {
         </div>
     );
 }
-
-export default NewContent;
+export default EditContent;
