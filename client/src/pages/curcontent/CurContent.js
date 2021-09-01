@@ -114,7 +114,11 @@ function CurContent({ userInfo }) {
                     ) : null}
                     {/* 알러트창!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!알러트창~!!!!!!!!!!!!! */}
 
-                    {content.voting_deadline ? <div>투표가 종료된 게시물입니다.</div> : <div>투표중입니다.</div>}
+                    {content.voting_deadline ? (
+                        <div className="voteOver">투표가 종료된 게시물입니다.</div>
+                    ) : (
+                        <div className="voteIng">투표중입니다.</div>
+                    )}
                     <ul id="curPicContainer">
                         <li>
                             <div className="curPic" onClick={getAgree}>
@@ -123,7 +127,7 @@ function CurContent({ userInfo }) {
                                     alt={content.description}
                                     className="curPicture_1 curPic"></img>
                             </div>
-                            <div style={content.checkAgree ? { background: 'red' } : null}>찬성{content.agree}</div>
+                            <div className={content.checkAgree ? 'over' : 'ing'}>찬성{content.agree}</div>
                         </li>
                         <li className="curVersus">
                             <img src="https://cdn.discordapp.com/attachments/881710985335934979/881711027425787914/vs.png"></img>
@@ -135,9 +139,7 @@ function CurContent({ userInfo }) {
                                     alt={content.description}
                                     className="curPicture_2 curPic"></img>
                             </div>
-                            <div style={content.checkDisAgree ? { background: 'red' } : null}>
-                                반대{content.disagree}
-                            </div>
+                            <div className={content.checkAgree ? 'over' : 'ing'}>반대{content.disagree}</div>
                         </li>
                     </ul>
                     {/* ---------------------작성자프로필-------------------- */}
@@ -149,10 +151,11 @@ function CurContent({ userInfo }) {
                                     // alt="작성자 프로필 사진"
                                     className="curWriterProfile"></img>
                             </div>
-                            <span className="curWriterName">{content.nickname}</span>
+                            <span className="curWriterName">닉네임{content.nickname}</span>
                         </div>
                         <span className="curDesc">{content.description}</span>
                     </div>
+                    <div className="footer"></div>
                 </div>
             </div>
         </div>

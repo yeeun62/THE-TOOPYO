@@ -7,14 +7,12 @@
     width: 70vw;
     margin: auto;
     padding: 2.6vw 1.04vw 0 1.04vw;
-    /* border-right: 1px solid red;
-    border-left: 1px solid red; */
     position: relative;
 }
 
 #newTitle {
     display: block;
-    /* text-align: center; */
+    text-align: center;
     width: 70vw;
     height: 2.6vw;
     margin: 1.56vw auto;

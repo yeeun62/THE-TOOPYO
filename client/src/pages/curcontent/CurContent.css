@@ -32,6 +32,10 @@
         left: 48%;
         width: 4vw;
     }
+
+    .contentMain {
+        margin-bottom: 20vw;
+    }
 }
 
 /* pc 버전 ⬆️ */
@@ -68,14 +72,17 @@
         width: 4vw;
     }
 }
+
 /* pc, mobile 전체 적용 */
+
 .curContent {
-    margin-bottom: 5vw;
+    margin-bottom: 20vw;
     padding-top: 5vw;
 }
 
 #curTitle {
     text-align: center;
+    font-size: 2.6vw;
 }
 
 /* --------------button 시작--------------- */
@@ -116,6 +123,10 @@
 
 /* =------------------컨텐츠 내용------------------- */
 
+.voteOver {
+    font-size: 1.2vw;
+}
+
 #curPicContainer {
     display: flex;
     justify-content: space-between;
@@ -126,25 +137,32 @@
 /* ---------------------작성자프로필-------------------- */
 
 .contentInfo {
-    border: 1px solid #ccc;
+    /* border: 1px solid #ccc; */
     height: 6.5vw;
+    width: 70vw;
+    padding-top: 3vw;
+    border-top: 2vw solid reba(6, 10, 125, 60%);
 }
 
 .curWriter {
     display: flex;
-    justify-content: space-between;
-    width: 14vw;
+    justify-content: start;
+    font-size: 1.6vw;
+    width: 70vw;
+    margin-bottom: 2vw;
 }
 
 .curWriterImg {
-    background: red;
+    background: #ccc;
     width: 3vw;
     height: 3vw;
     border-radius: 50%;
+    margin-right: 1.5vw;
 }
 
 .curWriterName {
     font-size: 2vw;
+    color: #666;
 }
 
 .curDesc {
@@ -152,4 +170,23 @@
     height: 6.5vw;
     overflow: scroll;
     border: 1px solid #bbb;
+}
+
+.footer {
+    width: 70vw;
+    height: 20vw;
+}
+
+/* ---------------투표알러트창 시작--------------- */
+
+.over {
+    display: none;
+}
+
+.ing {
+    background: #060a7d;
+    color: #fff;
+    text-align: center;
+    height: 2vw;
+    vertical-align: middle;
 }
