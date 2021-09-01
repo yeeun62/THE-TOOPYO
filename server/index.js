@@ -6,6 +6,7 @@ const express = require('express');
 const app = express();
 const imgRouter = require('./multer');
 const jwt = require('jsonwebtoken');
+const contentImgRouter = require('./contentmulter');
 const controllers = require('./controllers');
 const fs = require('fs');
 

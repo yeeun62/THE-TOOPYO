@@ -38,9 +38,7 @@ function Nav({ isLogin, loginHandler, contentList, getContentDetail }) {
                         <li>
                             {isLogin ? (
                                 <Link to="/">
-                                    <button className="navBtn" onClick={logoutHandler}>
-                                        로그아웃
-                                    </button>
+                                    <button className="navBtn">로그아웃</button>
                                 </Link>
                             ) : (
                                 <SignUpButton loginHandler={loginHandler} />
