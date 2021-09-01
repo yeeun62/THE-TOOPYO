@@ -19,27 +19,35 @@ const upload = multer({
             cb(null, 'upload/');
         },
         filename(req, file, cb) {
-            const ext = path.extname(file.originalname);
-            cb(null, path.basename(file.originalname, ext) + Date.now() + ext);
+            cb(null, file.originalname);
         },
     }),
-    limits: { fileSize: 5 * 300 * 300 },
+    limits: { fileSize: 5 * 1000 * 1000 },
 });
 // 이미지 업로드를 위한 API
 // upload의 single 메서드는 하나의 이미지를 업로드할 때 사용
 router.patch('/upload', upload.single('file'), async (req, res) => {
-    console.log(req.file);
-    const { filename } = req.file;
-    if (filename) {
-        await user.update(
-            { profile_img: filename.path },
-            {
-                where: {
-                    profile_img: filename.originalname,
+    try {
+        console.log('file', req.file);
+        const { originalname } = req.file;
+        const filepath = req.file.path;
+        // console.log('filename', filename);
+        console.log(originalname, filepath);
+        if (originalname && filepath) {
+            await user.update(
+                { profile_img: filepath },
+                {
+                    where: {
+                        profile_img: originalname, //토큰의 아이디로
+                    },
                 },
-            },
-        );
-        res.status(200).json({ url: `/upload/${req.file.filename}` }); //포스트맨으로 실험 불가능(파일)
+            );
+            res.status(200).send('되나'); //포스트맨으로 실험 불가능(파일)
+        } else {
+            res.status(400).send('업로드 문제');
+        }
+    } catch (err) {
+        res.status(500).send('업로드500');
     }
 });
 
