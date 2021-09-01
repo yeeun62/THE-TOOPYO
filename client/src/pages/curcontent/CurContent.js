@@ -156,11 +156,11 @@ function CurContent({ userInfo }) {
                         <div className="curWriter">
                             <div className="curWriterImg">
                                 <img
-                                    src={content.profile_img}
+                                    src={`/upload/${content.profile_img}`}
                                     // alt="작성자 프로필 사진"
                                     className="curWriterProfile"></img>
                             </div>
-                            <span className="curWriterName">닉네임{content.nickname}</span>
+                            <span className="curWriterName">닉네임{content.nickName}</span>
                         </div>
                         <span className="curDesc">{content.description}</span>
                     </div>
