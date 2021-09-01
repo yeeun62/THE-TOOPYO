@@ -14,7 +14,7 @@
 
 #newTitle {
     display: block;
-    text-align: center;
+    /* text-align: center; */
     width: 70vw;
     height: 2.6vw;
     margin: 1.56vw auto;
@@ -28,17 +28,18 @@
     background-color: #fff;
     border: none;
     position: absolute;
-    top: 8vw;
-    margin-left: 1.04vw;
+    top: 24.4vw;
+    right: 1.5vw;
 }
 
 .inputTitle {
-    width: 26.04vw;
     height: 3vw;
     font-size: 1.8vw;
     vertical-align: middle;
     border: 1px solid #ccc;
-    width: 55.73vw;
+    width: 65vw;
+    position: absolute;
+    left: 1vw;
 }
 
 #newVersus {
