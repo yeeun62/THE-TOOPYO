@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import Login from './LoginModal';
+import { useHistory } from 'react-router-dom';
 
 function LoginButton({ loginHandler }) {
+    const history = useHistory();
     const [isModalOpen, setIsModalOpen] = useState(false);
-
     const openModal = () => {
         setIsModalOpen(true);
     };
