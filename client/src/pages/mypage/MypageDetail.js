@@ -112,6 +112,7 @@ export default function MypageDetail({ userInfo, getUserInfo }) {
                     </div>
                 </form>
             ) : (
+
                 <>
                     <div className="myDetailContainer">
                         <h1 className="myHello">안녕하세요 {userInfo.nickName}님</h1>
@@ -140,6 +141,7 @@ export default function MypageDetail({ userInfo, getUserInfo }) {
                         </div>
                     </div>
                 </>
+
             )}
         </>
     );
