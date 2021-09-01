@@ -3,9 +3,10 @@ import './Mypage.css';
 import { Link } from 'react-router-dom';
 
 function MyThumbnail({ list }) {
+    //{{`/update/${this.state.article.id}`} info={this.state.article}
     return (
         <div>
-            <Link to="/curContent">
+            <Link to={'/curContent/:' + list.id}>
                 <div className="myThumnailContainer">
                     <h1 className="thumbTitle">{list.title}</h1>
                     <img className="thumbPicture thumbPicture_1" src={list.picture_1}></img>
