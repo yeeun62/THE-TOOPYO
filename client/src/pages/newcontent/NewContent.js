@@ -61,7 +61,6 @@ function NewContent() {
             console.log(information.title, information.description, information.votingDeadLine);
             //|| !information.picture_1 || !information.picture_2
             // return isErrHandler();
-
             await axios
                 .post(
                     'http://localhost:80/content',
@@ -86,7 +85,6 @@ function NewContent() {
                         window.location.replace(`/curContent/${res.data.contentId}`);
                     }
                 });
-
         }
     };
 
