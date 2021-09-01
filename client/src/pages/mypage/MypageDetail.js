@@ -106,8 +106,12 @@ export default function MypageDetail({ userInfo, getUserInfo }) {
                                             onChange={(e) => inputHandler(e)}
                                             value={patchInfo.phoneNumber}></input>
                                     </div>
+                                    <div className="saveContainer">
+                                        <a type="submit" onClick={patchRequestHandler}>
+                                            저장
+                                        </a>
+                                    </div>
                                 </div>
-                                <input classname="editBtn" type="submit" value="저장" onClick={patchRequestHandler} />
                             </div>
                         </div>
                     </div>
@@ -143,9 +147,9 @@ export default function MypageDetail({ userInfo, getUserInfo }) {
                                     </div>
                                 </div>
                             </div>
-                            <button classname="editBtn" onClick={clickHandler}>
-                                수정
-                            </button>
+                            <div className="editContainer">
+                                <a onClick={clickHandler}>수정</a>
+                            </div>
                         </div>
                     </div>
                 </>

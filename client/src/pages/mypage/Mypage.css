@@ -24,27 +24,22 @@
     background-color: rgba(6, 10, 125, 1);
     color: white;
 }
-.pfAreaContainer {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border: 1px solid black;
-}
+
 .myDetailContainer {
     width: 15vw;
 }
+
 .myHello {
     border: 0;
     position: absolute;
+    top: 15vw;
     left: 17vw;
     align-content: center;
 }
 .pfArea {
-    margin: 25vw 15vw;
+    margin: 10vw 15vw;
     width: 70vw;
-    height: 38vw;
+    height: 40vw;
     border-radius: 3vw;
     background-color: rgba(102, 102, 102, 0.2);
 }
@@ -59,8 +54,6 @@
     position: absolute;
     width: 28vw;
     height: 28vw;
-    border-radius: 3vw;
-    background-color: rgba(6, 10, 125, 1);
     border: 1px solid #ccc;
 }
 .infoContainer {
@@ -81,7 +74,7 @@
 .user {
     width: 100%;
     border-radius: 1vw;
-    border: 1px solid white;
+    border: 1px solid #ccc;
     margin: 0 3.5vw;
     text-align: left;
     font-size: 2vw;
@@ -99,7 +92,7 @@
     font-size: 10px;
     height: 3vw;
     width: 20vw;
-    margin-left: 3vw;
+    margin-left: 0vw;
 }
 
 .filteredContainer {
@@ -123,9 +116,25 @@
     border: 1px solid #ccc;
     border-radius: 1vw;
 }
-.editBtn {
-    height: 100vw;
-    width: 10vw;
+.editContainer {
+    font-weight: bold;
+    color: #fff;
+    position: absolute;
+    top: 52vw;
+    left: 68vw;
+    width: 100px;
+    border-radius: 3px;
+    background-color: rgba(6, 10, 125, 1);
+}
+.saveContainer {
+    font-weight: bold;
+    color: #fff;
+    position: absolute;
+    top: 35vw;
+    left: 22vw;
+    width: 100px;
+    border-radius: 3px;
+    background-color: rgba(6, 10, 125, 1);
 }
 
 #thumbVersus {
