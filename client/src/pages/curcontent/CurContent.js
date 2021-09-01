@@ -1,10 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './CurContent.css';
+import { useParams } from 'react-router-dom';
 
-function CurContent({ content, id }) {
+function CurContent({ writerId, userInfo }) {
+    let { id } = useParams();
+    const [content, setContent] = useState({});
     const [isAuthOk, setIsAuthOk] = useState(false); // session id 를 보내고 인증이 완료되어 투표한 경우
     const [isAuthNot, setIsAuthNot] = useState(false);
+
+    useEffect(() => {
+        axios.get(`http://localhost:80/content/${id}`).then((res) => {
+            console.log('res', res);
+            setContent(res.data.data);
+        });
+    }, []);
 
     const isAuthOkHandler = () => {
         setIsAuthOk(true);
@@ -15,26 +25,33 @@ function CurContent({ content, id }) {
     };
 
     const getAgree = () => {
-        console.log('agree실행됨');
-        axios.get(`https://localhost:80/content/agree/${id}`).then((res) => {
-            if (res.message === 'agree complete') return isAuthOkHandler();
-            else {
+        axios.get(`http://localhost:80/content/agree/${id}`).then((res) => {
+            axios.get(`http://localhost:80/content/${id}`).then((res) => {
+                setContent(res.data.data);
+            });
+            if (res.data.message === 'agree complete') {
+                return isAuthOkHandler();
+            } else {
                 return isAuthNotHandler();
             }
         });
     };
 
     const getDisagree = () => {
-        axios.get(`https://localhost:80/content/disagree/${id}`).then((res) => {
-            if (res.message === 'disagree complete') return isAuthOkHandler();
-            else {
+        axios.get(`http://localhost:80/content/disagree/${id}`).then((res) => {
+            axios.get(`http://localhost:80/content/${id}`).then((res) => {
+                setContent(res.data.data);
+            });
+            if (res.data.message === 'disagree complete') {
+                return isAuthOkHandler();
+            } else {
                 return isAuthNotHandler();
             }
         });
     };
 
     const deleteContent = () => {
-        axios.delete(`https://localhost:80/content/${id}`).then((res) => {
+        axios.delete(`http://localhost:80/content/${id}`).then((res) => {
             if (res.message === 'delete complete') {
                 isAuthOkHandler();
             } else {
@@ -43,20 +60,37 @@ function CurContent({ content, id }) {
         });
     };
 
+    const requestDeadline = () => {
+        axios.get('http://localhost:80/content').then((res) => {
+            console.log(res);
+            alert('css 모달만들어주세요');
+        });
+    };
+
     return (
         <div className="curContent">
             <div className="curCotainerTitle">
                 <h1 id="curTitle">{content.title}</h1>
-                <button className="editContentBtn curBtn">
-                    <img
-                        id="editContent"
-                        src="https://cdn.discordapp.com/attachments/881710985335934979/881927360398655518/edit.png"></img>
-                </button>
-                <button className="deleteContentBtn curBtn" onClick={deleteContent}>
-                    <img
-                        id="deleteContent"
-                        src="https://cdn.discordapp.com/attachments/837593576955052072/881931904486621204/delete.png"></img>
-                </button>
+                {content.userId === userInfo.id ? (
+                    <>
+                        {content.voting_deadline ? null : (
+                            <button className="editContentBtn voting" onClick={requestDeadline}>
+                                투표종료
+                            </button>
+                        )}
+
+                        <button className="editContentBtn curBtn">
+                            <img
+                                id="editContent"
+                                src="https://cdn.discordapp.com/attachments/881710985335934979/881927360398655518/edit.png"></img>
+                        </button>
+                        <button className="deleteContentBtn curBtn" onClick={deleteContent}>
+                            <img
+                                id="deleteContent"
+                                src="https://cdn.discordapp.com/attachments/837593576955052072/881931904486621204/delete.png"></img>
+                        </button>
+                    </>
+                ) : null}
             </div>
             {/* 버튼 끝!!!!!!!!!!!!!!!!             @@@@@@@@@@@@@@@@@ */}
             <div className="contentMain">
@@ -79,26 +113,30 @@ function CurContent({ content, id }) {
                         </div>
                     ) : null}
                     {/* 알러트창!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!알러트창~!!!!!!!!!!!!! */}
+
+                    {content.voting_deadline ? <div>투표가 종료된 게시물입니다.</div> : <div>투표중입니다.</div>}
                     <ul id="curPicContainer">
                         <li>
-                            <div className="curPic">
+                            <div className="curPic" onClick={getAgree}>
                                 <img
                                     src={content.picture_1}
                                     alt={content.description}
-                                    className="curPicture_1 curPic"
-                                    onClick={getAgree}></img>
+                                    className="curPicture_1 curPic"></img>
                             </div>
+                            <div style={content.checkAgree ? { background: 'red' } : null}>찬성{content.agree}</div>
                         </li>
                         <li className="curVersus">
                             <img src="https://cdn.discordapp.com/attachments/881710985335934979/881711027425787914/vs.png"></img>
                         </li>
                         <li>
-                            <div className="curPic">
+                            <div className="curPic" onClick={getDisagree}>
                                 <img
                                     src={content.picture_2}
                                     alt={content.description}
-                                    className="curPicture_2 curPic"
-                                    onClick={getDisagree}></img>
+                                    className="curPicture_2 curPic"></img>
+                            </div>
+                            <div style={content.checkDisAgree ? { background: 'red' } : null}>
+                                반대{content.disagree}
                             </div>
                         </li>
                     </ul>
