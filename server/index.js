@@ -22,7 +22,7 @@ app.use(
 );
 
 app.patch('/upload', imgRouter);
-
+app.patch('/uploads', contentImgRouter);
 app.post('/login', controllers.login);
 app.get('/signout', controllers.signOut);
 app.post('/signup', controllers.signUp);
