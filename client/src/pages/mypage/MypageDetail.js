@@ -36,7 +36,9 @@ export default function MypageDetail({ userInfo, getUserInfo }) {
             patchInfo.password &&
             patchInfo.phoneNumber &&
             userInfo.email
-        ) {
+        )
+            return console.log(patchInfo);
+        {
             axios
                 .patch(`http://localhost:80/user`, {
                     nickName: patchInfo.nickName,
@@ -46,6 +48,7 @@ export default function MypageDetail({ userInfo, getUserInfo }) {
                     phoneNumber: patchInfo.phoneNumber,
                 })
                 .then((res) => {
+                    console.log(res);
                     history.push('/');
                 });
         }
