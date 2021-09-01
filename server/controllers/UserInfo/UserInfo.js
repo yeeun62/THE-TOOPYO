@@ -1,79 +1,49 @@
 const { user } = require('../../models');
 const { content } = require('../../models');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 module.exports = {
     // 내정보 입니다.
     mypage: async (req, res) => {
-        const { email } = req.body;
-        if (email !== undefined) {
-            const findUser = await user.findOne({
-                where: {
-                    email,
-                },
-            });
-            const { id } = findUser;
-            const findcontent = await content.findAll({
-                where: {
-                    userId: id,
-                },
-            });
-            res.status(200).json({
-                message: 'ok',
-                data: {
-                    content: findcontent,
-                    userInfo: findUser,
-                },
-            });
-        } else {
-            res.status(404).json({ message: 'Bad Request' });
+        const accessToken = req.cookies.accessToken;
+        console.log('!!!!!!!!!!!!!!', req);
+        try {
+            if (!accessToken) {
+                res.status(404).json({ message: 'invalid access token' });
+            } else {
+                const userData = await jwt.verify(accessToken, process.env.ACCESS_SECRET);
+                delete userData.iat;
+                delete userData.exp;
+                const findcontent = await content.findAll({ where: { userId: userData.id } });
+                res.status(200).json({ message: 'ok', data: { userInfo: userData, content: findcontent } });
+            }
+        } catch (err) {
+            res.status(500).json({ message: 'server error' });
         }
     },
     // 내정보 수정입니다.
     retouchMypage: async (req, res) => {
-        //! 나중에 session으로 바꿔야함
-        const { nickName, email, phoneNumber, profile_img } = req.body;
-        const finduser = await user.findOne({
-            where: {
-                email: req.session.email,
-            },
-        });
-        if (email === finduser.email) {
-            const findNickname = await user.findOne({
-                where: {
-                    nickName,
-                },
-            });
-            if (!findNickname) {
-                await user.update(
-                    {
-                        nickName,
-                        email,
-                        phoneNumber,
-                        profile_img,
-                    },
-                    {
-                        where: {
-                            email,
-                        },
-                    },
-                );
-                const userInfo = await user.findOne({
-                    where: {
-                        email,
-                    },
+        try {
+            const accessToken = req.cookies.accessToken;
+            const { nickName, password, email, phoneNumber, profile_img } = req.body;
 
-                });
-                res.status(200).json({
-                    message: 'ok',
-                    data: {
-                        userInfo: userInfo,
-                    },
-                });
+            if (!accessToken) {
+                res.status(404).json({ message: 'invalid access token' });
             } else {
-                res.status(400).json({ message: 'Bad Request' });
+                const userData = await jwt.verify(accessToken, process.env.ACCESS_SECRET);
+                await user.update(
+                    { nickName, password, email, phoneNumber, profile_img },
+                    { where: { id: userData.id } },
+                );
+                const newData = { id: userData.id, nickName, email, phoneNumber, profile_img };
+                const newAccessToken = await jwt.sign(newData, process.env.ACCESS_SECRET);
+                delete newAccessToken.iat;
+                delete newAccessToken.exp;
+                res.cookie('accessToken', newAccessToken).status(200).json({ message: 'ok' });
             }
-        } else {
-            res.status(400).json({ message: 'Bad Request' });
+        } catch (err) {
+            res.status(500).json({ message: 'server error' });
         }
     },
 };

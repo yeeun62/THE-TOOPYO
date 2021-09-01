@@ -1,49 +1,98 @@
-nav {
-    position: fixed;
-    height: 4.17vw;
-    width: 100%;
-    background-color: #060a7d;
+@media screen and (min-width: 769px) {
+    nav {
+        position: fixed;
+        height: 5vw;
+        width: 100%;
+        background-color: #060a7d;
+        z-index: 9999;
+        margin-bottom: 5vw;
+    }
+
+    .navInner {
+        margin: 0 auto;
+        width: 70vw;
+        display: flex;
+        justify-content: flex-end;
+        position: relative;
+    }
+
+    .logoContainer h1 {
+        color: #fff;
+        font-weight: 500;
+    }
+
+    .logo {
+        width: 3.5vw;
+        height: 3.5vw;
+        margin-top: 0.6vw;
+        position: absolute;
+        left: 0;
+        margin-left: 1.04vw;
+    }
+
+    .buttonContainer {
+        display: flex;
+        justify-content: flex-end;
+        padding-top: 0.52vw;
+    }
+
+    .navBtn {
+        margin-top: 0.3vw;
+        height: 3vw;
+        padding-left: 1vw;
+        padding-right: 1vw;
+        border-radius: 2vw;
+        border: none;
+        outline: none;
+        font-size: 1vw;
+        font-weight: bold;
+        word-break: keep-all;
+        background-color: #fff;
+        color: #060a7d;
+        cursor: pointer;
+        margin-right: 1.04vw;
+    }
+
+    .navBtn:hover {
+        background-color: #060a7d;
+        color: #fff;
+        border: 1px solid #fff;
+    }
 }
 
-.navInner {
-    margin: 0 auto;
-    width: 70vw;
-    display: flex;
-    justify-content: flex-end;
-}
+/* ===================pc 끝 !!! mobile 시작!!! ================= */
 
-.logo {
-    width: 42px;
-    height: 42px;
-    margin-top: 10px;
-    position: absolute;
-    left: 0;
-}
+@media screen and (max-width: 769px) {
+    .newContentBtn {
+        display: none;
+    }
+    nav {
+        position: fixed;
+        height: 7vw;
+        width: 100%;
+        background-color: #060a7d;
+        z-index: 9999;
+    }
 
-.buttonContainer {
-    display: flex;
-    justify-content: flex-end;
-    padding-top: 0.52vw;
-}
+    .navInner {
+        margin: 0 auto;
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        position: relative;
+    }
 
-.navBtn {
-    height: 3vw;
-    padding-left: 1vw;
-    padding-right: 1vw;
-    border-radius: 2vw;
-    border: none;
-    outline: none;
-    font-size: 1vw;
-    font-weight: bold;
-    word-break: keep-all;
-    background-color: #fff;
-    color: #060a7d;
-    transition: all 0.125s;
-    cursor: pointer;
-}
+    .logoContainer h1 {
+        color: #fff;
+        font-weight: 500;
+    }
 
-.navBtn:hover {
-    background-color: #060a7d;
-    color: #fff;
-    border: 1px solid #fff;
+    .logo {
+        width: 4vw;
+        height: 4vw;
+        margin-top: 10px;
+        position: absolute;
+        left: 0;
+        margin-left: 1.04vw;
+    }
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Mycontent from '../../pages/mypage/Mycontent';
 import MypageDetail from '../../pages/mypage/MypageDetail';
@@ -24,15 +24,23 @@ const Desc = styled.div`
     text-align: center;
 `;
 
-export default function Tab() {
+export default function Tab({ userInfo, MycontentList }) {
     const [currentTab, setCurrentTab] = useState(0);
     const tabMenu = [
-        { name: 'mypage', content: <MypageDetail /> },
-        { name: 'mycontent', content: <Mycontent /> },
+        { name: 'mypage', content: <MypageDetail MycontentList={MycontentList} userInfo={userInfo} /> },
+        {
+            name: 'mycontent',
+            content: <Mycontent MycontentList={MycontentList} userInfo={userInfo} />,
+        },
     ];
     const selectMenuHandler = (index) => {
         setCurrentTab(index);
     };
+
+    useEffect(() => {
+        console.log('여기는텝', userInfo);
+    });
+
     return (
         <>
             <div>
@@ -41,7 +49,9 @@ export default function Tab() {
                         return (
                             <li
                                 className={currentTab === index ? 'mypage' : 'mycontent'}
-                                onClick={() => selectMenuHandler(index)}>
+                                onClick={() => {
+                                    selectMenuHandler(index);
+                                }}>
                                 {el.name}
                             </li>
                         );

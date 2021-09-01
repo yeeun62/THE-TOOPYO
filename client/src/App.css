@@ -5,13 +5,16 @@
 .App img {
     vertical-align: middle;
 }
+li {
+    display: inline;
+}
+.Pagination {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
 
 @media screen and (min-width: 769px) {
-    .App {
-        width: 62.5vw;
-        margin: auto;
-    }
-
     .app-thumb-entire {
         width: 70vw;
         margin: auto;
@@ -20,13 +23,21 @@
         justify-content: space-between;
         flex-wrap: wrap;
     }
+
+    #banner {
+        display: block;
+        width: 70vw;
+        padding-top: 6.3vw;
+        margin: auto;
+    }
 }
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
+@media screen and(max-width: 768px) {
+    .App {
+        width: 100%;
     }
-    to {
-        transform: rotate(360deg);
+
+    .mainBanner {
+        display: none;
     }
 }

@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
-import './SignUp.css';
+import '../../components/modals/Modal.css';
 import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
 
 function SignupPage() {
     const [signupInfo, setSignupInfo] = useState({
-        picture: '',
-        provider: 'origin',
+        profile_img: '',
         nickName: '',
         email: '',
         password: '',
         phoneNumber: '',
     });
+    console.log(signupInfo);
     const [errorMessage, setErrorMessage] = useState(false);
+    const [img, setImg] = useState(null);
     const [isLogin, setIsLogin] = useState({
         isLogin: false,
     });
@@ -22,22 +23,22 @@ function SignupPage() {
         setIsLogin(true);
     };
 
-    const fileEvent = (e) => {
-        const reader = new FileReader();
-        reader.onload = () => {
-            setSignupInfo({ ...signupInfo, [e.target.name]: e.target.picture });
-            console.log('파일 업로드 완료.');
-        };
-        reader.readAsText(e.target.files[0]);
+    const fileEvent = async (e) => {
+        setImg(e.target.files[0]);
+        // const formData = new FormData();
+        // formData.set('file', img);
+        // const res = await axios.patch('/upload', formData);
+        // return res;
+        console.log('파일 업로드 완료.', e.target.files[0].name);
     };
     const inputHandler = (e) => {
         setSignupInfo({ ...signupInfo, [e.target.name]: e.target.value });
     };
 
-    const signUpRequestHandler = () => {
+    const signUpRequestHandler = async () => {
         if (
-            // !signupInfo.picture ||
-            !signupInfo.provider ||
+            // !signupInfo.profile_img ||
+            // !signupInfo.provider ||
             !signupInfo.nickName ||
             !signupInfo.email ||
             !signupInfo.password ||
@@ -47,11 +48,11 @@ function SignupPage() {
             console.log(signupInfo);
         } else {
             console.log(signupInfo);
-            axios
+            await axios
                 .post(
                     'http://localhost:80/signup',
                     {
-                        profile_img: 'signupInfo.picture',
+                        profile_img: img.name,
                         provider: signupInfo.provider,
                         nickName: signupInfo.nickName,
                         email: signupInfo.email,
@@ -62,9 +63,13 @@ function SignupPage() {
                 )
                 .then((res) => {
                     history.push('/');
-                    if (res.message === 'ok') return loginHandler(true);
-                    console.log('eeeeeee');
+                    if (res.data.message === 'ok') {
+                        return loginHandler();
+                    }
                 });
+            const formData = new FormData();
+            formData.append('file', img);
+            await axios.patch('http://localhost:80/upload', formData);
         }
     };
     return (
@@ -112,21 +117,15 @@ function SignupPage() {
                                 value={signupInfo.phoneNumber}
                             />
                             <div className="profileUploader">프로필 사진을 선택하세요.</div>
-                            <input
-                                name="picture"
-                                className="signUpPic"
-                                type="file"
-                                placeholder="picture"
-                                onChange={fileEvent}
-                                value={signupInfo.picture}
-                            />
+                            <input name="profile_img" className="signUpPic" type="file" onChange={fileEvent} />
                             <button className="signUpB" onClick={signUpRequestHandler}>
-                                {' '}
                                 회원가입
                             </button>
                             <div className="loginLine">
                                 이미 아이디가 있으신가요?
-                                <Link to="/">로그인</Link>
+                                <Link to="/login">
+                                    <button className="link">로그인</button>
+                                </Link>
                             </div>
                         </div>
                     </form>
