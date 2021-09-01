@@ -1,7 +1,7 @@
 import './App.css';
 import 'antd/dist/antd.css';
 import { useState, useEffect } from 'react';
-import { useHistory, BrowserRouter, Switch, Route, Redirect, Link } from 'react-router-dom';
+import { useHistory, BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 import Nav from './components/nav/Nav';
 import Thumbnail from './components/thumbnail/Thumbnail';
 import axios from 'axios';
@@ -11,6 +11,7 @@ import Mypage from './pages/mypage/Mypage';
 import NewContent from './pages/newcontent/NewContent';
 import LoginPage from './pages/login/LoginPage';
 import { Pagination } from 'antd';
+import EditContent from './pages/curcontent/EditContent';
 axios.defaults.withCredentials = true;
 
 export default function App() {
@@ -100,6 +101,9 @@ export default function App() {
                                 />
                             </div>
                         </div>
+                    </Route>
+                    <Route path="/editContent">
+                        <EditContent></EditContent>
                     </Route>
                     <Route path="/mypage">
                         <Mypage userInfo={userInfo} MycontentList={MycontentList} setUserInfo={setUserInfo} />

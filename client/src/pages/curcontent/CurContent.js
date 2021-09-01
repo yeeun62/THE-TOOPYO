@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './CurContent.css';
 import { useHistory, useParams } from 'react-router-dom';
@@ -14,7 +15,7 @@ function CurContent({ userInfo }) {
 
     useEffect(() => {
         axios.get(`http://localhost:80/content/${id}`).then((res) => {
-            console.log('res', res);
+            //console.log('res', res);
             setContent(res.data.data);
             if (res.data.data.voting_deadline === 'true') {
                 setVotingdead(true);
@@ -83,6 +84,7 @@ function CurContent({ userInfo }) {
 
     return (
         <div className="curContent">
+<<<<<<< HEAD
             {isEdit ? (
                 <>
                     <div className="curCotainerTitle">
@@ -119,6 +121,50 @@ function CurContent({ userInfo }) {
                                     요청이 완료되었습니다.
                                 </div>
                             ) : null}
+=======
+            <div className="curCotainerTitle">
+                <h1 id="curTitle">{content.title}</h1>
+                {content.userId === userInfo.id ? (
+                    <>
+                        {content.voting_deadline ? null : (
+                            <button className="curBtn voting" onClick={requestDeadline}>
+                                투표종료
+                            </button>
+                        )}
+                        <Link
+                            to={{
+                                pathname: '/editContent:' + { id },
+                                state: {
+                                    content: content,
+                                    userInfo: userInfo,
+                                },
+                            }}>
+                            <button className="editContentBtn curBtn">
+                                <img
+                                    id="editContent"
+                                    src="https://cdn.discordapp.com/attachments/881710985335934979/881927360398655518/edit.png"></img>
+                            </button>
+                        </Link>
+                        <button className="deleteContentBtn curBtn" onClick={deleteContent}>
+                            <img
+                                id="deleteContent"
+                                src="https://cdn.discordapp.com/attachments/837593576955052072/881931904486621204/delete.png"></img>
+                        </button>
+                    </>
+                ) : null}
+            </div>
+            {/* 버튼 끝!!!!!!!!!!!!!!!!             @@@@@@@@@@@@@@@@@ */}
+            <div className="contentMain">
+                <div className="contentInner">
+                    {isAuthOk ? (
+                        <div className="alert authOk">
+                            <button onClick={isAuthOkHandler} className="checkAlertBtn">
+                                확인
+                            </button>
+                            요청이 완료되었습니다.
+                        </div>
+                    ) : null}
+>>>>>>> b6d851613954ae1197d11be22b7185fd2336f392
 
                             {isAuthNot ? (
                                 <div className="alert authNot" onClick={isAuthNotHandler}>
@@ -130,6 +176,7 @@ function CurContent({ userInfo }) {
                             ) : null}
                             {/* 알러트창!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!알러트창~!!!!!!!!!!!!! */}
 
+<<<<<<< HEAD
                             {votingdead ? (
                                 <div className="voteOver">투표가 종료된 게시물입니다.</div>
                             ) : (
@@ -178,6 +225,52 @@ function CurContent({ userInfo }) {
             ) : (
                 <NewContent isEdit={isEdit} content={content} setContent={setContent} setIsEdit={setIsEdit} />
             )}
+=======
+                    {content.voting_deadline ? (
+                        <div className="voteOver">투표가 종료된 게시물입니다.</div>
+                    ) : (
+                        <div className="voteIng">투표중입니다.</div>
+                    )}
+                    <ul id="curPicContainer">
+                        <li>
+                            <div className="curPic" onClick={getAgree}>
+                                <img
+                                    src={`/upload/${content.picture_1}`}
+                                    alt={content.description}
+                                    className="curPicture_1 curPic"></img>
+                            </div>
+                            <div className={content.checkAgree ? 'over' : 'ing'}>찬성{content.agree}</div>
+                        </li>
+                        <li className="curVersus">
+                            <img src="https://cdn.discordapp.com/attachments/881710985335934979/881711027425787914/vs.png"></img>
+                        </li>
+                        <li>
+                            <div className="curPic" onClick={getDisagree}>
+                                <img
+                                    src={`/upload/${content.picture_2}`}
+                                    alt={content.description}
+                                    className="curPicture_2 curPic"></img>
+                            </div>
+                            <div className={content.checkAgree ? 'over' : 'ing'}>반대{content.disagree}</div>
+                        </li>
+                    </ul>
+                    {/* ---------------------작성자프로필-------------------- */}
+                    <div className="contentInfo">
+                        <div className="curWriter">
+                            <div className="curWriterImg">
+                                <img
+                                    src={`/upload/${content.profile_img}`}
+                                    // alt="작성자 프로필 사진"
+                                    className="curWriterProfile"></img>
+                            </div>
+                            <span className="curWriterName">닉네임{content.nickName}</span>
+                        </div>
+
+                        <span className="curDesc">{content.description}</span>
+                    </div>
+                </div>
+            </div>
+>>>>>>> b6d851613954ae1197d11be22b7185fd2336f392
         </div>
     );
 }

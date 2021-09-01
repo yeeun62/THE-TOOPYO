@@ -2,7 +2,6 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import './NewContent.css';
-import CurContent from '../curcontent/CurContent';
 axios.defaults.withCredentials = true;
 
 function NewContent({ content, setContent, setIsEdit, isEdit }) {
