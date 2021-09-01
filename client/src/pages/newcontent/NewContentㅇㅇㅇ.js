@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './NewContent.css';
+import CurContent from '../curcontent/CurContent';
 
 function NewContent() {
     const [information, setInformation] = useState({
@@ -11,7 +12,6 @@ function NewContent() {
         picture_2: '',
         votingDeadLine: false,
     });
-    console.log(information);
 
     const [isOk, setIsOk] = useState(false);
 
@@ -24,9 +24,9 @@ function NewContent() {
         setIsErr(isErr ? false : true);
     };
 
-    const handleInputValue = (e) => {
-        console.log(e.target.name);
-        setInformation({ ...information, [e.target.name]: e.target.value });
+    const handleInputValue = (key) => (e) => {
+        setInformation({ ...information, [key]: e.target.value });
+        console.log(information);
     };
 
     const handleInputfile = (key) => (e) => {
@@ -35,25 +35,25 @@ function NewContent() {
     };
 
     const uploadHandler = () => {
-        // if (!information.title || !information.description || !information.picture_1 || !information.picture_2) {
-        //     return isErrHandler();
-        // }
-        console.log(information);
-        axios.post('http://localhost:80/content', {
-            title: information.title,
-            // picture_1: information.picture_1,
-            // picture_2: information.picture_2,
-            description: information.description,
-            voting_deadline: information.votingDeadLine,
-        });
-        // .then((res) => {
-        //     console.log(res);
-        //     if (res.message === 'please rewrite') return isErrHandler();
-        //     else if (res.message === 'ok') {
-        //         isOkHandler();
-        //         return <CurContent id={res.data.content.id}></CurContent>;
-        //     }
-        // });
+        if (!information.title || !information.description || !information.picture_1 || !information.picture_2) {
+            return isErrHandler();
+        }
+        axios
+            .post('http://localhost:80/content', {
+                title: information.title,
+                picture_1: information.picture_1,
+                picture_2: information.picture_2,
+                description: information.description,
+                votingDeadLine: information.votingDeadLine,
+            })
+            .then((res) => {
+                console.log(res.message);
+                if (res.message === 'please rewrite') return isErrHandler();
+                else if (res.message === 'ok') {
+                    isOkHandler();
+                    return <CurContent id={res.data.content.id}></CurContent>;
+                }
+            });
     };
 
     return (
@@ -69,14 +69,16 @@ function NewContent() {
                 {/*action="데이터보낼 서버의 파일"*/}
                 <input
                     className="inputTitle"
-                    type="text"
                     maxLength="20"
                     autoFocus
                     required
                     placeholder="제목을 입력하세요"
-                    name="title"
-                    onChange={(e) => handleInputValue(e)}></input>
-                <button type="submit" onClick={uploadHandler} id="NewSubmit" />
+                    onChange={() => handleInputValue('title')}></input>
+                <button type="submit" onClick={uploadHandler}>
+                    <img
+                        src="https://cdn.discordapp.com/attachments/881710985335934979/881719851356409896/verify.png"
+                        id="NewSubmit"></img>
+                </button>
                 {/* --------------------- 상단 제목과 버튼 부분 ----------------- */}
                 <div className="NewContentFrame">
                     <div className="pic Left">
@@ -103,8 +105,7 @@ function NewContent() {
                         type="text"
                         required
                         placeholder="설명을 입력해주세요."
-                        name="description"
-                        onChange={(e) => handleInputValue(e)}></input>
+                        onChange={() => handleInputValue('description')}></input>
                 </div>
             </form>
         </div>
