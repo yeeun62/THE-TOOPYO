@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Mypage.css';
 import { useHistory } from 'react-router-dom';
+
 export default function MypageDetail({ userInfo, getUserInfo }) {
     useEffect(() => {
         console.log('여기는 마이페이지디테일', userInfo);
@@ -119,7 +120,7 @@ export default function MypageDetail({ userInfo, getUserInfo }) {
                             <a className="profile_img">
                                 <div className="label">프로필 사진</div>
                                 <img
-                                    src="/images/kakao.png"
+                                    src="/img/kakao.png"
                                     alt={userInfo.nickName}
                                     name="profile_img"
                                     className="avatar"
