@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './CurContent.css';
 import { useParams } from 'react-router-dom';
@@ -74,16 +75,24 @@ function CurContent({ userInfo }) {
                 {content.userId === userInfo.id ? (
                     <>
                         {content.voting_deadline ? null : (
-                            <button className="editContentBtn voting" onClick={requestDeadline}>
+                            <button className="curBtn voting" onClick={requestDeadline}>
                                 투표종료
                             </button>
                         )}
-
-                        <button className="editContentBtn curBtn">
-                            <img
-                                id="editContent"
-                                src="https://cdn.discordapp.com/attachments/881710985335934979/881927360398655518/edit.png"></img>
-                        </button>
+                        <Link
+                            to={{
+                                pathname: '/editContent:' + { id },
+                                state: {
+                                    content: content,
+                                    userInfo: userInfo,
+                                },
+                            }}>
+                            <button className="editContentBtn curBtn">
+                                <img
+                                    id="editContent"
+                                    src="https://cdn.discordapp.com/attachments/881710985335934979/881927360398655518/edit.png"></img>
+                            </button>
+                        </Link>
                         <button className="deleteContentBtn curBtn" onClick={deleteContent}>
                             <img
                                 id="deleteContent"
