@@ -2,7 +2,6 @@ import axios from 'axios';
 import { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import './NewContent.css';
-import CurContent from '../curcontent/CurContent';
 axios.defaults.withCredentials = true;
 
 function NewContent() {
@@ -62,6 +61,7 @@ function NewContent() {
             console.log(information.title, information.description, information.votingDeadLine);
             //|| !information.picture_1 || !information.picture_2
             // return isErrHandler();
+
             await axios
                 .post(
                     'http://localhost:80/content',
@@ -86,6 +86,7 @@ function NewContent() {
                         window.location.replace(`/curContent/${res.data.contentId}`);
                     }
                 });
+
         }
     };
 
