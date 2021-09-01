@@ -8,13 +8,7 @@ export default function MypageDetail({ userInfo, getUserInfo }) {
     }, [userInfo]);
 
     const [isClick, setIsClick] = useState(false);
-    const [patchInfo, setPatchInfo] = useState({
-        // nickName: userInfo.nickName,
-        // email: userInfo.email,
-        // password: userInfo.password,
-        // profile_img: userInfo.profile_img,
-        // phoneNumber: userInfo.phoneNumber, // 초기값에 info.data.userInfo
-    });
+    const [patchInfo, setPatchInfo] = useState(userInfo);
     console.log(userInfo);
     console.log(patchInfo);
     const clickHandler = () => {
@@ -33,19 +27,19 @@ export default function MypageDetail({ userInfo, getUserInfo }) {
         setPatchInfo({ ...patchInfo, [e.target.name]: e.target.value });
     };
     const patchRequestHandler = () => {
-        if (!patchInfo.nickName || !patchInfo.password || !patchInfo.profile_img || !patchInfo.phoneNumber) {
-        } else {
-            axios.patch(
-                `https://localhost:80/user/${userInfo.id}`,
-                {
+        if (patchInfo.nickName && patchInfo.password && patchInfo.phoneNumber && userInfo.email) {
+            // && patchInfo.profile_img
+            axios
+                .patch(`http://localhost:80/user`, {
                     nickName: patchInfo.nickName,
-                    email: patchInfo.email,
+                    email: userInfo.email,
                     password: patchInfo.password,
-                    profile_img: patchInfo.profile_img,
+                    //profile_img: patchInfo.profile_img,
                     phoneNumber: patchInfo.phoneNumber,
-                },
-                { 'Content-Type': 'application/json', withCredentials: true },
-            ); // 또 뭐 담아야하징 헤더 auth?
+                })
+                .then(() => {
+                    axios.get(`http://localhost:80/user`);
+                });
         }
     };
     if (!userInfo) {

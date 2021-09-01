@@ -20,7 +20,13 @@ export default function Search({ isOpen, close, contentList, getContentDetail })
         return data.map((list) => {
             return (
                 <li>
-                    <SearchThumbnail close={close} list={list} key={list.id} getContentDetail={getContentDetail} />
+                    <SearchThumbnail
+                        close={close}
+                        list={list}
+                        key={list.id}
+                        contentList={contentList}
+                        getContentDetail={getContentDetail}
+                    />
                 </li>
             );
         });
