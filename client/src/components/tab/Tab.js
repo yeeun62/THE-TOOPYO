@@ -24,10 +24,13 @@ const Desc = styled.div`
     text-align: center;
 `;
 
-export default function Tab({ userInfo, MycontentList }) {
+export default function Tab({ userInfo, MycontentList, setUserInfo }) {
     const [currentTab, setCurrentTab] = useState(0);
     const tabMenu = [
-        { name: 'mypage', content: <MypageDetail MycontentList={MycontentList} userInfo={userInfo} /> },
+        {
+            name: 'mypage',
+            content: <MypageDetail setUserInfo={setUserInfo} MycontentList={MycontentList} userInfo={userInfo} />,
+        },
         {
             name: 'mycontent',
             content: <Mycontent MycontentList={MycontentList} userInfo={userInfo} />,

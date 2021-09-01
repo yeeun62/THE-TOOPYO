@@ -3,7 +3,7 @@ import axios from 'axios';
 import './Mypage.css';
 import { useHistory } from 'react-router-dom';
 
-export default function MypageDetail({ userInfo, getUserInfo }) {
+export default function MypageDetail({ userInfo, setUserInfo }) {
     useEffect(() => {
         console.log('여기는 마이페이지디테일', userInfo);
     }, [userInfo]);
@@ -30,26 +30,32 @@ export default function MypageDetail({ userInfo, getUserInfo }) {
     };
 
     const patchRequestHandler = async () => {
-        if (
-            patchInfo.nickName &&
-            patchInfo.profile_img &&
-            patchInfo.password &&
-            patchInfo.phoneNumber &&
-            userInfo.email
-        )
-            console.log(patchInfo);
-        {
+        let image;
+        if (img) {
+            image = img.name;
+        } else {
+            image = userInfo.profile_img;
+        }
+        if (patchInfo.nickName && patchInfo.password && patchInfo.phoneNumber && userInfo.email) {
             await axios
                 .patch(`http://localhost:80/user`, {
                     nickName: patchInfo.nickName,
                     email: userInfo.email,
                     password: patchInfo.password,
-                    profile_img: img.name,
+                    profile_img: image,
                     phoneNumber: patchInfo.phoneNumber,
                 })
                 .then((res) => {
+                    setUserInfo({
+                        ...userInfo,
+                        nickName: patchInfo.nickName,
+                        email: userInfo.email,
+                        password: patchInfo.password,
+                        profile_img: image,
+                        phoneNumber: patchInfo.phoneNumber,
+                    });
                     console.log(res);
-                    history.push('/');
+                    history.push('/mypage');
                 });
             const formData = new FormData();
             formData.append('file', img);
