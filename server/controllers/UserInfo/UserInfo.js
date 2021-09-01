@@ -7,7 +7,6 @@ module.exports = {
     // 내정보 입니다.
     mypage: async (req, res) => {
         const accessToken = req.cookies.accessToken;
-        console.log('!!!!!!!!!!!!!!', req);
         try {
             if (!accessToken) {
                 res.status(404).json({ message: 'invalid access token' });

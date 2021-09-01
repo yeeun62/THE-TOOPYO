@@ -28,6 +28,7 @@ export default function App() {
             setCurrentPageList(contentList.slice(PAGE_SIZE * (page - 1), PAGE_SIZE * page));
         }
     };
+
     useEffect(() => {
         if (contentList) {
             setCurrentPage(1);
@@ -44,17 +45,8 @@ export default function App() {
         });
     };
 
-    // function getUserInfo() {
-    //     axios.get('http://localhost:80/user').then((res) => {
-    //         console.log(res);
-    //         setIsLogin(true);
-    //         setUserInfo(res.data.data);
-    //     });
-    // }
-
     useEffect(() => {
         axios.get('http://localhost:80/user', { withCredentials: true }).then((res) => {
-            console.log('어쩔숟없어', res);
             setIsLogin(true);
             setUserInfo(res.data.data.userInfo);
             setMyContentList(res.data.data.content);
@@ -65,19 +57,13 @@ export default function App() {
         getContentList();
     }, []);
 
-    useEffect(() => {
-        console.log(userInfo);
-    }, [userInfo]);
-
-    // useEffect(() => {
-    //     localStorage.setItem('thetoopyo', userInfo.userInfo);
-    // }, []);
-    // console.log(localStorage);
+    // useEffect(() => {}, [userInfo]);
 
     return (
         <BrowserRouter>
             <div className="app">
                 <Nav isLogin={isLogin} loginHandler={loginHandler} contentList={contentList}></Nav>
+
                 <Switch>
                     <Route exact path="/">
                         <div className="app-thumb-entire">
