@@ -37,7 +37,7 @@ module.exports = {
             } catch (err) {
                 res.status(500).json({ message: 'server error' });
             }
-            const newData = { id: userData.id, nickName, phoneNumber, email };
+            const newData = { id: userData.id, nickName, phoneNumber, email, profile_img };
             //profile_img;
             const newAccessToken = await jwt.sign(newData, process.env.ACCESS_SECRET);
             delete newAccessToken.iat;
