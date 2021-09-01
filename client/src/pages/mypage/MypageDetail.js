@@ -120,7 +120,7 @@ export default function MypageDetail({ userInfo, getUserInfo }) {
                             <a className="profile_img">
                                 <div className="label">프로필 사진</div>
                                 <img
-                                    src="/img/kakao.png"
+                                    src={`/upload/${userInfo.profile_img}`}
                                     alt={userInfo.nickName}
                                     name="profile_img"
                                     className="avatar"
