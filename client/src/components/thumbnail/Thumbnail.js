@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 function Thumbnail({ list, getContentDetail, writerId }) {
     return (
         <div>
-            {/* <Link to={`/curContent/${list.id}`}> */}
             <div className="container">
                 <h1 className="thumbTitle">{list.title}</h1>
                 <div className="thumbPicContainer">
@@ -22,7 +21,6 @@ function Thumbnail({ list, getContentDetail, writerId }) {
                 </div>
                 <div className="descript">{list.description}</div>
             </div>
-            {/* </Link> */}
         </div>
     );
 }
