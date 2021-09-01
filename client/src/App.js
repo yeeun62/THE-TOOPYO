@@ -35,7 +35,7 @@ export default function App() {
         }
     }, [contentList]);
     const loginHandler = function () {
-        setIsLogin(true);
+        setIsLogin(!isLogin);
     };
 
     const getContentList = () => {
@@ -75,12 +75,40 @@ export default function App() {
     // console.log(localStorage);
 
     return (
-        <div className="app">
-            <Nav isLogin={isLogin} loginHandler={loginHandler} contentList={contentList}></Nav>
-            <div className="mainBanner">
-                <img
-                    id="banner"
-                    src="https://cdn.discordapp.com/attachments/881710985335934979/882192949079851008/2021-08-31_6.19.17.png"></img>
+        <BrowserRouter>
+            <div className="app">
+                <Nav
+                    isLogin={isLogin}
+                    loginHandler={loginHandler}
+                    contentList={contentList}
+                    getContentDetail={getContentDetail}></Nav>
+
+                <Switch>
+                    <Route path="/mypage">
+                        <Mypage userInfo={userInfo} MycontentList={MycontentList} />
+                    </Route>
+                    <Route path="/signup" component={SignupPage} />
+                    <Route path="/login">
+                        <LoginPage loginHandler={loginHandler} />
+                    </Route>
+                    <Route path="/newContent" component={NewContent} />
+                    <Route path="/curContent">
+                        <CurContent content={content}></CurContent>
+                    </Route>
+
+                    <Route exact path="/">
+                        <div className="mainBanner">
+                            <img
+                                id="banner"
+                                src="https://cdn.discordapp.com/attachments/881710985335934979/882192949079851008/2021-08-31_6.19.17.png"></img>
+                        </div>
+                        <div className="app-thumb-entire">
+                            {contentList.map((list) => {
+                                return <Thumbnail list={list} key={list.id} getContentDetail={getContentDetail} />;
+                            })}
+                        </div>
+                    </Route>
+                </Switch>
             </div>
             <Switch>
                 <Route exact path="/">
