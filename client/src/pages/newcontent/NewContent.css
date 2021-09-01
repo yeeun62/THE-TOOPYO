@@ -7,14 +7,12 @@
     width: 70vw;
     margin: auto;
     padding: 2.6vw 1.04vw 0 1.04vw;
-    /* border-right: 1px solid red;
-    border-left: 1px solid red; */
     position: relative;
 }
 
 #newTitle {
     display: block;
-    /* text-align: center; */
+    text-align: center;
     width: 70vw;
     height: 2.6vw;
     margin: 1.56vw auto;
@@ -25,11 +23,14 @@
 
 #NewSubmit {
     width: 3.65vw;
-    background-color: #fff;
+    height: 3.65vw;
+    background: url(https://cdn.discordapp.com/attachments/881710985335934979/881719851356409896/verify.png);
+    background-repeat: no-repeat;
+    background-size: contain;
     border: none;
     position: absolute;
-    top: 24.4vw;
-    right: 1.5vw;
+    top: 21.9vw;
+    right: -1.1vw;
 }
 
 .inputTitle {
@@ -38,22 +39,22 @@
     vertical-align: middle;
     border: 1px solid #ccc;
     width: 65vw;
-    position: absolute;
-    left: 1vw;
+    margin-right: 4vw;
 }
 
 #newVersus {
     width: 4vw;
     height: 4vw;
     position: absolute;
-    top: 13vw;
+    top: 12vw;
     left: 47%;
 }
 
 .NewContentFrame {
+    width: 70vw;
+    height: 50vw;
     margin: 10vw 0;
     position: relative;
-    /* border: 1px solid red; */
     margin-top: 2.6vw;
     display: flex;
     justify-content: space-between;

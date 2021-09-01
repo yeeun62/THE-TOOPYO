@@ -7,7 +7,6 @@ module.exports = {
     // 내정보 입니다.
     mypage: async (req, res) => {
         const accessToken = req.cookies.accessToken;
-        console.log('!!!!!!!!!!!!!!', req);
         try {
             if (!accessToken) {
                 res.status(404).json({ message: 'invalid access token' });
@@ -31,11 +30,14 @@ module.exports = {
         } else {
             const userData = await jwt.verify(accessToken, process.env.ACCESS_SECRET);
             try {
-                await user.update({ nickName, phoneNumber, password, email }, { where: { id: userData.id } }); //, profile_img
+                await user.update(
+                    { nickName, phoneNumber, password, email, profile_img },
+                    { where: { id: userData.id } },
+                ); //, profile_img
             } catch (err) {
                 res.status(500).json({ message: 'server error' });
             }
-            const newData = { id: userData.id, nickName, phoneNumber, email };
+            const newData = { id: userData.id, nickName, phoneNumber, email, profile_img };
             //profile_img;
             const newAccessToken = await jwt.sign(newData, process.env.ACCESS_SECRET);
             delete newAccessToken.iat;
