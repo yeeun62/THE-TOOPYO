@@ -1,25 +1,18 @@
-import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import './NewContent.css';
+import axios from 'axios';
+import '../../pages/newcontent/NewContent.css';
 axios.defaults.withCredentials = true;
 
-function NewContent() {
-    const history = useHistory();
+function EditContent({ content, userInfo }) {
     const [information, setInformation] = useState({
-        title: '',
-        description: '',
-        // picture_1: '',
-        // picture_2: '',
-        votingDeadLine: 'false',
+        title: content.title,
+        description: content.description,
+        // picture_1: content.picture_1,
+        // picture_2: content.picture_2,
+        votingDeadLine: content.voting_deadline,
     });
     console.log(information);
-
-    const [isOk, setIsOk] = useState(false);
-
-    const isOkHandler = () => {
-        setIsOk(isOk ? false : true);
-    };
 
     const [isErr, setIsErr] = useState(false);
     const isErrHandler = () => {
@@ -30,74 +23,41 @@ function NewContent() {
         setInformation({ ...information, [e.target.name]: e.target.value });
     };
 
-    const handleInputfile = (e) => {
-        setInformation({ ...information, [e.target.name]: e.target.file });
-    };
-
-    const [img1, setImg1] = useState(null);
-    const [img2, setImg2] = useState(null);
-
-    const fileEvent1 = async (e) => {
-        setImg1(e.target.files[0]);
-        // const formData = new FormData();
-        // formData.set('file', img);
-        // const res = await axios.patch('/upload', formData);
-        // return res;
-        console.log('파일 업로드 완료.', e.target.files[0].name);
-    };
-
-    const fileEvent2 = async (e) => {
-        setImg2(e.target.files[0]);
-        // const formData = new FormData();
-        // formData.set('file', img);
-        // const res = await axios.patch('/upload', formData);
-        // return res;
-        console.log('파일 업로드 완료.', e.target.files[0].name);
-    };
-
     const uploadHandler = async () => {
-        console.log('up');
-        if (information.title && information.description) {
-            console.log(information.title, information.description, information.votingDeadLine);
+        if (information.title && information.description && information.voting_deadline) {
+            console.log(information.title, information.description, information.voting_deadline);
             //|| !information.picture_1 || !information.picture_2
             // return isErrHandler();
-            await axios
-                .post(
-                    'http://localhost:80/content',
-                    {
-                        title: information.title,
-                        picture_1: img1.name,
-                        picture_2: img2.name,
-                        description: information.description,
-                        voting_deadline: information.votingDeadLine,
-                    },
-                    { 'Content-Type': 'application/json', withCredentials: true },
-                )
-                .then((res) => {
-                    const formData = new FormData();
-                    formData.append('file', img1);
-                    formData.append('file', img2);
-                    axios.patch('http://localhost:80/uploads', formData);
-
-                    if (res.data.message === 'please rewrite') return isErrHandler();
-                    else if (res.data.message === 'ok') {
-                        isOkHandler();
-                        window.location.replace(`/curContent/${res.data.contentId}`);
-                    }
-                });
+            await axios.patch(
+                `http://localhost:80/content:`,
+                {
+                    title: information.title,
+                    // picture_1: information.picture_1,
+                    // picture_2: information.picture_2,
+                    description: information.description,
+                },
+                { 'Content-Type': 'application/json', withCredentials: true },
+            );
         }
+        // .then((res) => {
+        //     if (res.message === 'please rewrite') return isErrHandler();
+        //     else if (res.message === 'ok') {
+        //         isOkHandler();
+        //         return <CurContent id={res.data.content.id}></CurContent>;
+        //     }
+        // });
     };
 
     return (
         <div id="inner">
             <h1 id="newTitle">새 글 작성</h1>
-            {isErr ? (
+            {/* {isErr ? (
                 <div className="errMsg" onClick={setIsErr}>
                     모든 항목을 채워서 다시 입력해주세요.
                 </div>
-            ) : null}
-            {isOk ? <div>게시물 등록 완료</div> : null}
-            <form onSubmit={(e) => e.preventDefault()}>
+            ) : null} */}
+            {/* {isOk ? <div>게시물 등록 완료</div> : null} */}
+            <form action="" method="post">
                 {/*action="데이터보낼 서버의 파일"*/}
                 <input
                     className="inputTitle"
@@ -118,7 +78,6 @@ function NewContent() {
                             type="file"
                             accept="image/png, image/jpeg"
                             name="picture_1"
-                            onChange={fileEvent1}
                             // onChange={(e) => handleInputfile(e)}
                         ></input>
                     </div>
@@ -132,7 +91,6 @@ function NewContent() {
                             type="file"
                             accept="image/png, image/jpeg"
                             name="picture_2"
-                            onChange={fileEvent2}
                             // onChange={(e) => handleInputfile(e)}
                         ></input>
                     </div>
@@ -148,5 +106,4 @@ function NewContent() {
         </div>
     );
 }
-
-export default NewContent;
+export default EditContent;

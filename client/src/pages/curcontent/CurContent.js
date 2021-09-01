@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './CurContent.css';
 import { useParams } from 'react-router-dom';
@@ -11,7 +12,7 @@ function CurContent({ userInfo }) {
 
     useEffect(() => {
         axios.get(`http://localhost:80/content/${id}`).then((res) => {
-            console.log('res', res);
+            //console.log('res', res);
             setContent(res.data.data);
         });
     }, []);
@@ -74,16 +75,24 @@ function CurContent({ userInfo }) {
                 {content.userId === userInfo.id ? (
                     <>
                         {content.voting_deadline ? null : (
-                            <button className="editContentBtn voting" onClick={requestDeadline}>
+                            <button className="curBtn voting" onClick={requestDeadline}>
                                 투표종료
                             </button>
                         )}
-
-                        <button className="editContentBtn curBtn">
-                            <img
-                                id="editContent"
-                                src="https://cdn.discordapp.com/attachments/881710985335934979/881927360398655518/edit.png"></img>
-                        </button>
+                        <Link
+                            to={{
+                                pathname: '/editContent:' + { id },
+                                state: {
+                                    content: content,
+                                    userInfo: userInfo,
+                                },
+                            }}>
+                            <button className="editContentBtn curBtn">
+                                <img
+                                    id="editContent"
+                                    src="https://cdn.discordapp.com/attachments/881710985335934979/881927360398655518/edit.png"></img>
+                            </button>
+                        </Link>
                         <button className="deleteContentBtn curBtn" onClick={deleteContent}>
                             <img
                                 id="deleteContent"
@@ -123,7 +132,7 @@ function CurContent({ userInfo }) {
                         <li>
                             <div className="curPic" onClick={getAgree}>
                                 <img
-                                    src={content.picture_1}
+                                    src={`/upload/${content.picture_1}`}
                                     alt={content.description}
                                     className="curPicture_1 curPic"></img>
                             </div>
@@ -135,7 +144,7 @@ function CurContent({ userInfo }) {
                         <li>
                             <div className="curPic" onClick={getDisagree}>
                                 <img
-                                    src={content.picture_2}
+                                    src={`/upload/${content.picture_2}`}
                                     alt={content.description}
                                     className="curPicture_2 curPic"></img>
                             </div>
@@ -151,11 +160,11 @@ function CurContent({ userInfo }) {
                                     // alt="작성자 프로필 사진"
                                     className="curWriterProfile"></img>
                             </div>
-                            <span className="curWriterName">닉네임{content.nickname}</span>
+                            <span className="curWriterName">닉네임{content.nickName}</span>
                         </div>
+
                         <span className="curDesc">{content.description}</span>
                     </div>
-                    <div className="footer"></div>
                 </div>
             </div>
         </div>

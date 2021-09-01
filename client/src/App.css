@@ -29,7 +29,7 @@ li {
         display: block;
         width: 70vw;
         padding-top: 6.3vw;
-        margin: auto;
+        margin: 0 auto 4vw 0;
     }
 }
 
