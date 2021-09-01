@@ -56,10 +56,9 @@
     border: 1px solid #ccc;
 }
 .infoContainer {
-    position: relative;
+    position: absolute;
     margin-top: 4.5vw;
     margin-right: -15vw;
-    border: 1px solid white;
 }
 .labelContainer {
     position: relative;
@@ -104,6 +103,9 @@
     border: 0;
     background-color: white;
 }
+.thumbBack {
+    margin-top: 6vw;
+}
 .myThumnailContainer {
     margin: 0.5vw 0;
     flex: 1 1 30%;
@@ -119,5 +121,5 @@
 }
 
 #thumbVersus {
-    margin: 2vw 0;
+    margin: 2vw 0.5vw;
 }

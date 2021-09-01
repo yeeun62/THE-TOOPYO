@@ -12,7 +12,6 @@ export default function Search({ isOpen, close, contentList, getContentDetail })
     const inputHandler = (e) => {
         SetSearchKeyword(([e.target.name] = e.target.value));
     };
-
     const filteredContent = (data) => {
         console.log(data);
         data = data.filter((el) => {
@@ -31,6 +30,7 @@ export default function Search({ isOpen, close, contentList, getContentDetail })
             );
         });
     };
+    console.log(filteredContent(contentList));
     return (
         <>
             {isOpen ? (
@@ -52,7 +52,7 @@ export default function Search({ isOpen, close, contentList, getContentDetail })
                         </button>
                     </div>
                     <div className="searchThumbnail">
-                        {contentList ? (
+                        {filteredContent(contentList).length !== 0 ? (
                             <div className="filteredContainer">{filteredContent(contentList)}</div>
                         ) : (
                             '검색 결과가 없습니다.'
