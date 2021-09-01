@@ -67,25 +67,28 @@ module.exports = {
 
     // 게시물 생성입니다.
     createContent: async (req, res) => {
-        try {
-            const accessToken = req.cookies.accessToken;
-            const userInfo = await jwt.verify(accessToken, process.env.ACCESS_SECRET);
-            const { title, picture_1, picture_2, description, voting_deadline } = req.body;
-            if (title && picture_1 && picture_2 && description && voting_deadline) {
+        const accessToken = req.cookies.accessToken;
+        const userInfo = await jwt.verify(accessToken, process.env.ACCESS_SECRET);
+        console.log('~~~~~~~~~~~~~~~', userInfo);
+        const { title, description, voting_deadline } = req.body; //picture_1, picture_2,
+        console.log('!!!!!!!!!!!!', req.body);
+        if (title && description && voting_deadline) {
+            //picture_1 && picture_2 &&
+            try {
                 const createContent = await content.create({
                     userId: userInfo.id,
                     title,
-                    picture_1,
-                    picture_2,
                     description,
                     voting_deadline,
+                    picture_1: '아직사진이안된데',
+                    picture_2: '아직사진이안된데',
                 });
                 res.status(201).json({ message: 'ok', contentId: createContent.id });
-            } else {
-                res.status(400).json({ message: 'please, rewrite' });
+            } catch (err) {
+                res.status(500).json({ message: 'server error' });
             }
-        } catch (err) {
-            res.status(500).json({ message: 'server error' });
+        } else {
+            res.status(400).json({ message: 'please, rewrite' });
         }
     },
 
