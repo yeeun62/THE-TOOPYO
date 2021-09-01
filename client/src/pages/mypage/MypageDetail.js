@@ -3,15 +3,10 @@ import axios from 'axios';
 import './Mypage.css';
 
 export default function MypageDetail({ userInfo, getUserInfo }) {
-    console.log(userInfo);
-    const [user, setUser] = useState({
-        nickName: userInfo.nickName,
-        email: userInfo.email,
-        password: userInfo.password,
-        profile_img: userInfo.profile_img,
-        phoneNumber: userInfo.phoneNumber,
-    });
-    console.log(user);
+    useEffect(() => {
+        console.log('여기는 마이페이지디테일', userInfo);
+    }, [userInfo]);
+
 
     const [isClick, setIsClick] = useState(false);
     const [patchInfo, setPatchInfo] = useState({
@@ -34,9 +29,6 @@ export default function MypageDetail({ userInfo, getUserInfo }) {
         };
         reader.readAsText(e.target.files[0]);
     };
-    useEffect(() => {
-        getUserInfo();
-    }, []);
 
     const inputHandler = (e) => {
         setPatchInfo({ ...patchInfo, [e.target.name]: e.target.value });
@@ -57,12 +49,15 @@ export default function MypageDetail({ userInfo, getUserInfo }) {
             ); // 또 뭐 담아야하징 헤더 auth?
         }
     };
+    if (!userInfo) {
+        return 'dㅇㅇㅇㅇ';
+    }
 
     return (
         <>
             {isClick ? (
                 <form onSubmit={(e) => e.preventDefault()}>
-                    <h1 className="myDetailContainer">안녕하세요 {user.nickName}님</h1>
+                    <h1 className="myDetailContainer">안녕하세요 {userInfo.nickName}님</h1>
                     <div className="pfArea">
                         <a className="profile_img">
                             <div className="label">프로필 사진</div>
@@ -71,7 +66,7 @@ export default function MypageDetail({ userInfo, getUserInfo }) {
                         <div className="infoContainer">
                             <div className="labelContainer">
                                 <div className="label">이메일</div>
-                                <div className="email">{user.email}</div>
+                                <div className="email">{userInfo.email}</div>
                             </div>
                             <div className="labelContainer">
                                 <div className="label">비밀번호</div>
@@ -110,27 +105,18 @@ export default function MypageDetail({ userInfo, getUserInfo }) {
                     </div>
                 </form>
             ) : (
-                <div className="myDetailContainer">
-                    <h1 className="myHello">안녕하세요 {user.nickName}님</h1>
-                    <div className="pfArea">
-                        <a className="profile_img">
-                            <div className="label">프로필 사진</div>
-                            <div type="file" className="avatar">
-                                {user.profile_img}
-                            </div>
-                        </a>
                         <div className="infoContainer">
                             <div className="labelContainer">
                                 <div className="label">이메일</div>
-                                <div className="user">{user.email}</div>
+                                <div className="user">{userInfo.email}</div>
                             </div>
                             <div className="nickName labelContainer">
                                 <div className="label">닉네임</div>
-                                <div className="user">{user.nickName}</div>
+                                <div className="user">{userInfo.nickName}</div>
                             </div>
                             <div className="phoneNumber labelContainer">
                                 <div className="label">전화번호</div>
-                                <div className="user">{user.phoneNumber}</div>
+                                <div className="user">{userInfo.phoneNumber}</div>
                             </div>
                             <button classname="editBtn" onClick={clickHandler}>
                                 수정

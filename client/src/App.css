@@ -5,6 +5,14 @@
 .App img {
     vertical-align: middle;
 }
+li {
+    display: inline;
+}
+.Pagination {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
 
 @media screen and (min-width: 769px) {
     .app-thumb-entire {

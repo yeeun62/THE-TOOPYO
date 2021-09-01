@@ -97,6 +97,12 @@
     right: 6vw;
 }
 
+.voting {
+    position: absolute;
+    right: 14vw;
+    top: 7.6vh;
+}
+
 #deleteContent {
     width: 2.6vw;
 }

@@ -5,21 +5,21 @@ const cookieParser = require('cookie-parser');
 const express = require('express');
 const app = express();
 const imgRouter = require('./multer');
+const jwt = require('jsonwebtoken');
 
 const controllers = require('./controllers');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 app.use(
     cors({
-        origin: true,
+        origin: 'http://localhost:3000',
         //['http://localhost:3000', 'https://the-toopyo.com'],
         credentials: true,
         methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
     }),
 );
-
-app.use(cookieParser());
 
 app.patch('/upload', imgRouter);
 
@@ -28,7 +28,6 @@ app.get('/signout', controllers.signOut);
 app.post('/signup', controllers.signUp);
 
 app.use('/user', controllers.userInfo);
-
 app.use('/content', controllers.content);
 
 const PORT = 80;

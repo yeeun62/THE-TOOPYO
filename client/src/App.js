@@ -1,6 +1,7 @@
 import './App.css';
+import 'antd/dist/antd.css';
 import { useState, useEffect } from 'react';
-import { BrowserRouter, Switch, Route, Redirect, useParams, Link } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect, Link } from 'react-router-dom';
 import Nav from './components/nav/Nav';
 import Thumbnail from './components/thumbnail/Thumbnail';
 import axios from 'axios';
@@ -9,18 +10,33 @@ import CurContent from './pages/curcontent/CurContent';
 import Mypage from './pages/mypage/Mypage';
 import NewContent from './pages/newcontent/NewContent';
 import LoginPage from './pages/login/LoginPage';
+import { Pagination } from 'antd';
+axios.defaults.withCredentials = true;
 
 export default function App() {
     const [isLogin, setIsLogin] = useState();
-    const [content, setContent] = useState({}); // 게시글 정보
-    console.log(content);
-
-    const loginHandler = function () {
-        console.log('로그인됐다');
-        setIsLogin(true);
-    };
-
+    const [userInfo, setUserInfo] = useState({});
+    const [MycontentList, setMyContentList] = useState([]);
     const [contentList, setContentList] = useState([]);
+    const [currentPageList, setCurrentPageList] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const PAGE_SIZE = 6;
+
+    const handlePageChange = (page) => {
+        if (contentList) {
+            setCurrentPage(page);
+            setCurrentPageList(contentList.slice(PAGE_SIZE * (page - 1), PAGE_SIZE * page));
+        }
+    };
+    useEffect(() => {
+        if (contentList) {
+            setCurrentPage(1);
+            setCurrentPageList(contentList.slice(0, PAGE_SIZE));
+        }
+    }, [contentList]);
+    const loginHandler = function () {
+        setIsLogin(!isLogin);
+    };
 
     const getContentList = () => {
         axios.get('http://localhost:80/content').then((res) => {
@@ -28,29 +44,31 @@ export default function App() {
         });
     };
 
-    const getContentDetail = (contentId) => {
-        axios.get(`http://localhost:80/content/${contentId}`).then((res) => {
-            console.log(res);
-            setContent(res.data.data);
+    // function getUserInfo() {
+    //     axios.get('http://localhost:80/user').then((res) => {
+    //         console.log(res);
+    //         setIsLogin(true);
+    //         setUserInfo(res.data.data);
+    //     });
+    // }
+
+    useEffect(() => {
+        axios.get('http://localhost:80/user', { withCredentials: true }).then((res) => {
+            console.log('어쩔숟없어', res);
+            setIsLogin(true);
+            setUserInfo(res.data.data.userInfo);
+            setMyContentList(res.data.data.content);
         });
-    };
+    }, []);
 
     useEffect(() => {
         getContentList();
     }, []);
 
-    const [userInfo, setUserInfo] = useState([]);
-    console.log(userInfo);
-
-    function getUserInfo() {
-        axios.post('http://localhost:80/user', { email: '확인중' }).then((res) => {
-            setUserInfo(res.data.data);
-        });
-    }
     useEffect(() => {
-        getUserInfo();
-    }, []);
-    console.log(localStorage);
+        console.log(userInfo);
+    }, [userInfo]);
+
     // useEffect(() => {
     //     localStorage.setItem('thetoopyo', userInfo.userInfo);
     // }, []);
@@ -64,20 +82,10 @@ export default function App() {
                     loginHandler={loginHandler}
                     contentList={contentList}
                     getContentDetail={getContentDetail}></Nav>
-                <div className="mainBanner">
-                    <img
-                        id="banner"
-                        src="https://cdn.discordapp.com/attachments/881710985335934979/882192949079851008/2021-08-31_6.19.17.png"></img>
-                </div>
+
                 <Switch>
                     <Route path="/mypage">
-                        <Mypage
-                            onClick={getUserInfo}
-                            userInfo={userInfo}
-                            getUserInfo={getUserInfo}
-                            contentList={contentList}
-                            getContentDetail={getContentDetail}
-                        />
+                        <Mypage userInfo={userInfo} MycontentList={MycontentList} />
                     </Route>
                     <Route path="/signup" component={SignupPage} />
                     <Route path="/login">
@@ -87,7 +95,13 @@ export default function App() {
                     <Route path="/curContent">
                         <CurContent content={content}></CurContent>
                     </Route>
+
                     <Route exact path="/">
+                        <div className="mainBanner">
+                            <img
+                                id="banner"
+                                src="https://cdn.discordapp.com/attachments/881710985335934979/882192949079851008/2021-08-31_6.19.17.png"></img>
+                        </div>
                         <div className="app-thumb-entire">
                             {contentList.map((list) => {
                                 return <Thumbnail list={list} key={list.id} getContentDetail={getContentDetail} />;
@@ -96,6 +110,39 @@ export default function App() {
                     </Route>
                 </Switch>
             </div>
-        </BrowserRouter>
+            <Switch>
+                <Route exact path="/">
+                    <div className="app-thumb-entire">
+                        {currentPageList.map((list) => {
+                            return (
+                                <Link to={`/curContent/${list.id}`}>
+                                    <Thumbnail list={list} key={list.id} />;
+                                </Link>
+                            );
+                        })}
+                        <div className="Pagination">
+                            <Pagination
+                                defaultCurrent={1}
+                                current={currentPage}
+                                pageSize={PAGE_SIZE}
+                                onChange={handlePageChange}
+                                total={contentList.length}
+                            />
+                        </div>
+                    </div>
+                </Route>
+                <Route path="/mypage">
+                    <Mypage userInfo={userInfo} MycontentList={MycontentList} />
+                </Route>
+                <Route path="/signup" component={SignupPage} />
+                <Route path="/login">
+                    <LoginPage loginHandler={loginHandler} />
+                </Route>
+                <Route path="/newContent" component={NewContent} />
+                <Route path="/curContent/:id">
+                    <CurContent userInfo={userInfo}></CurContent>
+                </Route>
+            </Switch>
+        </div>
     );
 }
