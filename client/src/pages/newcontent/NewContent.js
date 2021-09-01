@@ -62,19 +62,19 @@ function NewContent() {
             console.log(information.title, information.description, information.votingDeadLine);
             //|| !information.picture_1 || !information.picture_2
             // return isErrHandler();
-
-            await axios.post(
-                'http://localhost:80/content/',
-                {
-                    title: information.title,
-                    // picture_1: information.picture_1,
-                    // picture_2: information.picture_2,
-                    description: information.description,
-                    voting_deadline: information.votingDeadLine,
-                },
-                { 'Content-Type': 'application/json', withCredentials: true },
-            );
-
+            await axios
+                .post(
+                    'http://localhost:80/content',
+                    {
+                        title: information.title,
+                        picture_1: img1.name,
+                        picture_2: img2.name,
+                        description: information.description,
+                        voting_deadline: information.votingDeadLine,
+                    },
+                    { 'Content-Type': 'application/json', withCredentials: true },
+                )
+                .then((res) => {
                     const formData = new FormData();
                     formData.append('file', img1);
                     formData.append('file', img2);
@@ -86,7 +86,8 @@ function NewContent() {
                         window.location.replace(`/curContent/${res.data.contentId}`);
                     }
                 });
-
+        }
+    };
 
     return (
         <div id="inner">
