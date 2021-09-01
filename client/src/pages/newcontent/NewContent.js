@@ -9,8 +9,8 @@ function NewContent() {
     const [information, setInformation] = useState({
         title: '',
         description: '',
-        // picture_1: '',
-        // picture_2: '',
+        // picture_1: null,
+        // picture_2: nu;;,
         votingDeadLine: 'false', //! 나중에 변경해야될수도있음
     });
     console.log(information);
@@ -31,14 +31,14 @@ function NewContent() {
     };
 
     // const handleInputfile = (e) => {
-    //     setInformation({ ...information, [e.target.name]: e.target.file });
+    //     setInformation({ ...information, [e.target.name]: e.target.file[0] });
     // };
 
     const uploadHandler = async () => {
-        if (information.title && information.description && information.voting_deadline) {
+        if (information.title && information.description) {
             console.log(information.title, information.description, information.voting_deadline);
             //|| !information.picture_1 || !information.picture_2
-            // return isErrHandler();
+            // return isErrHandler(); && information.voting_deadline
             await axios.post(
                 'http://localhost:80/content',
                 {
@@ -50,6 +50,9 @@ function NewContent() {
                 },
                 { 'Content-Type': 'application/json', withCredentials: true },
             );
+            const formData = new FormData();
+            formData.append('file');
+            await axios.patch('http://localhost:80/uploads', formData);
         }
         // .then((res) => {
         //     if (res.message === 'please rewrite') return isErrHandler();
