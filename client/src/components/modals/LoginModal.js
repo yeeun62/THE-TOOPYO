@@ -27,6 +27,7 @@ function Login({ isOpen, close, loginHandler }) {
             .then((res) => {
                 if (res.data.message === 'ok') {
                     loginHandler(res);
+                    window.location.reload();
                 }
             })
             .catch((err) => alert(err));

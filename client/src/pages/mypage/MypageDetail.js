@@ -29,7 +29,7 @@ export default function MypageDetail({ userInfo, getUserInfo }) {
         setPatchInfo({ ...patchInfo, [e.target.name]: e.target.value });
     };
 
-    const patchRequestHandler = () => {
+    const patchRequestHandler = async () => {
         if (
             patchInfo.nickName &&
             patchInfo.profile_img &&
@@ -37,25 +37,25 @@ export default function MypageDetail({ userInfo, getUserInfo }) {
             patchInfo.phoneNumber &&
             userInfo.email
         )
-            return console.log(patchInfo);
+            console.log(patchInfo);
         {
-            axios
+            await axios
                 .patch(`http://localhost:80/user`, {
                     nickName: patchInfo.nickName,
                     email: userInfo.email,
                     password: patchInfo.password,
-                    profile_img: patchInfo.profile_img,
+                    profile_img: img.name,
                     phoneNumber: patchInfo.phoneNumber,
                 })
                 .then((res) => {
                     console.log(res);
-                    history.push('/');
+                    history.push('/mypage');
                 });
+            const formData = new FormData();
+            formData.append('file', img);
+            await axios.patch('http://localhost:80/upload', formData);
         }
     };
-    if (!userInfo) {
-        return 'dㅇㅇㅇㅇ';
-    }
 
     return (
         <>
@@ -66,12 +66,7 @@ export default function MypageDetail({ userInfo, getUserInfo }) {
                         <div className="pfArea">
                             <a className="profile_img">
                                 <div className="label">프로필 사진</div>
-                                <input
-                                    name="profile_img"
-                                    className="avatar"
-                                    type="file"
-                                    onChange={(e) => fileEvent(e)}
-                                />
+                                <input name="profile_img" className="avatar" type="file" onChange={fileEvent} />
                             </a>
                             <div className="infoContainer">
                                 <div className="labelContainer">

@@ -1,15 +1,11 @@
-import { useState } from 'react';
-import { Switch, Route, Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Nav.css';
 import LoginButton from '../modals/LoginBtn';
 import SignUpButton from '../modals/SignUpBtn';
 import Sidebar from '../sidebar/SideBar';
 import SearchButton from '../search/SearchBtn';
-import axios from 'axios';
-import Mypage from '../../pages/mypage/Mypage';
-import Tab from '../tab/Tab';
 
-function Nav({ isLogin, loginHandler, contentList, getContentDetail }) {
+function Nav({ isLogin, loginHandler, contentList, getContentDetail, handleLogout }) {
     return (
         <nav>
             <div className="navInner">
@@ -38,7 +34,7 @@ function Nav({ isLogin, loginHandler, contentList, getContentDetail }) {
                         <li>
                             {isLogin ? (
                                 <Link to="/">
-                                    <button className="navBtn" onClick={logoutHandler}>
+                                    <button className="navBtn" onClick={handleLogout}>
                                         로그아웃
                                     </button>
                                 </Link>
