@@ -37,7 +37,7 @@ export default function MypageDetail({ userInfo, getUserInfo }) {
             patchInfo.phoneNumber &&
             userInfo.email
         )
-            return console.log(patchInfo);
+            console.log(patchInfo);
         {
             await axios
                 .patch(`http://localhost:80/user`, {
