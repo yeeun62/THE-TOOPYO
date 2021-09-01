@@ -10,12 +10,6 @@ import Mypage from '../../pages/mypage/Mypage';
 import Tab from '../tab/Tab';
 
 function Nav({ isLogin, loginHandler, contentList, getContentDetail }) {
-    const logoutHandler = () => {
-        axios.get('https://localhost:80/signout').then((res) => {
-            if (res.message === 'Successfully sign out!') return loginHandler();
-        });
-    };
-
     return (
         <nav>
             <div className="navInner">
