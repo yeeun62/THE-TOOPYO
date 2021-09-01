@@ -44,7 +44,7 @@ function Nav({ isLogin, loginHandler, contentList, getContentDetail }) {
                             <SearchButton contentList={contentList} getContentDetail={getContentDetail} />
                         </li>
                         <li>
-                            <Link to="/NewContent newcontent">
+                            <Link to="/newcontent">
                                 <button className="newContentBtn navBtn">새 글 작성</button>
                             </Link>
                         </li>
