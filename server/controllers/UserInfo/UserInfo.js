@@ -26,13 +26,16 @@ module.exports = {
     retouchMypage: async (req, res) => {
         try {
             const accessToken = req.cookies.accessToken;
-            const { nickName, email, phoneNumber, profile_img } = req.body;
+            const { nickName, email, phoneNumber, profile_img, password } = req.body;
 
             if (!accessToken) {
                 res.status(404).json({ message: 'invalid access token' });
             } else {
                 const userData = await jwt.verify(accessToken, process.env.ACCESS_SECRET);
-                await user.update({ nickName, email, phoneNumber, profile_img }, { where: { id: userData.id } });
+                await user.update(
+                    { nickName, email, phoneNumber, profile_img, password },
+                    { where: { id: userData.id } },
+                );
                 const newData = { id: userData.id, nickName, email, phoneNumber, profile_img };
                 const newAccessToken = await jwt.sign(newData, process.env.ACCESS_SECRET);
                 delete newAccessToken.iat;

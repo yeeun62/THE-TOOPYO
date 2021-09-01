@@ -77,13 +77,28 @@ export default function App() {
     return (
         <BrowserRouter>
             <div className="app">
-                <Nav
-                    isLogin={isLogin}
-                    loginHandler={loginHandler}
-                    contentList={contentList}
-                    getContentDetail={getContentDetail}></Nav>
-
+                <Nav isLogin={isLogin} loginHandler={loginHandler} contentList={contentList}></Nav>
                 <Switch>
+                    <Route exact path="/">
+                        <div className="app-thumb-entire">
+                            {currentPageList.map((list) => {
+                                return (
+                                    <Link to={`/curContent/${list.id}`}>
+                                        <Thumbnail list={list} key={list.id} />;
+                                    </Link>
+                                );
+                            })}
+                            <div className="Pagination">
+                                <Pagination
+                                    defaultCurrent={1}
+                                    current={currentPage}
+                                    pageSize={PAGE_SIZE}
+                                    onChange={handlePageChange}
+                                    total={contentList.length}
+                                />
+                            </div>
+                        </div>
+                    </Route>
                     <Route path="/mypage">
                         <Mypage userInfo={userInfo} MycontentList={MycontentList} />
                     </Route>
@@ -92,57 +107,11 @@ export default function App() {
                         <LoginPage loginHandler={loginHandler} />
                     </Route>
                     <Route path="/newContent" component={NewContent} />
-                    <Route path="/curContent">
-                        <CurContent content={content}></CurContent>
-                    </Route>
-
-                    <Route exact path="/">
-                        <div className="mainBanner">
-                            <img
-                                id="banner"
-                                src="https://cdn.discordapp.com/attachments/881710985335934979/882192949079851008/2021-08-31_6.19.17.png"></img>
-                        </div>
-                        <div className="app-thumb-entire">
-                            {contentList.map((list) => {
-                                return <Thumbnail list={list} key={list.id} getContentDetail={getContentDetail} />;
-                            })}
-                        </div>
+                    <Route path="/curContent/:id">
+                        <CurContent userInfo={userInfo}></CurContent>
                     </Route>
                 </Switch>
             </div>
-            <Switch>
-                <Route exact path="/">
-                    <div className="app-thumb-entire">
-                        {currentPageList.map((list) => {
-                            return (
-                                <Link to={`/curContent/${list.id}`}>
-                                    <Thumbnail list={list} key={list.id} />;
-                                </Link>
-                            );
-                        })}
-                        <div className="Pagination">
-                            <Pagination
-                                defaultCurrent={1}
-                                current={currentPage}
-                                pageSize={PAGE_SIZE}
-                                onChange={handlePageChange}
-                                total={contentList.length}
-                            />
-                        </div>
-                    </div>
-                </Route>
-                <Route path="/mypage">
-                    <Mypage userInfo={userInfo} MycontentList={MycontentList} />
-                </Route>
-                <Route path="/signup" component={SignupPage} />
-                <Route path="/login">
-                    <LoginPage loginHandler={loginHandler} />
-                </Route>
-                <Route path="/newContent" component={NewContent} />
-                <Route path="/curContent/:id">
-                    <CurContent userInfo={userInfo}></CurContent>
-                </Route>
-            </Switch>
-        </div>
+        </BrowserRouter>
     );
 }
