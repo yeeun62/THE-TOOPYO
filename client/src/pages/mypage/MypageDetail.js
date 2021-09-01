@@ -1,52 +1,52 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Mypage.css';
-
+import { useHistory } from 'react-router-dom';
 export default function MypageDetail({ userInfo, getUserInfo }) {
     useEffect(() => {
         console.log('여기는 마이페이지디테일', userInfo);
     }, [userInfo]);
-
+    const history = useHistory();
+    const [img, setImg] = useState(null);
     const [isClick, setIsClick] = useState(false);
-    const [patchInfo, setPatchInfo] = useState({
-        // nickName: userInfo.nickName,
-        // email: userInfo.email,
-        // password: userInfo.password,
-        // profile_img: userInfo.profile_img,
-        // phoneNumber: userInfo.phoneNumber, // 초기값에 info.data.userInfo
-    });
+    const [patchInfo, setPatchInfo] = useState(userInfo);
     console.log(userInfo);
     console.log(patchInfo);
     const clickHandler = () => {
         setIsClick(!isClick);
     };
-    const fileEvent = (e) => {
-        const reader = new FileReader();
-        reader.onload = () => {
-            setPatchInfo({ ...patchInfo, [e.target.name]: e.target.files });
-            console.log('파일 업로드 완료.');
-        };
-        reader.readAsText(e.target.files[0]);
+    const fileEvent = async (e) => {
+        setImg(e.target.files[0]);
+        // const formData = new FormData();
+        // formData.set('file', img);
+        // const res = await axios.patch('/upload', formData);
+        // return res;
+        console.log('파일 업로드 완료.', e.target.files[0].name);
     };
 
     const inputHandler = (e) => {
         setPatchInfo({ ...patchInfo, [e.target.name]: e.target.value });
     };
+
     const patchRequestHandler = () => {
-        if (!patchInfo.nickName || !patchInfo.password || !patchInfo.profile_img || !patchInfo.phoneNumber) {
-            console.log('다 입력해주세요');
-        } else {
-            axios.patch(
-                `http://localhost:80/user/${userInfo.id}`,
-                {
+        if (
+            patchInfo.nickName &&
+            patchInfo.profile_img &&
+            patchInfo.password &&
+            patchInfo.phoneNumber &&
+            userInfo.email
+        ) {
+            axios
+                .patch(`http://localhost:80/user`, {
                     nickName: patchInfo.nickName,
-                    email: patchInfo.email,
+                    email: userInfo.email,
                     password: patchInfo.password,
                     profile_img: patchInfo.profile_img,
                     phoneNumber: patchInfo.phoneNumber,
-                },
-                { 'Content-Type': 'application/json', withCredentials: true },
-            );
+                })
+                .then((res) => {
+                    history.push('/');
+                });
         }
     };
     if (!userInfo) {
@@ -112,14 +112,19 @@ export default function MypageDetail({ userInfo, getUserInfo }) {
                     </div>
                 </form>
             ) : (
-
                 <>
                     <div className="myDetailContainer">
                         <h1 className="myHello">안녕하세요 {userInfo.nickName}님</h1>
                         <div className="pfArea">
                             <a className="profile_img">
                                 <div className="label">프로필 사진</div>
-                                <img src={userInfo.profile_img} name="profile_img" className="avatar" type="file" />
+                                <img
+                                    src="/images/kakao.png"
+                                    alt={userInfo.nickName}
+                                    name="profile_img"
+                                    className="avatar"
+                                    type="file"
+                                />
                             </a>
                             <div className="infoContainer">
                                 <div className="labelContainer">
@@ -141,7 +146,6 @@ export default function MypageDetail({ userInfo, getUserInfo }) {
                         </div>
                     </div>
                 </>
-
             )}
         </>
     );
