@@ -28,6 +28,7 @@ export default function App() {
             setCurrentPageList(contentList.slice(PAGE_SIZE * (page - 1), PAGE_SIZE * page));
         }
     };
+
     useEffect(() => {
         if (contentList) {
             setCurrentPage(1);
@@ -77,11 +78,7 @@ export default function App() {
     return (
         <BrowserRouter>
             <div className="app">
-                <Nav
-                    isLogin={isLogin}
-                    loginHandler={loginHandler}
-                    contentList={contentList}
-                    getContentDetail={getContentDetail}></Nav>
+                <Nav isLogin={isLogin} loginHandler={loginHandler} contentList={contentList}></Nav>
 
                 <Switch>
                     <Route exact path="/">
