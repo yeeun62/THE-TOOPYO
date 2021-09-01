@@ -3,7 +3,7 @@ import axios from 'axios';
 import './CurContent.css';
 import { useParams } from 'react-router-dom';
 
-function CurContent({ writerId, userInfo }) {
+function CurContent({ userInfo }) {
     let { id } = useParams();
     const [content, setContent] = useState({});
     const [isAuthOk, setIsAuthOk] = useState(false); // session id 를 보내고 인증이 완료되어 투표한 경우
