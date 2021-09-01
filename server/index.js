@@ -8,6 +8,7 @@ const imgRouter = require('./multer');
 const jwt = require('jsonwebtoken');
 const controllers = require('./controllers');
 const fs = require('fs');
+const contentImgRouter = require('./contentmulter');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
