@@ -6,7 +6,7 @@ function MyThumbnail({ list }) {
     //{{`/update/${this.state.article.id}`} info={this.state.article}
     return (
         <div>
-            <Link to={'/curContent/:' + list.id}>
+            <Link to={`/curContent/${list.id}`}>
                 <div className="thumbBack">
                     <div className="myThumnailContainer">
                         <h1 className="thumbTitle">{list.title}</h1>

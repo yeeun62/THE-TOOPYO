@@ -2,7 +2,6 @@ import axios from 'axios';
 import { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import './NewContent.css';
-import CurContent from '../curcontent/CurContent';
 axios.defaults.withCredentials = true;
 
 function NewContent() {
@@ -75,18 +74,18 @@ function NewContent() {
                 { 'Content-Type': 'application/json', withCredentials: true },
             );
 
-                    const formData = new FormData();
-                    formData.append('file', img1);
-                    formData.append('file', img2);
-                    axios.patch('http://localhost:80/uploads', formData);
+            // const formData = new FormData();
+            // formData.append('file', img1);
+            // formData.append('file', img2);
+            // axios.patch('http://localhost:80/uploads', formData);
 
-                    if (res.data.message === 'please rewrite') return isErrHandler();
-                    else if (res.data.message === 'ok') {
-                        isOkHandler();
-                        window.location.replace(`/curContent/${res.data.contentId}`);
-                    }
-                });
-
+            // if (res.data.message === 'please rewrite') return isErrHandler();
+            // else if (res.data.message === 'ok') {
+            //     isOkHandler();
+            //     window.location.replace(`/curContent/${res.data.contentId}`);
+            // }
+        }
+    };
 
     return (
         <div id="inner">
