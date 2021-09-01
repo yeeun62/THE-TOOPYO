@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const express = require('express');
 const app = express();
 const imgRouter = require('./multer');
+const contentImgRouter = require('./contentmulter');
 const jwt = require('jsonwebtoken');
 
 const controllers = require('./controllers');
