@@ -86,10 +86,15 @@ export default function App() {
                 <Switch>
                     <Route exact path="/">
                         <div className="app-thumb-entire">
+                            <div className="mainbnner">
+                                <img
+                                    id="banner"
+                                    src="https://cdn.discordapp.com/attachments/881710985335934979/882192949079851008/2021-08-31_6.19.17.png"></img>
+                            </div>
                             {currentPageList.map((list) => {
                                 return (
                                     <Link to={`/curContent/${list.id}`}>
-                                        <Thumbnail list={list} key={list.id} />;
+                                        <Thumbnail list={list} key={list.id} />
                                     </Link>
                                 );
                             })}
