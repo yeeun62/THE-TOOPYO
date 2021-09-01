@@ -61,29 +61,30 @@ function NewContent() {
             console.log(information.title, information.description, information.votingDeadLine);
             //|| !information.picture_1 || !information.picture_2
             // return isErrHandler();
+            await axios
+                .post(
+                    'http://localhost:80/content',
+                    {
+                        title: information.title,
+                        picture_1: img1.name,
+                        picture_2: img2.name,
+                        description: information.description,
+                        voting_deadline: information.votingDeadLine,
+                    },
+                    { 'Content-Type': 'application/json', withCredentials: true },
+                )
+                .then((res) => {
+                    const formData = new FormData();
+                    formData.append('file', img1);
+                    formData.append('file', img2);
+                    axios.patch('http://localhost:80/uploads', formData);
 
-            await axios.post(
-                'http://localhost:80/content/',
-                {
-                    title: information.title,
-                    // picture_1: information.picture_1,
-                    // picture_2: information.picture_2,
-                    description: information.description,
-                    voting_deadline: information.votingDeadLine,
-                },
-                { 'Content-Type': 'application/json', withCredentials: true },
-            );
-
-            // const formData = new FormData();
-            // formData.append('file', img1);
-            // formData.append('file', img2);
-            // axios.patch('http://localhost:80/uploads', formData);
-
-            // if (res.data.message === 'please rewrite') return isErrHandler();
-            // else if (res.data.message === 'ok') {
-            //     isOkHandler();
-            //     window.location.replace(`/curContent/${res.data.contentId}`);
-            // }
+                    if (res.data.message === 'please rewrite') return isErrHandler();
+                    else if (res.data.message === 'ok') {
+                        isOkHandler();
+                        window.location.replace(`/curContent/${res.data.contentId}`);
+                    }
+                });
         }
     };
 

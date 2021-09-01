@@ -156,7 +156,7 @@ function CurContent({ userInfo }) {
                         <div className="curWriter">
                             <div className="curWriterImg">
                                 <img
-                                    src={content.profile_img}
+                                    src={`/upload/${content.profile_img}`}
                                     // alt="작성자 프로필 사진"
                                     className="curWriterProfile curWriterImg"></img>
                             </div>
