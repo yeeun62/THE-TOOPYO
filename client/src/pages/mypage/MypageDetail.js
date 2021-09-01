@@ -7,7 +7,6 @@ export default function MypageDetail({ userInfo, getUserInfo }) {
         console.log('여기는 마이페이지디테일', userInfo);
     }, [userInfo]);
 
-
     const [isClick, setIsClick] = useState(false);
     const [patchInfo, setPatchInfo] = useState({
         // nickName: userInfo.nickName,
@@ -105,24 +104,22 @@ export default function MypageDetail({ userInfo, getUserInfo }) {
                     </div>
                 </form>
             ) : (
-                        <div className="infoContainer">
-                            <div className="labelContainer">
-                                <div className="label">이메일</div>
-                                <div className="user">{userInfo.email}</div>
-                            </div>
-                            <div className="nickName labelContainer">
-                                <div className="label">닉네임</div>
-                                <div className="user">{userInfo.nickName}</div>
-                            </div>
-                            <div className="phoneNumber labelContainer">
-                                <div className="label">전화번호</div>
-                                <div className="user">{userInfo.phoneNumber}</div>
-                            </div>
-                            <button classname="editBtn" onClick={clickHandler}>
-                                수정
-                            </button>
-                        </div>
+                <div className="infoContainer">
+                    <div className="labelContainer">
+                        <div className="label">이메일</div>
+                        <div className="user">{userInfo.email}</div>
                     </div>
+                    <div className="nickName labelContainer">
+                        <div className="label">닉네임</div>
+                        <div className="user">{userInfo.nickName}</div>
+                    </div>
+                    <div className="phoneNumber labelContainer">
+                        <div className="label">전화번호</div>
+                        <div className="user">{userInfo.phoneNumber}</div>
+                    </div>
+                    <button classname="editBtn" onClick={clickHandler}>
+                        수정
+                    </button>
                 </div>
             )}
         </>
