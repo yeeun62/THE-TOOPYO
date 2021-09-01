@@ -12,7 +12,6 @@ export default function Search({ isOpen, close, contentList, getContentDetail })
     const inputHandler = (e) => {
         SetSearchKeyword(([e.target.name] = e.target.value));
     };
-    const [data, setData] = useState(contentList);
     const filteredContent = (data) => {
         console.log(data);
         data = data.filter((el) => {
