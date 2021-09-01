@@ -35,7 +35,7 @@ function SignupPage() {
         setSignupInfo({ ...signupInfo, [e.target.name]: e.target.value });
     };
 
-    const signUpRequestHandler = () => {
+    const signUpRequestHandler = async () => {
         if (
             // !signupInfo.profile_img ||
             // !signupInfo.provider ||

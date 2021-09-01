@@ -104,23 +104,32 @@ export default function MypageDetail({ userInfo, getUserInfo }) {
                     </div>
                 </form>
             ) : (
-                <div className="infoContainer">
-                    <div className="labelContainer">
-                        <div className="label">이메일</div>
-                        <div className="user">{userInfo.email}</div>
+                <>
+                    <h1 className="myDetailContainer">안녕하세요 {userInfo.nickName}님</h1>
+                    <div className="pfArea">
+                        <a className="profile_img">
+                            <div className="label">프로필 사진</div>
+                            <img src={userInfo.profile_img} name="profile_img" className="avatar" type="file" />
+                        </a>
+                        <div className="infoContainer">
+                            <div className="labelContainer">
+                                <div className="label">이메일</div>
+                                <div className="user">{userInfo.email}</div>
+                            </div>
+                            <div className="nickName labelContainer">
+                                <div className="label">닉네임</div>
+                                <div className="user">{userInfo.nickName}</div>
+                            </div>
+                            <div className="phoneNumber labelContainer">
+                                <div className="label">전화번호</div>
+                                <div className="user">{userInfo.phoneNumber}</div>
+                            </div>
+                            <button classname="editBtn" onClick={clickHandler}>
+                                수정
+                            </button>
+                        </div>
                     </div>
-                    <div className="nickName labelContainer">
-                        <div className="label">닉네임</div>
-                        <div className="user">{userInfo.nickName}</div>
-                    </div>
-                    <div className="phoneNumber labelContainer">
-                        <div className="label">전화번호</div>
-                        <div className="user">{userInfo.phoneNumber}</div>
-                    </div>
-                    <button classname="editBtn" onClick={clickHandler}>
-                        수정
-                    </button>
-                </div>
+                </>
             )}
         </>
     );
