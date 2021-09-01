@@ -1,4 +1,5 @@
 .mypage {
+    font-size: 2vw;
     width: 50%;
     padding: 20px;
     float: left;
@@ -12,6 +13,7 @@
     margin: 10%;
 }
 .mycontent {
+    font-size: 2vw;
     width: 50%;
     padding: 20px;
     cursor: pointer;
@@ -20,27 +22,75 @@
     background-color: rgba(6, 10, 125, 1);
     color: white;
 }
+.myDetailContainer {
+    width: 85vw;
+}
+.myHello {
+    border: 0;
+    position: absolute;
+    left: 15vw;
+    align-content: center;
+}
 .pfArea {
-    padding: 0;
-    margin: 0;
-    max-width: 100%;
-    position: relative;
+    padding-left: 35vw;
+    width: 50vw;
+    top: 55vw;
+    left: 15vw;
+    height: 50vw;
+    border: 1px solid white;
+}
+.profile_img {
+    border: 1px solid white;
+    position: absolute;
+    margin: 5vw -20vw;
+    width: 30vw;
+    height: 35vw;
     display: block;
+}
+.avatar {
+    left: 1vw;
+    position: absolute;
+    width: 28vw;
+    height: 28vw;
+    border: 1px solid #ccc;
+}
+.infoContainer {
+    position: relative;
+    margin-top: 4.5vw;
+    border: 1px solid white;
+}
+.labelContainer {
+    position: relative;
+    margin: 0.5vw 10vw;
+    border: 1px solid white;
 }
 .label {
     color: #333;
-    font-size: 20px;
-    margin-top: 14px;
-    margin-bottom: 14px;
+    width: 10vw;
+    font-size: 1.5vw;
+    margin: 1vw;
+}
+.user {
+    border-radius: 1vw;
+    border: 1px solid white;
+    margin-left: 3.5vw;
+    text-align: left;
+    font-size: 2vw;
+}
+.email {
+    margin-left: 3.5vw;
+    text-align: left;
+    font-size: 2vw;
 }
 .inputBox {
-    background-color: rgba(6, 10, 125, 0.8);
-    border-radius: 6px;
+    border: 1px solid #666;
+    border-radius: 1vw;
     outline: 0;
-    font-weight: 500;
-    height: 30px;
-    padding: 0 20px;
-    width: 15%;
+    font-weight: 300;
+    font-size: 10px;
+    height: 3vw;
+    width: 35vw;
+    margin-left: 3vw;
 }
 
 .filteredContainer {
@@ -60,6 +110,12 @@
     background-color: white;
     border: 1px solid #ccc;
     border-radius: 1vw;
+}
+.editBtn {
+    outline: 0;
+    border: 0;
+    width: 10vw;
+    position: relative;
 }
 
 #thumbVersus {

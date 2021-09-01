@@ -3,6 +3,7 @@
     padding: 20px;
     float: left;
     cursor: pointer;
+    font-size: 40vw;
 }
 .mypage:hover {
     background-color: rgba(6, 10, 125, 0.8);
@@ -13,16 +14,14 @@
     padding: 20px;
     float: left;
     cursor: pointer;
+    font-size: 40px;
 }
 .mycontent:hover {
     background-color: rgba(6, 10, 125, 0.8);
     color: white;
 }
-.hello {
-    float: left;
-    width: 100%;
-}
-.pf-input-area {
+
+.pfArea {
     padding: 0;
     margin: 0;
     max-width: 100%;

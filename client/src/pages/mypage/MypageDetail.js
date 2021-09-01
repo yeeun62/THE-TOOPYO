@@ -62,77 +62,81 @@ export default function MypageDetail({ userInfo, getUserInfo }) {
         <>
             {isClick ? (
                 <form onSubmit={(e) => e.preventDefault()}>
-                    <h1 className="mypageTitle">안녕하세요 {user.name}님</h1>
-                    <div className="pf-input-area">
+                    <h1 className="myDetailContainer">안녕하세요 {user.nickName}님</h1>
+                    <div className="pfArea">
                         <a className="profile_img">
                             <div className="label">프로필 사진</div>
                             <input name="profile_img" className="avatar" type="file" onChange={(e) => fileEvent(e)} />
                         </a>
-                        <div className="id">
-                            <div className="label">이메일</div>
-                            <div>이메일</div>
+                        <div className="infoContainer">
+                            <div className="labelContainer">
+                                <div className="label">이메일</div>
+                                <div className="email">{user.email}</div>
+                            </div>
+                            <div className="labelContainer">
+                                <div className="label">비밀번호</div>
+                                <input
+                                    className="inputBox"
+                                    name="password"
+                                    type="password"
+                                    placeholder="비밀번호를 입력해주세요"
+                                    onChange={(e) => inputHandler(e)}
+                                    value={patchInfo.password}></input>
+                            </div>
+                            <div className="labelContainer">
+                                <div className="label">닉네임</div>
+                                <input
+                                    className="inputBox"
+                                    name="nickName"
+                                    type="text"
+                                    maxLength="20"
+                                    placeholder="닉네임을 입력해주세요"
+                                    onChange={(e) => inputHandler(e)}
+                                    value={patchInfo.nickName}></input>
+                            </div>
+                            <div className="labelContainer">
+                                <div className="label">전화번호</div>
+                                <input
+                                    className="inputBox"
+                                    name="phoneNumber"
+                                    type="text"
+                                    maxLength="20"
+                                    placeholder="전화번호를 입력해주세요"
+                                    onChange={(e) => inputHandler(e)}
+                                    value={patchInfo.phoneNumber}></input>
+                            </div>
+                            <input classname="editBtn" type="submit" value="저장" onClick={patchRequestHandler} />
                         </div>
-                        <div className="password">
-                            <div className="label">비밀번호</div>
-                            <input
-                                className="inputBox"
-                                name="password"
-                                type="password"
-                                placeholder="비밀번호를 입력해주세요"
-                                onChange={(e) => inputHandler(e)}
-                                value={patchInfo.password}></input>
-                        </div>
-                        <div className="nickName">
-                            <div className="label">닉네임</div>
-                            <input
-                                className="inputBox"
-                                name="nickName"
-                                type="text"
-                                maxLength="20"
-                                placeholder="닉네임을 입력해주세요"
-                                onChange={(e) => inputHandler(e)}
-                                value={patchInfo.nickName}></input>
-                        </div>
-                        <div className="phoneNumber">
-                            <div className="label">전화번호</div>
-                            <input
-                                className="inputBox"
-                                name="phoneNumber"
-                                type="text"
-                                maxLength="20"
-                                placeholder="전화번호를 입력해주세요"
-                                onChange={(e) => inputHandler(e)}
-                                value={patchInfo.phoneNumber}></input>
-                        </div>
-                        <input type="submit" value="저장" onClick={patchRequestHandler} />
                     </div>
                 </form>
             ) : (
-                <div>
-                    <h1>안녕하세요 {user.nickName}님</h1>
+                <div className="myDetailContainer">
+                    <h1 className="myHello">안녕하세요 {user.nickName}님</h1>
                     <div className="pfArea">
-                        <a className="pfImg">
+                        <a className="profile_img">
                             <div className="label">프로필 사진</div>
                             <div type="file" className="avatar">
                                 {user.profile_img}
                             </div>
                         </a>
-                        <div className="email">
-                            <div className="label">이메일</div>
-                            <div>{user.email}</div>
-                        </div>
-                        <div className="nickName">
-                            <div className="label">닉네임</div>
-                            <div>{user.nickName}</div>
-                        </div>
-                        <div className="phoneNumber">
-                            <div className="label">전화번호</div>
-                            <div>{user.phoneNumber}</div>
+                        <div className="infoContainer">
+                            <div className="labelContainer">
+                                <div className="label">이메일</div>
+                                <div className="user">{user.email}</div>
+                            </div>
+                            <div className="nickName labelContainer">
+                                <div className="label">닉네임</div>
+                                <div className="user">{user.nickName}</div>
+                            </div>
+                            <div className="phoneNumber labelContainer">
+                                <div className="label">전화번호</div>
+                                <div className="user">{user.phoneNumber}</div>
+                            </div>
+                            <button classname="editBtn" onClick={clickHandler}>
+                                수정
+                            </button>
                         </div>
                     </div>
-                    <button classname="editBtn" onClick={clickHandler}>
-                        수정
-                    </button>
                 </div>
             )}
         </>
