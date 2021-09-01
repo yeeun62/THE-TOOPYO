@@ -15,6 +15,7 @@ module.exports = {
                 LEFT JOIN users ON contents.userId = users.id
                 LEFT JOIN (SELECT contentId, COUNT(*) as count2 FROM agrees GROUP BY contentId) as agree_count on contents.id = agree_count.contentId
                 LEFT JOIN (SELECT contentId, COUNT(*) as count1 FROM disagrees GROUP BY contentId) as disagree_count on contents.id = disagree_count.contentId
+                ORDER BY contents.id DESC
                 `,
                 { type: QueryTypes.SELECT },
             );
