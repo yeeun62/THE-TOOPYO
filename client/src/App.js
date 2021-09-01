@@ -1,7 +1,7 @@
 import './App.css';
 import 'antd/dist/antd.css';
 import { useState, useEffect } from 'react';
-import { BrowserRouter, Switch, Route, Redirect, Link } from 'react-router-dom';
+import { useHistory, BrowserRouter, Switch, Route, Redirect, Link } from 'react-router-dom';
 import Nav from './components/nav/Nav';
 import Thumbnail from './components/thumbnail/Thumbnail';
 import axios from 'axios';
@@ -14,6 +14,7 @@ import { Pagination } from 'antd';
 axios.defaults.withCredentials = true;
 
 export default function App() {
+    const history = useHistory();
     const [isLogin, setIsLogin] = useState();
     const [userInfo, setUserInfo] = useState({});
     const [MycontentList, setMyContentList] = useState([]);
@@ -21,7 +22,13 @@ export default function App() {
     const [currentPageList, setCurrentPageList] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const PAGE_SIZE = 6;
-
+    const handleLogout = () => {
+        axios.get('http://localhost:80/signout', {}).then((res) => {
+            setUserInfo(null);
+            setIsLogin(false);
+            history.push('/');
+        });
+    };
     const handlePageChange = (page) => {
         if (contentList) {
             setCurrentPage(page);
@@ -62,7 +69,11 @@ export default function App() {
     return (
         <BrowserRouter>
             <div className="app">
-                <Nav isLogin={isLogin} loginHandler={loginHandler} contentList={contentList}></Nav>
+                <Nav
+                    isLogin={isLogin}
+                    loginHandler={loginHandler}
+                    contentList={contentList}
+                    handleLogout={handleLogout}></Nav>
 
                 <Switch>
                     <Route exact path="/">

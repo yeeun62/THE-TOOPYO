@@ -49,7 +49,7 @@ export default function MypageDetail({ userInfo, getUserInfo }) {
                 })
                 .then((res) => {
                     console.log(res);
-                    history.push('/');
+                    history.push('/mypage');
                 });
             const formData = new FormData();
             formData.append('file', img);
