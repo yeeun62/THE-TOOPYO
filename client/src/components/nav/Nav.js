@@ -46,18 +46,14 @@ function Nav({ isLogin, loginHandler, contentList, getContentDetail }) {
                         <li>
                             {isLogin ? (
                                 <Link to="/newcontent">
-                                    <button className="newContentBtn navBtn">
-                                        new
-                                        <br />
-                                        content
-                                    </button>
+                                    <button className="newContentBtn navBtn">새 글 작성</button>
                                 </Link>
                             ) : null}
                         </li>
                         <li>
                             {isLogin ? (
                                 <button className="navBtn" onClick={loginHandler}>
-                                    log out
+                                    로그아웃
                                 </button>
                             ) : (
                                 <SignUpButton loginHandler={loginHandler} />
@@ -66,7 +62,7 @@ function Nav({ isLogin, loginHandler, contentList, getContentDetail }) {
                         {isLogin ? (
                             <li>
                                 <Link to="/mypage">
-                                    <button className="navBtn">my page</button>
+                                    <button className="navBtn">마이페이지</button>
                                 </Link>
                             </li>
                         ) : (

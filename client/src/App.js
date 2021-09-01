@@ -80,10 +80,12 @@ export default function App() {
             <div className="app">
                 <Nav isLogin={isLogin} loginHandler={loginHandler} contentList={contentList}></Nav>
 
+
                 <Switch>
                     <Route exact path="/">
                         <div className="app-thumb-entire">
-                            <div className="mainbnner">
+                            <div>
+
                                 <img
                                     id="banner"
                                     src="https://cdn.discordapp.com/attachments/881710985335934979/882192949079851008/2021-08-31_6.19.17.png"></img>

@@ -13,6 +13,7 @@ function SignupPage() {
     });
     console.log(signupInfo);
     const [errorMessage, setErrorMessage] = useState(false);
+    const [img, setImg] = useState(null);
     const [isLogin, setIsLogin] = useState({
         isLogin: false,
     });
@@ -22,19 +23,19 @@ function SignupPage() {
         setIsLogin(true);
     };
 
-    const fileEvent = (e) => {
-        const reader = new FileReader();
-        reader.onload = () => {
-            setSignupInfo({ ...signupInfo, [e.target.name]: e.target.files });
-            console.log('파일 업로드 완료.');
-        };
-        reader.readAsText(e.target.files[0]);
+    const fileEvent = async (e) => {
+        setImg(e.target.files[0]);
+        // const formData = new FormData();
+        // formData.set('file', img);
+        // const res = await axios.patch('/upload', formData);
+        // return res;
+        console.log('파일 업로드 완료.', e.target.files[0].name);
     };
     const inputHandler = (e) => {
         setSignupInfo({ ...signupInfo, [e.target.name]: e.target.value });
     };
 
-    const signUpRequestHandler = () => {
+    const signUpRequestHandler = async () => {
         if (
             // !signupInfo.profile_img ||
             // !signupInfo.provider ||
@@ -47,11 +48,11 @@ function SignupPage() {
             console.log(signupInfo);
         } else {
             console.log(signupInfo);
-            axios
+            await axios
                 .post(
                     'http://localhost:80/signup',
                     {
-                        profile_img: signupInfo.profile_img,
+                        profile_img: img.name,
                         provider: signupInfo.provider,
                         nickName: signupInfo.nickName,
                         email: signupInfo.email,
@@ -63,8 +64,12 @@ function SignupPage() {
                 .then((res) => {
                     history.push('/');
                     if (res.data.message === 'ok') {
+                        return loginHandler();
                     }
                 });
+            const formData = new FormData();
+            formData.append('file', img);
+            await axios.patch('http://localhost:80/upload', formData);
         }
     };
     return (
@@ -112,12 +117,7 @@ function SignupPage() {
                                 value={signupInfo.phoneNumber}
                             />
                             <div className="profileUploader">프로필 사진을 선택하세요.</div>
-                            <input
-                                name="profile_img"
-                                className="signUpPic"
-                                type="file"
-                                onChange={(e) => fileEvent(e)}
-                            />
+                            <input name="profile_img" className="signUpPic" type="file" onChange={fileEvent} />
                             <button className="signUpB" onClick={signUpRequestHandler}>
                                 회원가입
                             </button>
