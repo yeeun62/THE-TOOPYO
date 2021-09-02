@@ -63,6 +63,7 @@ function SignupPage() {
                 )
                 .then((res) => {
                     history.push('/');
+                    alert('회원가입 완료');
                     if (res.data.message === 'ok') {
                         return loginHandler();
                     }
