@@ -66,8 +66,6 @@ export default function App() {
         getContentList();
     }, []);
 
-    // useEffect(() => {}, [userInfo]);
-
     return (
         <>
             <BrowserRouter>

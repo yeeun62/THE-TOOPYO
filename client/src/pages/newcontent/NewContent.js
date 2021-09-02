@@ -4,8 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 import './NewContent.css';
 axios.defaults.withCredentials = true;
 
-function NewContent({ content, setContent, setIsEdit, isEdit }) {
-    console.log(content);
+function NewContent({ content, isEdit }) {
     const history = useHistory();
     const [information, setInformation] = useState({
         title: '',
@@ -14,7 +13,6 @@ function NewContent({ content, setContent, setIsEdit, isEdit }) {
         picture_2: '',
         votingDeadLine: 'false',
     });
-    console.log(information);
     const [edit, setEdit] = useState('새 글 작성');
 
     useEffect(() => {
@@ -54,20 +52,10 @@ function NewContent({ content, setContent, setIsEdit, isEdit }) {
 
     const fileEvent1 = async (e) => {
         setImg1(e.target.files[0]);
-        // const formData = new FormData();
-        // formData.set('file', img);
-        // const res = await axios.patch('/upload', formData);
-        // return res;
-        //console.log('파일 업로드 완료.', e.target.files[0].name);
     };
 
     const fileEvent2 = async (e) => {
         setImg2(e.target.files[0]);
-        // const formData = new FormData();
-        // formData.set('file', img);
-        // const res = await axios.patch('/upload', formData);
-        // return res;
-        //console.log('파일 업로드 완료.', e.target.files[0].name);
     };
 
     const uploadHandler = async () => {
@@ -100,8 +88,6 @@ function NewContent({ content, setContent, setIsEdit, isEdit }) {
             return;
         }
         if (information.title && information.description && img1 && img2) {
-            console.log(information.title, information.description, information.votingDeadLine);
-            // return isErrHandler();
             await axios
                 .post(
                     'http://localhost:80/content',

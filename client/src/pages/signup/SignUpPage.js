@@ -11,7 +11,6 @@ function SignupPage() {
         password: '',
         phoneNumber: '',
     });
-    console.log(signupInfo);
     const [errorMessage, setErrorMessage] = useState(false);
     const [img, setImg] = useState(null);
     const [isLogin, setIsLogin] = useState({
@@ -25,29 +24,15 @@ function SignupPage() {
 
     const fileEvent = async (e) => {
         setImg(e.target.files[0]);
-        // const formData = new FormData();
-        // formData.set('file', img);
-        // const res = await axios.patch('/upload', formData);
-        // return res;
-        console.log('파일 업로드 완료.', e.target.files[0].name);
     };
     const inputHandler = (e) => {
         setSignupInfo({ ...signupInfo, [e.target.name]: e.target.value });
     };
 
     const signUpRequestHandler = async () => {
-        if (
-            // !signupInfo.profile_img ||
-            // !signupInfo.provider ||
-            !signupInfo.nickName ||
-            !signupInfo.email ||
-            !signupInfo.password ||
-            !signupInfo.phoneNumber
-        ) {
+        if (!signupInfo.nickName || !signupInfo.email || !signupInfo.password || !signupInfo.phoneNumber) {
             setErrorMessage(true);
-            console.log(signupInfo);
         } else {
-            console.log(signupInfo);
             await axios
                 .post(
                     'http://localhost:80/signup',

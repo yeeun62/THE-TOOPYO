@@ -40,9 +40,7 @@ export default function Tab({ userInfo, MycontentList, setUserInfo }) {
         setCurrentTab(index);
     };
 
-    useEffect(() => {
-        console.log('여기는텝', userInfo);
-    });
+    useEffect(() => {});
 
     return (
         <>
