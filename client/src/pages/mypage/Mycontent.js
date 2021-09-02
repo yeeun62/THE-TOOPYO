@@ -4,7 +4,7 @@ import MyThumbnail from './MyThumbnail';
 export default function Mycontent({ MycontentList, userInfo }) {
     return (
         <>
-            <h1 className="myHello">안녕하세요 {userInfo.nickName}님</h1>
+            <h1 className="myHello">안녕하세요 {userInfo.nickName}님 🎈</h1>
             <div className="filteredContainer">
                 {MycontentList.map((list) => {
                     return (

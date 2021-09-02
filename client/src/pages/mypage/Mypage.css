@@ -163,9 +163,11 @@
     border: 0;
     background-color: white;
 }
+
 .thumbBack {
     margin-top: 6vw;
 }
+
 .myThumnailContainer {
     margin: 0.5vw 0;
     flex: 1 1 30%;
@@ -174,7 +176,14 @@
     background-color: white;
     border: 1px solid #ccc;
     border-radius: 1vw;
+    box-shadow: 1px 1px 4px 3.5px rgba(21, 27, 139, 0.411);
 }
+
+.myThumnailContainer:hover {
+    transform: translate(5px, 5px);
+    transition-duration: 0.5s;
+}
+
 .actions {
     margin-top: 15vw;
     margin-left: 4vw;

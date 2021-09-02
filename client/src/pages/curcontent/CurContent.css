@@ -140,7 +140,8 @@
 
 /* =------------------컨텐츠 내용------------------- */
 
-.voteIng {
+.voteIng,
+.voteOver {
     font-size: 1.5vw;
     font-weight: 600;
     margin-bottom: 65px;
