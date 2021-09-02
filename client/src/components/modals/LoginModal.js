@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
 import './Modal.css';
 
-function Login({ isOpen, close, loginHandler }) {
+function Login({ isOpen, close, loginHandler, getUserinfo }) {
     const history = useHistory();
     const [loginInfo, setLoginInfo] = useState({
         email: '',
@@ -27,7 +27,7 @@ function Login({ isOpen, close, loginHandler }) {
             .then((res) => {
                 if (res.data.message === 'ok') {
                     loginHandler(res);
-                    history.push('/');
+                    getUserinfo();
                 }
             })
             .catch((err) => alert(err));
