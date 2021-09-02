@@ -13,25 +13,23 @@
         border-radius: 1vw;
         background-color: #fff;
     }
+
+    .container:hover {
+        transform: translate(5px, 5px);
+        transition-duration: 0.5s;
+    }
 }
 
 .container {
-    border: 1px solid #ccc;
+    /* border: 1px solid #ccc; */
+    background: #fff;
     flex: 1 1 30%;
     margin-bottom: 1.04vw;
+    box-shadow: 1px 1px 4px 3.5px rgba(21, 27, 139, 0.411);
 }
-
-.thumbPicture:hover {
-    transform: scale(1.05);
+.container:hover {
+    transform: scale(1.02);
 }
-
-/* .container:nth-child(n + 3) {
-    border-right: none;
-}
-
-.container:nth-child(3n + 3) {
-    border-left: none;
-} */
 
 .thumbTitle {
     font-size: 1.4vw;
@@ -39,6 +37,7 @@
     margin-top: 0.8vw;
     text-align: center;
 }
+
 .thumbPicContainer {
     margin: 0 2.21vw;
 }
@@ -58,8 +57,9 @@
     overflow: scroll;
 }
 .iconContainer {
-    margin: 0 9.5vw;
+    margin: 0 8vw;
 }
+
 #thumbVersus {
-    transform: scale(1.2vw);
+    width: 45px;
 }

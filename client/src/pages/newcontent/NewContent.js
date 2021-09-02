@@ -58,7 +58,7 @@ function NewContent({ content, setContent, setIsEdit, isEdit }) {
         // formData.set('file', img);
         // const res = await axios.patch('/upload', formData);
         // return res;
-        console.log('파일 업로드 완료.', e.target.files[0].name);
+        //console.log('파일 업로드 완료.', e.target.files[0].name);
     };
 
     const fileEvent2 = async (e) => {
@@ -67,7 +67,7 @@ function NewContent({ content, setContent, setIsEdit, isEdit }) {
         // formData.set('file', img);
         // const res = await axios.patch('/upload', formData);
         // return res;
-        console.log('파일 업로드 완료.', e.target.files[0].name);
+        //console.log('파일 업로드 완료.', e.target.files[0].name);
     };
 
     const uploadHandler = async () => {
@@ -168,7 +168,7 @@ function NewContent({ content, setContent, setIsEdit, isEdit }) {
                     </div>
                     <img
                         id="newVersus"
-                        src="https://cdn.discordapp.com/attachments/881710985335934979/881711027425787914/vs.png"></img>
+                        src="https://cdn.discordapp.com/attachments/881710985335934979/882719381036093461/vs_1.png"></img>
                     <div className="pic Right">
                         <img className="picBg" src=""></img>
                         <input
