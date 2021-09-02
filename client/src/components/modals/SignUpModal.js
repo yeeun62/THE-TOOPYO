@@ -56,6 +56,7 @@ function Signup({ isOpen, close, loginHandler }) {
                 .then((res) => {
                     console.log(res);
                     if (res.data.message === 'ok') {
+                        alert('회원가입 완료');
                         return close();
                     }
                 });
