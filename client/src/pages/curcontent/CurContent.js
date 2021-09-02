@@ -187,7 +187,7 @@ function CurContent({ userInfo }) {
                                             // alt="작성자 프로필 사진"
                                             className="curWriterProfile"></img>
                                     </div>
-                                    <span className="curWriterName">닉네임{content.nickname}</span>
+                                    <span className="curWriterName">{content.nickName}</span>
                                 </div>
                                 <span className="curDesc">{content.description}</span>
                             </div>

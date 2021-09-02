@@ -163,6 +163,7 @@
 
 .curWriterProfile {
     border: none;
+    border-radius: 50%;
 }
 
 .curWriterName {
