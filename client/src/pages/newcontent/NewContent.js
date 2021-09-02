@@ -10,8 +10,8 @@ function NewContent({ content, setContent, setIsEdit, isEdit }) {
     const [information, setInformation] = useState({
         title: '',
         description: '',
-        // picture_1: '',
-        // picture_2: '',
+        picture_1: '',
+        picture_2: '',
         votingDeadLine: 'false',
     });
     console.log(information);
@@ -146,7 +146,7 @@ function NewContent({ content, setContent, setIsEdit, isEdit }) {
                     value={information.title}
                     className="inputTitle"
                     type="text"
-                    maxLength="20"
+                    maxLength="30"
                     autoFocus
                     required
                     placeholder="제목을 입력하세요"
