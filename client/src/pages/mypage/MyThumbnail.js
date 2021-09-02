@@ -3,7 +3,6 @@ import './Mypage.css';
 import { Link } from 'react-router-dom';
 
 function MyThumbnail({ list }) {
-    //{{`/update/${this.state.article.id}`} info={this.state.article}
     return (
         <div>
             <Link to={`/curContent/${list.id}`}>

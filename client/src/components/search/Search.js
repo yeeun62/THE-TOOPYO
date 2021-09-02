@@ -5,15 +5,11 @@ import './Search.css';
 import SearchThumbnail from './SearchThumbnail';
 
 export default function Search({ isOpen, close, contentList, getContentDetail }) {
-    // 컨텐츠리스트를 데이터로 받아서 그걸 필터하고 맵걸어서 썸네일에 그 값을 넣어 출력하는 함수
-    // 저기에 리스트를 넣는게 맞는지 모르겠으나 앱 JS를 보고 일단 만듬.
-
     const [searchKeyword, SetSearchKeyword] = useState('');
     const inputHandler = (e) => {
         SetSearchKeyword(([e.target.name] = e.target.value));
     };
     const filteredContent = (data) => {
-        console.log(data);
         data = data.filter((el) => {
             return el.title.indexOf(searchKeyword) > -1;
         });
@@ -30,7 +26,6 @@ export default function Search({ isOpen, close, contentList, getContentDetail })
             );
         });
     };
-    console.log(filteredContent(contentList));
     return (
         <>
             {isOpen ? (

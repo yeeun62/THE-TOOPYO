@@ -3,9 +3,7 @@ import './Mypage.css';
 import Tab from '../../components/tab/Tab';
 
 export default function Mypage({ userInfo, MycontentList, setUserInfo }) {
-    useEffect(() => {
-        console.log('여기는 마이페이지', userInfo);
-    });
+    useEffect(() => {});
     return (
         <div>
             <Tab setUserInfo={setUserInfo} userInfo={userInfo} MycontentList={MycontentList} />

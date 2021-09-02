@@ -4,7 +4,6 @@ const { allContent, detailContent, createContent, retouchContent, deleteContent 
 const { close } = require('./ContentClose');
 const { agree, disagree } = require('./ContentChoice');
 const multer = require('multer');
-const fs = require('fs');
 const path = require('path');
 
 const upload = multer({
@@ -17,7 +16,6 @@ const upload = multer({
             cb(null, path.basename(file.originalname, ext) + Date.now() + ext);
         },
     }),
-    // limits: { fileSize: 5 * 300 * 300 },
 });
 
 content.get('/', allContent);

@@ -4,7 +4,6 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 module.exports = {
-    // 모든 게시물 보기입니다.
     allContent: async (req, res) => {
         try {
             let contentList = await sequelize.query(
@@ -24,7 +23,6 @@ module.exports = {
             res.status(500).json({ message: 'server error' });
         }
     },
-    // 특정 게시물 보기입니다.
     detailContent: async (req, res) => {
         try {
             const id = req.params.id;
@@ -66,7 +64,6 @@ module.exports = {
         }
     },
 
-    // 게시물 생성입니다.
     createContent: async (req, res) => {
         const accessToken = req.cookies.accessToken;
         const userInfo = await jwt.verify(accessToken, process.env.ACCESS_SECRET);
@@ -90,7 +87,6 @@ module.exports = {
         }
     },
 
-    // 게시물 수정입니다.
     retouchContent: async (req, res) => {
         try {
             const id = req.params.id;
@@ -110,7 +106,6 @@ module.exports = {
         }
     },
 
-    // 게시물 삭제입니다.
     deleteContent: async (req, res) => {
         try {
             const id = req.params.id;
