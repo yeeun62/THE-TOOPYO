@@ -1,7 +1,5 @@
 import '../../components/thumbnail/Thumbnail.css';
 import './Search.css';
-import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
 
 function SearchThumbnail({ list, close }) {
     return (
@@ -16,7 +14,7 @@ function SearchThumbnail({ list, close }) {
                 <div className="iconContainer">
                     <img
                         id="thumbVersus"
-                        src="https://cdn.discordapp.com/attachments/881710985335934979/881711027425787914/vs.png"
+                        src="https://cdn.discordapp.com/attachments/881710985335934979/882719381036093461/vs_1.png"
                         alt="versus"></img>
                 </div>
                 <img className="thumbPicture thumbPicture_2" src={`/upload/${list.picture_2}`}></img>
