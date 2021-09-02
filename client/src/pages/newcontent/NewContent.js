@@ -9,8 +9,8 @@ function NewContent() {
     const [information, setInformation] = useState({
         title: '',
         description: '',
-        // picture_1: '',
-        // picture_2: '',
+        picture_1: '',
+        picture_2: '',
         votingDeadLine: 'false',
     });
     console.log(information);
@@ -61,7 +61,6 @@ function NewContent() {
             console.log(information.title, information.description, information.votingDeadLine);
             //|| !information.picture_1 || !information.picture_2
             // return isErrHandler();
-
             await axios
                 .post(
                     'http://localhost:80/content',
@@ -86,7 +85,6 @@ function NewContent() {
                         window.location.replace(`/curContent/${res.data.contentId}`);
                     }
                 });
-
         }
     };
 
@@ -104,7 +102,7 @@ function NewContent() {
                 <input
                     className="inputTitle"
                     type="text"
-                    maxLength="20"
+                    maxLength="30"
                     autoFocus
                     required
                     placeholder="제목을 입력하세요"
