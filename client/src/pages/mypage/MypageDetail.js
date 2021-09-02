@@ -67,13 +67,20 @@ export default function MypageDetail({ userInfo, setUserInfo }) {
         <>
             {isClick ? (
                 <form onSubmit={(e) => e.preventDefault()}>
-                    <h1 className="myHello">안녕하세요 {userInfo.nickName}님</h1>
+                    <h1 className="myHello">안녕하세요 {userInfo.nickName}님 🎈</h1>
                     <div className="myDetailContainer">
                         <div className="pfAreaContainer">
                             <div className="pfArea">
                                 <div className="label">프로필 사진</div>
                                 <div className="profile">
-                                    <div className="circle"></div>
+                                    <div className="circle">
+                                        <img
+                                            src={`/upload/${userInfo.profile_img}`}
+                                            alt={userInfo.nickName}
+                                            name="profile_img"
+                                            className="avatar"
+                                            type="file"></img>
+                                    </div>
                                     <div className="actions">
                                         <button className="editBtncon" type="submit" onClick={patchRequestHandler}>
                                             저장
@@ -129,8 +136,8 @@ export default function MypageDetail({ userInfo, setUserInfo }) {
                     </div>
                 </form>
             ) : (
-                <>
-                    <h1 className="myHello">안녕하세요 {userInfo.nickName}님</h1>
+                <div id="mypageDetailContainer">
+                    <h1 className="myHello">안녕하세요 {userInfo.nickName}님 🎈</h1>
                     <div className="myDetailContainer">
                         <div className="pfAreaContainer">
                             <div className="pfArea">
@@ -167,7 +174,7 @@ export default function MypageDetail({ userInfo, setUserInfo }) {
                             </div>
                         </div>
                     </div>
-                </>
+                </div>
             )}
         </>
     );

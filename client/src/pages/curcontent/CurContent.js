@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './CurContent.css';
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import NewContent from '../newcontent/NewContent';
 
 function CurContent({ userInfo }) {
@@ -125,24 +125,16 @@ function CurContent({ userInfo }) {
                                     <button onClick={isAuthOkHandler} className="checkAlertBtn">
                                         확인
                                     </button>
-                                    요청이 완료되었습니다.
+                                    투표가 완료되었습니다.
                                 </div>
                             ) : null}
 
-                            {/* {isAuthNot ? (
-                                <div className="alert authNot" onClick={isAuthNotHandler}>
-                                    <button onClick={isAuthOkHandler} className="checkAlert">
-                                        확인
-                                    </button>
-                                    로그인이 필요한 서비스입니다.
-                                </div>
-                            ) : null} */}
                             {/* 알러트창!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!알러트창~!!!!!!!!!!!!! */}
 
                             {votingdead ? (
-                                <div className="voteOver">투표가 종료된 게시물입니다.</div>
+                                <div className="voteOver">⌛️ 공정한 심사 감사드립니다 ⌛️</div>
                             ) : (
-                                <div className="voteIng">투표중입니다.</div>
+                                <div className="voteIng">🛎 공정한 심사 부탁드립니다 🛎</div>
                             )}
                             <ul id="curPicContainer">
                                 <li className="list">
@@ -160,7 +152,9 @@ function CurContent({ userInfo }) {
                                     </div>
                                 </li>
                                 <li className="curVersus">
-                                    <img src="https://cdn.discordapp.com/attachments/881710985335934979/881711027425787914/vs.png"></img>
+                                    <img
+                                        className="curVersus-img"
+                                        src="https://cdn.discordapp.com/attachments/881710985335934979/882719381036093461/vs_1.png"></img>
                                 </li>
                                 <li className="list">
                                     <div className="picContainer curPic" onClick={getDisagree}>
@@ -186,7 +180,7 @@ function CurContent({ userInfo }) {
                                             // alt="작성자 프로필 사진"
                                             className="curWriterProfile"></img>
                                     </div>
-                                    <span className="curWriterName">닉네임{content.nickname}</span>
+                                    <span className="curWriterName">{content.nickName}</span>
                                 </div>
                                 <span className="curDesc">{content.description}</span>
                             </div>

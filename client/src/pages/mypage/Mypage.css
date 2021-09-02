@@ -35,6 +35,11 @@
     left: 15vw;
     align-content: center;
 }
+
+#mypageDetailContainer {
+    height: 700px;
+}
+
 .myDetailContainer {
     position: absolute;
     top: 20vw;
@@ -56,6 +61,7 @@
     background: #fff;
     border-radius: 3px;
     box-shadow: 10px 10px 15px 0 rgba(0, 0, 0, 0.3);
+    padding-top: 20px;
 }
 .pfArea {
     text-align: center;
@@ -109,15 +115,16 @@
 }
 .labelContainer {
     box-sizing: border-box;
+    border-radius: 15px 0 15px 0;
     width: 25vw;
     height: 8vw;
-    background: rgba(6, 10, 125, 0.2);
+    background: rgba(6, 10, 125, 1);
     text-align: center;
     transition: all 0.4s ease-in-out;
     box-shadow: 10px 10px 15px 0 rgba(0, 0, 0, 0.3);
 }
 .label {
-    color: #333;
+    color: #fff;
     width: 10vw;
     font-size: 2vw;
     margin-left: 2vw;
@@ -128,6 +135,7 @@
     font-size: 1.5vw;
     font-weight: 600;
     margin-top: 2vw;
+    color: #fff;
 }
 .email {
     margin-left: 3.5vw;
@@ -138,8 +146,9 @@
     border: 1px solid #333;
     border-radius: 1vw;
     outline: 0;
-    font-weight: 300;
-    font-size: 10px;
+    color: #666;
+    font-weight: 400;
+    font-size: 14px;
     height: 2.5vw;
     width: 20vw;
     margin-left: 2vw;
@@ -154,9 +163,11 @@
     border: 0;
     background-color: white;
 }
+
 .thumbBack {
     margin-top: 6vw;
 }
+
 .myThumnailContainer {
     margin: 0.5vw 0;
     flex: 1 1 30%;
@@ -165,7 +176,14 @@
     background-color: white;
     border: 1px solid #ccc;
     border-radius: 1vw;
+    box-shadow: 1px 1px 4px 3.5px rgba(21, 27, 139, 0.411);
 }
+
+.myThumnailContainer:hover {
+    transform: translate(5px, 5px);
+    transition-duration: 0.5s;
+}
+
 .actions {
     margin-top: 15vw;
     margin-left: 4vw;

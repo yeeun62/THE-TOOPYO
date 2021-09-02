@@ -52,6 +52,7 @@
 }
 .searchThumbnail {
     box-shadow: 1vw 2vw rgba(255, 255, 255, 0.3);
+    padding-top: 10px;
     /* 여러 개를 모아주는 콘테이너 */
     text-align: center;
     flex: 1 1 40%;
@@ -81,4 +82,10 @@
     border: 2px solid #ccc;
     height: 50.5vw;
     background-color: white;
+    box-shadow: 1px 1px 4px 3.5px rgba(21, 27, 139, 0.411);
+}
+
+.searchThumbContainer:hover {
+    transform: translate(5px, 5px);
+    transition-duration: 0.5s;
 }

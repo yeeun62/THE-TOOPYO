@@ -2,7 +2,7 @@
     .curCotainerTitle {
         width: 70vw;
         margin: auto;
-        margin-top: 4vw; /*w지울거*/
+        margin-top: 4vw;
         position: relative;
     }
 
@@ -28,21 +28,19 @@
     .curVersus {
         position: absolute;
         top: 14vw;
-        left: 46.5%;
-        width: 4vw;
+        left: 48%;
+        width: 3vw;
     }
 
     .curVersus-img {
-        width: 5vw;
-    }
-
-    .contentMain {
-        margin-bottom: 20vw;
+        width: 3.5vw;
     }
 
     .curWriterProfile {
         width: 100%;
         height: 100%;
+        border: 2px solid #060a7d;
+        border-radius: 50%;
     }
 }
 
@@ -83,7 +81,7 @@
 /* pc, mobile 전체 적용 */
 
 .curContent {
-    margin-bottom: 20vw;
+    height: 1400px;
     padding-top: 5vw;
 }
 
@@ -130,9 +128,26 @@
     right: 2.6vw;
 }
 
+#votingDeadline {
+    width: 2.7vw;
+    height: 2.7vw;
+    position: absolute;
+    right: -50px;
+    top: -10px;
+}
+
 /* --------------button 끝--------------- */
 
 /* =------------------컨텐츠 내용------------------- */
+
+.voteIng,
+.voteOver {
+    font-size: 1.5vw;
+    font-weight: 600;
+    margin-bottom: 65px;
+    width: 70vw;
+    text-align: center;
+}
 
 .voteOver {
     font-size: 1.2vw;
@@ -161,10 +176,6 @@
     border-top: 2vw solid reba(6, 10, 125, 60%);
 }
 
-.curWriterProfile {
-    border: none;
-}
-
 .curWriterName {
     font-size: 4vw;
 }
@@ -182,7 +193,7 @@
     height: 4vw;
     border-radius: 50%;
     margin-right: 1.5vw;
-    border: 1px solid #060a7d;
+    background: #fff;
 }
 
 .curWriterName {
@@ -192,7 +203,7 @@
 
 .curDesc {
     display: block;
-    height: 6.5vw;
+    height: 13vw;
     overflow: scroll;
     border: 1px solid #bbb;
     font-size: 2vw;
@@ -225,6 +236,7 @@
     font-weight: 600;
     text-align: center;
     line-height: 100px;
+    z-index: 1000;
 }
 
 .checkAlertBtn {
