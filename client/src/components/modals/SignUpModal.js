@@ -28,7 +28,7 @@ function Signup({ isOpen, close, loginHandler }) {
         setSignupInfo({ ...signupInfo, [e.target.name]: e.target.value });
     };
 
-    const signUpRequestHandler = () => {
+    const signUpRequestHandler = async () => {
         if (
             // !signupInfo.profile_img ||
             // !signupInfo.provider ||
@@ -41,7 +41,7 @@ function Signup({ isOpen, close, loginHandler }) {
             console.log(signupInfo);
         } else {
             console.log(signupInfo);
-            axios
+            await axios
                 .post(
                     'http://localhost:80/signup',
                     {
@@ -56,9 +56,13 @@ function Signup({ isOpen, close, loginHandler }) {
                 .then((res) => {
                     console.log(res);
                     if (res.data.message === 'ok') {
+                        alert('회원가입 완료');
                         return close();
                     }
                 });
+            const formData = new FormData();
+            formData.append('file', img);
+            await axios.patch('http://localhost:80/upload', formData);
         }
     };
     return (
