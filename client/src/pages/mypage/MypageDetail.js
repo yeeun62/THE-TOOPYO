@@ -4,25 +4,16 @@ import './Mypage.css';
 import { useHistory } from 'react-router-dom';
 
 export default function MypageDetail({ userInfo, setUserInfo }) {
-    useEffect(() => {
-        console.log('여기는 마이페이지디테일', userInfo);
-    }, [userInfo]);
+    useEffect(() => {}, [userInfo]);
     const history = useHistory();
     const [img, setImg] = useState(null);
     const [isClick, setIsClick] = useState(false);
     const [patchInfo, setPatchInfo] = useState(userInfo);
-    console.log(userInfo);
-    console.log(patchInfo);
     const clickHandler = () => {
         setIsClick(!isClick);
     };
     const fileEvent = async (e) => {
         setImg(e.target.files[0]);
-        // const formData = new FormData();
-        // formData.set('file', img);
-        // const res = await axios.patch('/upload', formData);
-        // return res;
-        console.log('파일 업로드 완료.', e.target.files[0].name);
     };
 
     const inputHandler = (e) => {
@@ -54,7 +45,6 @@ export default function MypageDetail({ userInfo, setUserInfo }) {
                         profile_img: image,
                         phoneNumber: patchInfo.phoneNumber,
                     });
-                    console.log(res);
                     history.push('/mypage');
                 });
             const formData = new FormData();

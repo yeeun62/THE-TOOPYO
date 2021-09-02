@@ -1,7 +1,6 @@
 @media screen and (min-width: 769px) {
     #inner {
         width: 70vw;
-        /* border: 1px solid red; */
         margin: auto;
         margin-top: 2vw;
         text-align: center;
@@ -21,7 +20,6 @@
 }
 
 .container {
-    /* border: 1px solid #ccc; */
     background: #fff;
     flex: 1 1 30%;
     margin-bottom: 1.04vw;

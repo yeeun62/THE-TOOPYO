@@ -1,7 +1,5 @@
 import './Thumbnail.css';
 
-import { Link } from 'react-router-dom';
-
 function Thumbnail({ list, getContentDetail, writerId }) {
     return (
         <div>

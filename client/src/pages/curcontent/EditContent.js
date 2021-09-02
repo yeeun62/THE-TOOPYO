@@ -10,8 +10,6 @@ function NewContent() {
 
     useEffect(() => {
         axios.get(`http://localhost:80/content/${id}`).then((res) => {
-            //console.log('res', res);
-            console.log(res.data.data);
             setContent(res.data.data);
         });
     }, []);
@@ -23,7 +21,6 @@ function NewContent() {
         // picture_2: '',
         votingDeadLine: 'false',
     });
-    console.log(information);
 
     const [isOk, setIsOk] = useState(false);
 
@@ -45,18 +42,14 @@ function NewContent() {
 
     const fileEvent1 = async (e) => {
         setImg1(e.target.files[0]);
-        console.log('파일 업로드 완료.', e.target.files[0].name);
     };
 
     const fileEvent2 = async (e) => {
         setImg2(e.target.files[0]);
-        console.log('파일 업로드 완료.', e.target.files[0].name);
     };
 
     const uploadHandler = async () => {
-        console.log('up');
         if (information.title && information.description) {
-            console.log(information.title, information.description, information.votingDeadLine);
             await axios
                 .post(
                     'http://localhost:80/content',

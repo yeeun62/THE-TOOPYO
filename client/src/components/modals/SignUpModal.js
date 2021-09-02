@@ -17,11 +17,6 @@ function Signup({ isOpen, close, loginHandler }) {
 
     const fileEvent = async (e) => {
         setImg(e.target.files[0]);
-        // const formData = new FormData();
-        // formData.set('file', img);
-        // const res = await axios.patch('/upload', formData);
-        // return res;
-        console.log('파일 업로드 완료.', e.target.files[0].name);
     };
 
     const inputHandler = (e) => {
@@ -38,9 +33,7 @@ function Signup({ isOpen, close, loginHandler }) {
             !signupInfo.phoneNumber
         ) {
             setErrorMessage(true);
-            console.log(signupInfo);
         } else {
-            console.log(signupInfo);
             await axios
                 .post(
                     'http://localhost:80/signup',
@@ -54,7 +47,6 @@ function Signup({ isOpen, close, loginHandler }) {
                     { 'Content-Type': 'application/json', withCredentials: true },
                 )
                 .then((res) => {
-                    console.log(res);
                     if (res.data.message === 'ok') {
                         alert('회원가입 완료');
                         return close();
