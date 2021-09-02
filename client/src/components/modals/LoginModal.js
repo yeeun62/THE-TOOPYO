@@ -9,7 +9,6 @@ function Login({ isOpen, close, loginHandler }) {
         email: '',
         password: '',
     });
-    console.log(loginInfo);
 
     const inputHandler = (e) => {
         setLoginInfo({ ...loginInfo, [e.target.name]: e.target.value });

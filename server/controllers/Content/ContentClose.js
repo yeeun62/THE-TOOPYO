@@ -4,7 +4,6 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 module.exports = {
-    // 투표종료입니다.
     close: async (req, res) => {
         try {
             const id = req.params.id;
@@ -20,8 +19,6 @@ module.exports = {
             } else {
                 res.status(401).json({ message: 'not authorization' });
             }
-        } catch (err) {
-            console.log(new Error(err));
-        }
+        } catch (err) {}
     },
 };
