@@ -19,6 +19,7 @@
     border-bottom: 3vw solid rgba(6, 10, 125, 60%);
     padding: 5vw 0 7vw 0;
     margin-bottom: 3vw;
+    font-weight: 600;
 }
 
 #NewSubmit {
