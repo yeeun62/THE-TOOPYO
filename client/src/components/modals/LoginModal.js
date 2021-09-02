@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import './Modal.css';
 
 function Login({ isOpen, close, loginHandler }) {
+    const history = useHistory();
     const [loginInfo, setLoginInfo] = useState({
         email: '',
         password: '',
@@ -27,7 +28,7 @@ function Login({ isOpen, close, loginHandler }) {
             .then((res) => {
                 if (res.data.message === 'ok') {
                     loginHandler(res);
-                    window.location.reload();
+                    history.push('/');
                 }
             })
             .catch((err) => alert(err));
