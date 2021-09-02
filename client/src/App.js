@@ -53,7 +53,13 @@ export default function App() {
             setContentList(res.data.content);
         });
     };
-
+    const getUserinfo = () => {
+        axios.get('http://localhost:80/user', { withCredentials: true }).then((res) => {
+            setIsLogin(true);
+            setUserInfo(res.data.data.userInfo);
+            setMyContentList(res.data.data.content);
+        });
+    };
     useEffect(() => {
         axios.get('http://localhost:80/user', { withCredentials: true }).then((res) => {
             setIsLogin(true);
@@ -74,7 +80,8 @@ export default function App() {
                         isLogin={isLogin}
                         loginHandler={loginHandler}
                         contentList={contentList}
-                        handleLogout={handleLogout}></Nav>
+                        handleLogout={handleLogout}
+                        getUserinfo={getUserinfo}></Nav>
 
                     <Switch>
                         <Route exact path="/">
@@ -87,8 +94,8 @@ export default function App() {
                                     </div>
                                     {currentPageList.map((list) => {
                                         return (
-                                            <Link to={`/curContent/${list.id}`}>
-                                                <Thumbnail list={list} key={list.id} />
+                                            <Link to={isLogin ? `/curContent/${list.id}` : '/'}>
+                                                <Thumbnail list={list} key={list.id} isLogin={isLogin} />
                                             </Link>
                                         );
                                     })}

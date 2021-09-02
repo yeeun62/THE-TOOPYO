@@ -5,7 +5,7 @@ import SignUpButton from '../modals/SignUpBtn';
 import Sidebar from '../sidebar/SideBar';
 import SearchButton from '../search/SearchBtn';
 
-function Nav({ isLogin, loginHandler, contentList, getContentDetail, handleLogout }) {
+function Nav({ isLogin, loginHandler, contentList, getContentDetail, handleLogout, getUserinfo }) {
     return (
         <nav>
             <div className="navInner">
@@ -50,7 +50,7 @@ function Nav({ isLogin, loginHandler, contentList, getContentDetail, handleLogou
                             </li>
                         ) : (
                             <div>
-                                <LoginButton loginHandler={loginHandler} />
+                                <LoginButton loginHandler={loginHandler} getUserinfo={getUserinfo} />
                             </div>
                         )}
                     </ul>
