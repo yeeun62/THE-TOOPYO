@@ -6,15 +6,8 @@
     left: 0;
     background-color: white;
 }
-.ModalBack {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: rgba(102, 102, 102, 0.5);
-}
-.signupModal {
+
+.loginModal {
     width: 360px;
     height: 600px;
     background-color: #060a7d;
@@ -24,14 +17,6 @@
     padding: 20px;
     background: #fff;
     border-radius: 10px;
-}
-.closeBtn {
-    float: right;
-    border: 0;
-    outline: 0;
-    background-color: white;
-    font-size: 16px;
-    cursor: pointer;
 }
 .closeB {
     float: right;
@@ -52,69 +37,12 @@
     justify-content: center;
     flex-direction: column;
 }
-.signUpIcon {
-    width: 150px;
-    margin: 0 auto;
-}
-.signUpId {
-    margin-top: 30px;
-    border-radius: 2px;
-    width: 100%;
-    height: 40px;
-    border: 1px solid #e5e5e5;
-    padding: 9px 12px;
-    outline: none;
-    box-sizing: border-box;
-}
+
 input::placeholder {
     color: #999999;
 }
-.signUpPw {
-    margin-top: 15px;
-    border-radius: 2px;
-    width: 100%;
-    height: 40px;
-    border: 1px solid #e5e5e5;
-    padding: 9px 12px;
-    outline: none;
-    box-sizing: border-box;
-}
-.signUpPic {
-    margin-top: 15px;
-    border-radius: 2px;
-    width: 100%;
-    height: 40px;
-    border: 1px solid #e5e5e5;
-    padding: 9px 12px;
-    outline: none;
-    box-sizing: border-box;
-}
-.profileUploader {
-    margin-top: 15px;
-    font-size: 15px;
-}
 
-.signUpNickName {
-    margin-top: 15px;
-    border-radius: 2px;
-    width: 100%;
-    height: 40px;
-    border: 1px solid #e5e5e5;
-    padding: 9px 12px;
-    outline: none;
-    box-sizing: border-box;
-}
-.signUpMobile {
-    margin-top: 15px;
-    border-radius: 2px;
-    width: 100%;
-    height: 40px;
-    border: 1px solid #e5e5e5;
-    padding: 9px 12px;
-    outline: none;
-    box-sizing: border-box;
-}
-.signUpB {
+.loginBtn {
     height: 40px;
     font-size: 14px;
     padding: 13px 30px;
@@ -132,7 +60,7 @@ input::placeholder {
     border-radius: 10px;
 }
 
-.kakaoBtn {
+/* .kakaoBtn {
     height: 40px;
     font-size: 14px;
     padding: 13px 30px;
@@ -156,7 +84,7 @@ input::placeholder {
     text-align: center;
     display: inline-block;
     box-sizing: border-box;
-}
+} */
 .loginLine {
     color: #bcbcbc;
     font-size: 11px;
@@ -174,4 +102,10 @@ input::placeholder {
     cursor: pointer;
     font-size: 11px;
     text-decoration: underline;
+}
+.link {
+    border: 0;
+    outline: 0;
+    background-color: white;
+    cursor: pointer;
 }

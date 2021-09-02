@@ -1,6 +1,7 @@
 .mypage {
+    font-size: 3vw;
     width: 50%;
-    padding: 20px;
+    margin-top: 5vw;
     float: left;
     cursor: pointer;
 }
@@ -8,9 +9,19 @@
     background-color: rgba(6, 10, 125, 1);
     color: white;
 }
+.imgInputBtn {
+    position: absolute;
+    top: 16vw;
+    left: 0vw;
+    transform: scale(0.6);
+}
+.mypageTitle {
+    margin: 10%;
+}
 .mycontent {
+    font-size: 3vw;
     width: 50%;
-    padding: 20px;
+    margin-top: 5vw;
     float: left;
     cursor: pointer;
 }
@@ -18,25 +29,196 @@
     background-color: rgba(6, 10, 125, 1);
     color: white;
 }
+.myHello {
+    position: absolute;
+    top: 15vw;
+    left: 15vw;
+    align-content: center;
+}
+
+#mypageDetailContainer {
+    height: 700px;
+}
+
+.myDetailContainer {
+    position: absolute;
+    top: 20vw;
+    left: 15vw;
+    width: 70vw;
+    height: 40vw;
+    border-radius: 2px;
+    box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);
+    background: #060a4d;
+    background: linear-gradient(to top right, #060a4d 0%, white 130%);
+}
+.pfAreaContainer {
+    overflow-y: scroll;
+    position: absolute;
+    top: 5vw;
+    left: 10vw;
+    height: 30vw;
+    width: 50vw;
+    background: #fff;
+    border-radius: 3px;
+    box-shadow: 10px 10px 15px 0 rgba(0, 0, 0, 0.3);
+    padding-top: 20px;
+}
 .pfArea {
-    padding: 0;
-    margin: 0;
-    max-width: 100%;
+    text-align: center;
+}
+.profile {
+    float: left;
+    width: 45vw;
+    height: 30vw;
+    text-align: center;
+}
+
+.avatar {
     position: relative;
+    width: 10vw;
+    height: 10vw;
     display: block;
+    border-radius: 50%;
+    background: rgba(6, 10, 125, 0.5);
+    box-shadow: 10px 10px 15px 0 rgba(0, 0, 0, 0.3);
+}
+.avatar:hover {
+    cursor: pointer;
+    transform: rotate(-360deg);
+}
+.circle {
+    position: absolute;
+    box-sizing: border-box;
+    width: 10.5vw;
+    height: 10.5vw;
+    top: 5vw;
+    left: 5vw;
+    border-width: 3px;
+    border-style: solid;
+    border-color: #060a4d #060a4d #060a4d transparent;
+    border-radius: 50%;
+    transition: all 1.5s ease-in-out;
+    border-color: #060a4d transparent #060a4d #060a4d;
+}
+.circle:hover {
+    cursor: pointer;
+    transform: rotate(360deg);
+}
+
+.infoContainer {
+    position: relative;
+    top: -24vw;
+    left: -13vw;
+    width: 10vw;
+    height: 5vw;
+    float: right;
+}
+.labelContainer {
+    box-sizing: border-box;
+    border-radius: 15px 0 15px 0;
+    width: 25vw;
+    height: 8vw;
+    background: rgba(6, 10, 125, 1);
+    text-align: center;
+    transition: all 0.4s ease-in-out;
+    box-shadow: 10px 10px 15px 0 rgba(0, 0, 0, 0.3);
 }
 .label {
-    color: #333;
-    font-size: 20px;
-    margin-top: 14px;
-    margin-bottom: 14px;
+    color: #fff;
+    width: 10vw;
+    font-size: 2vw;
+    margin-left: 2vw;
+    margin-right: 1vw;
+    margin-top: 0.5vw;
+}
+.user {
+    font-size: 1.5vw;
+    font-weight: 600;
+    margin-top: 2vw;
+    color: #fff;
+}
+.email {
+    margin-left: 3.5vw;
+    text-align: left;
+    font-size: 2vw;
 }
 .inputBox {
-    background-color: rgba(6, 10, 125, 0.8);
-    border-radius: 6px;
+    border: 1px solid #333;
+    border-radius: 1vw;
     outline: 0;
-    font-weight: 500;
-    height: 30px;
-    padding: 0 20px;
-    width: 15%;
+    color: #666;
+    font-weight: 400;
+    font-size: 14px;
+    height: 2.5vw;
+    width: 20vw;
+    margin-left: 2vw;
+}
+
+.filteredContainer {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 70vw;
+    margin: auto;
+    border: 0;
+    background-color: white;
+}
+
+.thumbBack {
+    margin-top: 6vw;
+}
+
+.myThumnailContainer {
+    margin: 0.5vw 0;
+    flex: 1 1 30%;
+    width: 22.43vw;
+    height: 50vw;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 1vw;
+    box-shadow: 1px 1px 4px 3.5px rgba(21, 27, 139, 0.411);
+}
+
+.myThumnailContainer:hover {
+    transform: translate(5px, 5px);
+    transition-duration: 0.5s;
+}
+
+.actions {
+    margin-top: 15vw;
+    margin-left: 4vw;
+    margin-right: 80vw;
+}
+.editBtncon {
+    display: block;
+    width: 12vw;
+    height: 3vw;
+    margin: 1vw 0 3vw 0;
+    background: none;
+    border: 1px solid #060a4d;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: 600;
+    box-sizing: border-box;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 10px 10px 15px 0 rgba(0, 0, 0, 0.3);
+    color: #060a4d;
+}
+.editContainer:hover {
+    background: #060a4d;
+    color: #fff;
+}
+.saveContainer {
+    font-weight: bold;
+    color: #fff;
+    position: absolute;
+    top: 35vw;
+    left: 27vw;
+    width: 100px;
+    border-radius: 3px;
+    background-color: rgba(6, 10, 125, 1);
+}
+
+#thumbVersus {
+    margin: 2vw 1.5vw;
 }

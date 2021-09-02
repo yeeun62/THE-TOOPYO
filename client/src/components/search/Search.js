@@ -1,9 +1,10 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Search.css';
-import Thumbnail from '../thumbnail/Thumbnail';
+import SearchThumbnail from './SearchThumbnail';
 
-export default function Search({ isOpen, close, contentList }) {
+export default function Search({ isOpen, close, contentList, getContentDetail }) {
     // 컨텐츠리스트를 데이터로 받아서 그걸 필터하고 맵걸어서 썸네일에 그 값을 넣어 출력하는 함수
     // 저기에 리스트를 넣는게 맞는지 모르겠으나 앱 JS를 보고 일단 만듬.
 
@@ -11,18 +12,25 @@ export default function Search({ isOpen, close, contentList }) {
     const inputHandler = (e) => {
         SetSearchKeyword(([e.target.name] = e.target.value));
     };
-
     const filteredContent = (data) => {
+        console.log(data);
         data = data.filter((el) => {
-            return el.data.nickName.indexOf(searchKeyword) > -1;
+            return el.title.indexOf(searchKeyword) > -1;
         });
         return data.map((list) => {
-            return <Thumbnail list={list} />;
+            return (
+                <li>
+                    <Link
+                        to={{
+                            pathname: `/curContent/${list.id}`,
+                        }}>
+                        <SearchThumbnail close={close} list={list} key={list.id} />
+                    </Link>
+                </li>
+            );
         });
     };
-    // 검색해서 리턴하고나면 검색어가 공백이 되게하는 리프레시 함수... 잘 될지 모르겠음.
-    // 이걸하면 모든 문자가 검색돼서 필터 걸리지않고 아마도 모든 게시물이 썸네일로 나올거임
-
+    console.log(filteredContent(contentList));
     return (
         <>
             {isOpen ? (
@@ -42,7 +50,13 @@ export default function Search({ isOpen, close, contentList }) {
                         <button className="closeBtn" onClick={close}>
                             X
                         </button>
-                        <div>{contentList ? <div>{filteredContent(contentList)}</div> : '검색 결과가 없습니다.'}</div>
+                    </div>
+                    <div className="searchThumbnail">
+                        {filteredContent(contentList).length !== 0 ? (
+                            <div className="filteredContainer">{filteredContent(contentList)}</div>
+                        ) : (
+                            '검색 결과가 없습니다.'
+                        )}
                     </div>
                 </div>
             ) : null}

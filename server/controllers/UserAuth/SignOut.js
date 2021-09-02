@@ -1,4 +1,8 @@
 module.exports = (req, res) => {
-    req.session.destroy();
-    res.status(200).json({ message: 'Successfully sign out!' });
+    res.cookie('accessToken', '', {
+        httpOnly: true,
+        maxAge: 1,
+    })
+        .status(200)
+        .json({ message: 'ok' });
 };

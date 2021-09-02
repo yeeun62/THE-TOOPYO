@@ -13,6 +13,13 @@
         color: #060a7d;
         transition: all 0.125s;
         cursor: pointer;
+        margin-right: 1.04vw;
+    }
+
+    .modalBtn:hover {
+        background-color: #060a7d;
+        color: #fff;
+        border: 1px solid #fff;
     }
 
     .modal {
@@ -96,7 +103,7 @@
         border-radius: 10px;
     }
 
-    .kakaoBtn {
+    /* .kakaoBtn {
         height: 40px;
         font-size: 14px;
         display: flex;
@@ -119,7 +126,7 @@
         text-align: center;
         display: inline-block;
         box-sizing: border-box;
-    }
+    } */
     .loginEnd {
         text-align: center;
         font-size: 11px;
@@ -141,6 +148,12 @@
         cursor: pointer;
         font-size: 11px;
         text-decoration: underline;
+    }
+    .link {
+        border: 0;
+        outline: 0;
+        background-color: white;
+        cursor: pointer;
     }
 }
 @media screen and (max-width: 768px) {

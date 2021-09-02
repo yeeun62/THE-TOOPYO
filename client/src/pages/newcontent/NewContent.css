@@ -4,41 +4,58 @@
 }
 
 #inner {
-    width: 62.5vw;
+    width: 70vw;
     margin: auto;
     padding: 2.6vw 1.04vw 0 1.04vw;
-    /* border-right: 1px solid red;
-    border-left: 1px solid red; */
     position: relative;
 }
 
 #newTitle {
     display: block;
     text-align: center;
-    width: 52.08vw;
+    width: 70vw;
     height: 2.6vw;
     margin: 1.56vw auto;
+    border-bottom: 3vw solid rgba(6, 10, 125, 60%);
+    padding: 5vw 0 7vw 0;
+    margin-bottom: 3vw;
+    font-weight: 600;
 }
 
 #NewSubmit {
     width: 3.65vw;
-    background-color: #fff;
+    height: 3.65vw;
+    background: url(https://cdn.discordapp.com/attachments/881710985335934979/881719851356409896/verify.png);
+    background-repeat: no-repeat;
+    background-size: contain;
     border: none;
     position: absolute;
-    top: 7vw;
-    margin-left: 1.04vw;
+    top: 21.9vw;
+    right: -1.1vw;
 }
 
-.title {
-    width: 26.04vw;
+.inputTitle {
+    height: 3vw;
+    font-size: 1.8vw;
+    vertical-align: middle;
     border: 1px solid #ccc;
-    width: 55.73vw;
+    width: 65vw;
+    margin-right: 4vw;
+}
+
+#newVersus {
+    width: 4vw;
+    height: 4vw;
+    position: absolute;
+    top: 12vw;
+    left: 47%;
 }
 
 .NewContentFrame {
-    margin-bottom: 5.21vw;
+    width: 70vw;
+    height: 50vw;
+    margin: 10vw 0;
     position: relative;
-    /* border: 1px solid red; */
     margin-top: 2.6vw;
     display: flex;
     justify-content: space-between;
@@ -51,12 +68,10 @@
 }
 
 .NewDesc {
-    width: 60.42vw;
-    height: 5.21vw;
+    width: 70vw;
+    height: 8vw;
     display: block;
     position: absolute;
-    top: 30vw;
-    left: 1.04vw;
+    top: 32vw;
     border: 1px solid #ccc;
-    margin-bottom: 10vw;
 }

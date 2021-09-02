@@ -1,34 +1,34 @@
 import React, { useState } from 'react';
 import '../../pages/signup/SignUp.css';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 function Signup({ isOpen, close, loginHandler }) {
+    const [img, setImg] = useState(null);
     const [signupInfo, setSignupInfo] = useState({
         profile_img: '',
-        provider: '',
         nickName: '',
         email: '',
         password: '',
         phoneNumber: '',
     });
-
+    const [errorMessage, setErrorMessage] = useState(false);
     const history = useHistory();
 
-    const fileEvent = (e) => {
-        const reader = new FileReader();
-        reader.onload = () => {
-            setSignupInfo({ ...signupInfo, [e.target.name]: e.target.profile_img });
-            console.log('파일 업로드 완료.');
-        };
-        reader.readAsText(e.target.files[0]);
+    const fileEvent = async (e) => {
+        setImg(e.target.files[0]);
+        // const formData = new FormData();
+        // formData.set('file', img);
+        // const res = await axios.patch('/upload', formData);
+        // return res;
+        console.log('파일 업로드 완료.', e.target.files[0].name);
     };
 
     const inputHandler = (e) => {
         setSignupInfo({ ...signupInfo, [e.target.name]: e.target.value });
     };
 
-    const signUpRequestHandler = () => {
+    const signUpRequestHandler = async () => {
         if (
             // !signupInfo.profile_img ||
             // !signupInfo.provider ||
@@ -37,13 +37,15 @@ function Signup({ isOpen, close, loginHandler }) {
             !signupInfo.password ||
             !signupInfo.phoneNumber
         ) {
+            setErrorMessage(true);
+            console.log(signupInfo);
         } else {
-            axios
+            console.log(signupInfo);
+            await axios
                 .post(
-                    'https://localhost:80/signup',
+                    'http://localhost:80/signup',
                     {
-                        profile_img: 'dddd',
-                        provider: signupInfo.provider,
+                        profile_img: img.name,
                         nickName: signupInfo.nickName,
                         email: signupInfo.email,
                         password: signupInfo.password,
@@ -52,9 +54,15 @@ function Signup({ isOpen, close, loginHandler }) {
                     { 'Content-Type': 'application/json', withCredentials: true },
                 )
                 .then((res) => {
-                    history.push('/');
-                    if (res.message === 'ok') return loginHandler(true);
+                    console.log(res);
+                    if (res.data.message === 'ok') {
+                        alert('회원가입 완료');
+                        return close();
+                    }
                 });
+            const formData = new FormData();
+            formData.append('file', img);
+            await axios.patch('http://localhost:80/upload', formData);
         }
     };
     return (
@@ -68,7 +76,7 @@ function Signup({ isOpen, close, loginHandler }) {
                         <form onSubmit={(e) => e.preventDefault()}>
                             <div className="modalContents">
                                 <img className="signUpIcon" />
-                                <span className="title">Sign Up</span>
+                                <h1>Sign Up</h1>
                                 <div>모든 항목은 필수입니다.</div>
                                 <input
                                     name="email"
@@ -107,14 +115,20 @@ function Signup({ isOpen, close, loginHandler }) {
                                     name="profile_img"
                                     className="signUpPic"
                                     type="file"
-                                    onChange={fileEvent}
-                                    value={signupInfo.profile_img}
+                                    placeholder="picture"
+                                    onChange={(e) => fileEvent(e)}
                                 />
                                 <button className="signUpB" onClick={signUpRequestHandler}>
-                                    {' '}
                                     회원가입
                                 </button>
-                                <div className="loginLine"></div>
+                                <div className="loginLine">
+                                    이미 아이디가 있으신가요?
+                                    <Link to="/login">
+                                        <button className="link" onClick={close}>
+                                            로그인
+                                        </button>
+                                    </Link>
+                                </div>
                             </div>
                         </form>
                     </div>
