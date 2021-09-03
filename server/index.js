@@ -9,6 +9,7 @@ const jwt = require('jsonwebtoken');
 const contentImgRouter = require('./contentmulter');
 const controllers = require('./controllers');
 const fs = require('fs');
+const models = require('./models/index');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

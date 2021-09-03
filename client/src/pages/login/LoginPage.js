@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import './LoginPage.css';
 
 function LoginPage({ loginHandler }) {
+    const history = useHistory();
     const [loginInfo, setLoginInfo] = useState({
         email: '',
         password: '',
@@ -26,6 +27,7 @@ function LoginPage({ loginHandler }) {
             .then((res) => {
                 if (res.message === 'ok') {
                     loginHandler();
+                    window.location.replace('/');
                 }
             })
             .catch((err) => alert(err));

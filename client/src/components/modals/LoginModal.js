@@ -28,7 +28,7 @@ function Login({ isOpen, close, loginHandler }) {
             .then((res) => {
                 if (res.data.message === 'ok') {
                     loginHandler(res);
-                    history.push('/');
+                    window.location.replace('/');
                 }
             })
             .catch((err) => alert(err));
