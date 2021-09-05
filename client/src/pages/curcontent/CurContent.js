@@ -14,7 +14,7 @@ function CurContent({ userInfo }) {
     const [votingdead, setVotingdead] = useState(false);
 
     useEffect(() => {
-        axios.get(`http://localhost:80/content/${id}`).then((res) => {
+        axios.get(`process.env.REACT_APP_API_URL/content/${id}`).then((res) => {
             setContent(res.data.data);
             if (res.data.data.voting_deadline === 'true') {
                 setVotingdead(true);
@@ -34,8 +34,8 @@ function CurContent({ userInfo }) {
         setModal(!modal);
     };
     const getAgree = () => {
-        axios.get(`http://localhost:80/content/agree/${id}`).then((res) => {
-            axios.get(`http://localhost:80/content/${id}`).then((res) => {
+        axios.get(`process.env.REACT_APP_API_URL/content/agree/${id}`).then((res) => {
+            axios.get(`process.env.REACT_APP_API_URL/content/${id}`).then((res) => {
                 setContent(res.data.data);
             });
             if (res.data.message === 'agree complete') {
@@ -47,8 +47,8 @@ function CurContent({ userInfo }) {
     };
 
     const getDisagree = () => {
-        axios.get(`http://localhost:80/content/disagree/${id}`).then((res) => {
-            axios.get(`http://localhost:80/content/${id}`).then((res) => {
+        axios.get(`process.env.REACT_APP_API_URL/content/disagree/${id}`).then((res) => {
+            axios.get(`process.env.REACT_APP_API_URL/content/${id}`).then((res) => {
                 setContent(res.data.data);
             });
             if (res.data.message === 'disagree complete') {
@@ -64,7 +64,7 @@ function CurContent({ userInfo }) {
     };
 
     const deleteContent = () => {
-        axios.delete(`http://localhost:80/content/${id}`).then((res) => {
+        axios.delete(`process.env.REACT_APP_API_URL/content/${id}`).then((res) => {
             if (res.data.message === 'delete complete') {
                 alert('삭제가 완료되었습니다.');
                 window.location.replace('/');
@@ -75,7 +75,7 @@ function CurContent({ userInfo }) {
     };
 
     const requestDeadline = () => {
-        axios.patch(`http://localhost:80/content/deadline/${content.id}`).then((res) => {
+        axios.patch(`process.env.REACT_APP_API_URL/content/deadline/${content.id}`).then((res) => {
             alert('투표가 종료되었습니다.');
             window.location.replace(`/curContent/${id}`);
         });

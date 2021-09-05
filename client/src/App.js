@@ -25,7 +25,7 @@ export default function App() {
     const PAGE_SIZE = 6;
 
     const handleLogout = () => {
-        axios.get('http://localhost:80/signout', {}).then((res) => {
+        axios.get(`process.env.REACT_APP_API_URL/signout`, {}).then((res) => {
             setUserInfo(null);
             setIsLogin(false);
             history.push('/');
@@ -49,19 +49,19 @@ export default function App() {
     };
 
     const getContentList = () => {
-        axios.get('http://localhost:80/content').then((res) => {
+        axios.get(`process.env.REACT_APP_API_URL/content`).then((res) => {
             setContentList(res.data.content);
         });
     };
     const getUserinfo = () => {
-        axios.get('http://localhost:80/user', { withCredentials: true }).then((res) => {
+        axios.get(`process.env.REACT_APP_API_URL/user`, { withCredentials: true }).then((res) => {
             setIsLogin(true);
             setUserInfo(res.data.data.userInfo);
             setMyContentList(res.data.data.content);
         });
     };
     useEffect(() => {
-        axios.get('http://localhost:80/user', { withCredentials: true }).then((res) => {
+        axios.get(`process.env.REACT_APP_API_URL/user`, { withCredentials: true }).then((res) => {
             setIsLogin(true);
             setUserInfo(res.data.data.userInfo);
             setMyContentList(res.data.data.content);

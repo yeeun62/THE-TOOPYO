@@ -29,7 +29,7 @@ export default function MypageDetail({ userInfo, setUserInfo }) {
         }
         if (patchInfo.nickName && patchInfo.password && patchInfo.phoneNumber && userInfo.email) {
             await axios
-                .patch(`http://localhost:80/user`, {
+                .patch(`process.env.REACT_APP_API_URL/user`, {
                     nickName: patchInfo.nickName,
                     email: userInfo.email,
                     password: patchInfo.password,
@@ -49,7 +49,7 @@ export default function MypageDetail({ userInfo, setUserInfo }) {
                 });
             const formData = new FormData();
             formData.append('file', img);
-            await axios.patch('http://localhost:80/upload', formData);
+            await axios.patch(`process.env.REACT_APP_API_URL/upload`, formData);
         }
     };
 

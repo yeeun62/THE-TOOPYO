@@ -35,7 +35,7 @@ function SignupPage() {
         } else {
             await axios
                 .post(
-                    'http://localhost:80/signup',
+                    `process.env.REACT_APP_API_URL/signup`,
                     {
                         profile_img: img.name,
                         provider: signupInfo.provider,
@@ -55,7 +55,7 @@ function SignupPage() {
                 });
             const formData = new FormData();
             formData.append('file', img);
-            await axios.patch('http://localhost:80/upload', formData);
+            await axios.patch(`process.env.REACT_APP_API_URL/upload`, formData);
         }
     };
     return (
