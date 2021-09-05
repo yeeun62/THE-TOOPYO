@@ -20,6 +20,9 @@ app.use(
     }),
 );
 
+app.get('/', (req, res) => {
+    res.send('hello world');
+});
 app.patch('/upload', imgRouter);
 app.patch('/uploads', contentImgRouter);
 app.post('/login', controllers.login);
