@@ -13,7 +13,9 @@ function Thumbnail({ list, getContentDetail, writerId, isLogin }) {
             <div className="container" onClick={pleaseLogin}>
                 <h1 className="thumbTitle">{list.title}</h1>
                 <div className="thumbPicContainer">
-                    <img className="thumbPicture thumbPicture_1" src={`/upload/${list.picture_1}`}></img>
+                    <img
+                        className="thumbPicture thumbPicture_1"
+                        src={`https://thetoopyo-client-bucket.s3.ap-northeast-2.amazonaws.com/upload/${list.picture_1}`}></img>
                 </div>
                 <div className="iconContainer">
                     <img
@@ -22,7 +24,9 @@ function Thumbnail({ list, getContentDetail, writerId, isLogin }) {
                         alt="versus"></img>
                 </div>
                 <div className="thumbPicContainer">
-                    <img className="thumbPicture thumbPicture_2" src={`/upload/${list.picture_2}`}></img>
+                    <img
+                        className="thumbPicture thumbPicture_2"
+                        src={`https://thetoopyo-client-bucket.s3.ap-northeast-2.amazonaws.com/upload/${list.picture_2}`}></img>
                 </div>
                 <div className="descript">{list.description}</div>
             </div>

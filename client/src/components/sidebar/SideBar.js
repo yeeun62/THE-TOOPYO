@@ -16,8 +16,8 @@ function Sidebar() {
     };
     return (
         <div className="sidebar">
-            <div class="btn-menu">
-                <a class="sidebarBtn" onClick={sidebarHandler}>
+            <div className="btn-menu">
+                <a className="sidebarBtn" onClick={sidebarHandler}>
                     <svg width="18" height="12" viewBox="0 0 18 14" fill="none">
                         <rect width="18" height="2" fill="white"></rect>
                         <rect x="6" y="6" width="12" height="2" fill="white"></rect>
