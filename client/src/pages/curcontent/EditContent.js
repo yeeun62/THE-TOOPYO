@@ -9,7 +9,7 @@ function NewContent() {
     const [content, setContent] = useState({});
 
     useEffect(() => {
-        axios.get(`process.env.REACT_APP_API_URL/content/${id}`).then((res) => {
+        axios.get(`${process.env.REACT_APP_API_URL}/content/${id}`).then((res) => {
             setContent(res.data.data);
         });
     }, []);
@@ -52,7 +52,7 @@ function NewContent() {
         if (information.title && information.description) {
             await axios
                 .post(
-                    `process.env.REACT_APP_API_URL/content`,
+                    `${process.env.REACT_APP_API_URL}/content`,
                     {
                         title: information.title,
                         picture_1: img1.name,
@@ -66,7 +66,7 @@ function NewContent() {
                     const formData = new FormData();
                     formData.append('file', img1);
                     formData.append('file', img2);
-                    axios.patch(`process.env.REACT_APP_API_URL/uploads`, formData);
+                    axios.patch(`${process.env.REACT_APP_API_URL}/uploads`, formData);
 
                     if (res.data.message === 'please rewrite') return isErrHandler();
                     else if (res.data.message === 'ok') {

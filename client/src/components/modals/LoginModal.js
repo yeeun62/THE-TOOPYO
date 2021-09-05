@@ -17,7 +17,7 @@ function Login({ isOpen, close, loginHandler, getUserinfo }) {
     const loginRequestHandler = () => {
         axios
             .post(
-                `process.env.REACT_APP_API_URL/login`,
+                `${process.env.REACT_APP_API_URL}/login`,
                 {
                     email: loginInfo.email,
                     password: loginInfo.password,

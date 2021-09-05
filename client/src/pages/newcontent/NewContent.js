@@ -65,7 +65,7 @@ function NewContent({ content, isEdit }) {
             if (img1) image1 = img1.name;
             if (img2) image2 = img2.name;
             axios
-                .patch(`process.env.REACT_APP_API_URL/${content.id}`, {
+                .patch(`${process.env.REACT_APP_API_URL}/${content.id}`, {
                     title: information.title,
                     description: information.description,
                     picture_1: image1,
@@ -77,7 +77,7 @@ function NewContent({ content, isEdit }) {
                     const formData = new FormData();
                     formData.append('file', img1);
                     formData.append('file', img2);
-                    axios.patch(`process.env.REACT_APP_API_URL/uploads`, formData);
+                    axios.patch(`${process.env.REACT_APP_API_URL}/uploads`, formData);
 
                     if (res.data.message === 'please rewrite') return isErrHandler();
                     else if (res.data.message === 'ok') {
@@ -90,7 +90,7 @@ function NewContent({ content, isEdit }) {
         if (information.title && information.description && img1 && img2) {
             await axios
                 .post(
-                    `process.env.REACT_APP_API_URL/content`,
+                    `${process.env.REACT_APP_API_URL}/content`,
                     {
                         title: information.title,
                         picture_1: img1.name,
@@ -104,7 +104,7 @@ function NewContent({ content, isEdit }) {
                     const formData = new FormData();
                     formData.append('file', img1);
                     formData.append('file', img2);
-                    axios.patch(`process.env.REACT_APP_API_URL/uploads`, formData);
+                    axios.patch(`${process.env.REACT_APP_API_URL}/uploads`, formData);
 
                     if (res.data.message === 'please rewrite') return isErrHandler();
                     else if (res.data.message === 'ok') {
