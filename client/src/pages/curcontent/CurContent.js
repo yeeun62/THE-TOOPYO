@@ -7,7 +7,7 @@ import NewContent from '../newcontent/NewContent';
 function CurContent({ userInfo }) {
     let { id } = useParams();
     const [content, setContent] = useState({});
-    const [isOk, setIsAuthOk] = useState(false); // session id 를 보내고 인증이 완료되어 투표한 경우
+    const [isOk, setIsAuthOk] = useState(false);
     const [isAuthNot, setIsAuthNot] = useState(false);
     const [modal, setModal] = useState(false);
     const [isEdit, setIsEdit] = useState(true);
@@ -15,7 +15,6 @@ function CurContent({ userInfo }) {
 
     useEffect(() => {
         axios.get(`http://localhost:80/content/${id}`).then((res) => {
-            //console.log('res', res);
             setContent(res.data.data);
             if (res.data.data.voting_deadline === 'true') {
                 setVotingdead(true);
@@ -53,7 +52,6 @@ function CurContent({ userInfo }) {
                 setContent(res.data.data);
             });
             if (res.data.message === 'disagree complete') {
-                console.log(res.data);
                 return modalhandler();
             } else {
                 return isAuthNotHandler();
@@ -62,15 +60,12 @@ function CurContent({ userInfo }) {
     };
 
     const editContent = () => {
-        console.log('수정됩니가');
         setIsEdit(false);
     };
 
     const deleteContent = () => {
-        console.log('딜리트됩니까');
         axios.delete(`http://localhost:80/content/${id}`).then((res) => {
             if (res.data.message === 'delete complete') {
-                // isAuthOkHandler();
                 alert('삭제가 완료되었습니다.');
                 window.location.replace('/');
             } else {
@@ -81,7 +76,6 @@ function CurContent({ userInfo }) {
 
     const requestDeadline = () => {
         axios.patch(`http://localhost:80/content/deadline/${content.id}`).then((res) => {
-            console.log(res);
             alert('투표가 종료되었습니다.');
             window.location.replace(`/curContent/${id}`);
         });
@@ -95,25 +89,27 @@ function CurContent({ userInfo }) {
                         <h1 id="curTitle">{content.title}</h1>
                         {content.userId === userInfo.id ? (
                             <>
-                                {votingdead ? null : (
-                                    <button className="editContentBtn voting curBtn" onClick={requestDeadline}>
-                                        <img
-                                            id="votingDeadline"
-                                            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOnN2Z2pzPSJodHRwOi8vc3ZnanMuY29tL3N2Z2pzIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgeD0iMCIgeT0iMCIgdmlld0JveD0iMCAwIDUxMCA1MTAiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTIiIHhtbDpzcGFjZT0icHJlc2VydmUiIGNsYXNzPSIiPjxnPjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgaWQ9IlhNTElEXzE5NDZfIj48cGF0aCBpZD0iWE1MSURfMTk0N18iIGQ9Im0yMzIgMzQ3LjQzNCAzMS4wMzggNzIuNTY2aDI4Ljk2MnYtMTUwaC0zMHY3MS4zNzhsLTI5LjUzOC03MS4zNzhoLTMwLjQ2MnYxNTBoMzB6IiBmaWxsPSIjMDYwYTdkIiBkYXRhLW9yaWdpbmFsPSIjMDAwMDAwIiBzdHlsZT0iIiBjbGFzcz0iIj48L3BhdGg+PHBhdGggaWQ9IlhNTElEXzIzNzBfIiBkPSJtNDEyIDM3NXYtNjBjMC0yNC44MTQtMTkuNjg2LTQ1LTQ0LjUtNDVoLTQ1LjV2MTUwaDQ1LjVjMjQuODE0IDAgNDQuNS0yMC4xODYgNDQuNS00NXptLTYwLTc1aDE1LjVjOC4yNzIgMCAxNC41IDYuNzI4IDE0LjUgMTV2NjBjMCA4LjI3Mi02LjIyOCAxNS0xNC41IDE1aC0xNS41eiIgZmlsbD0iIzA2MGE3ZCIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiIgY2xhc3M9IiI+PC9wYXRoPjxwYXRoIGlkPSJYTUxJRF8yMzcxXyIgZD0ibTE3MiAzOTBoLTQ1di0zMGgzMHYtMzBoLTMwdi0zMGg0NXYtMzBoLTc1djE1MGg3NXoiIGZpbGw9IiMwNjBhN2QiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIHN0eWxlPSIiIGNsYXNzPSIiPjwvcGF0aD48cGF0aCBpZD0iWE1MSURfMjM3Ml8iIGQ9Im00MTIgMjEwaC00NXYtMzBoMzB2LTMwaC0zMHYtMzBoNDV2LTMwaC03NXYxNTBoNzV6IiBmaWxsPSIjMDYwYTdkIiBkYXRhLW9yaWdpbmFsPSIjMDAwMDAwIiBzdHlsZT0iIiBjbGFzcz0iIj48L3BhdGg+PHBhdGggaWQ9IlhNTElEXzIzNzNfIiBkPSJtMTI3IDI0MGgzMHYtMTIwaDMwdi0zMGgtOTB2MzBoMzB6IiBmaWxsPSIjMDYwYTdkIiBkYXRhLW9yaWdpbmFsPSIjMDAwMDAwIiBzdHlsZT0iIiBjbGFzcz0iIj48L3BhdGg+PHBhdGggaWQ9IlhNTElEXzIzNzRfIiBkPSJtMjQ3IDE4MGgzMHY2MGgzMHYtMTUwaC0zMHY2MGgtMzB2LTYwaC0zMHYxNTBoMzB6IiBmaWxsPSIjMDYwYTdkIiBkYXRhLW9yaWdpbmFsPSIjMDAwMDAwIiBzdHlsZT0iIiBjbGFzcz0iIj48L3BhdGg+PHBhdGggaWQ9IlhNTElEXzIzNzdfIiBkPSJtMCAwdjUxMGg1MTB2LTUxMHptNDgwIDQ4MGgtNDUwdi00NTBoNDUweiIgZmlsbD0iIzA2MGE3ZCIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiIgY2xhc3M9IiI+PC9wYXRoPjwvZz48L2c+PC9zdmc+"
-                                        />
-                                    </button>
-                                )}
+                                <div className="btnLineContainer">
+                                    {votingdead ? null : (
+                                        <button className="editContentBtn voting curBtn" onClick={requestDeadline}>
+                                            <img
+                                                id="votingDeadline"
+                                                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOnN2Z2pzPSJodHRwOi8vc3ZnanMuY29tL3N2Z2pzIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgeD0iMCIgeT0iMCIgdmlld0JveD0iMCAwIDUxMCA1MTAiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTIiIHhtbDpzcGFjZT0icHJlc2VydmUiIGNsYXNzPSIiPjxnPjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgaWQ9IlhNTElEXzE5NDZfIj48cGF0aCBpZD0iWE1MSURfMTk0N18iIGQ9Im0yMzIgMzQ3LjQzNCAzMS4wMzggNzIuNTY2aDI4Ljk2MnYtMTUwaC0zMHY3MS4zNzhsLTI5LjUzOC03MS4zNzhoLTMwLjQ2MnYxNTBoMzB6IiBmaWxsPSIjMDYwYTdkIiBkYXRhLW9yaWdpbmFsPSIjMDAwMDAwIiBzdHlsZT0iIiBjbGFzcz0iIj48L3BhdGg+PHBhdGggaWQ9IlhNTElEXzIzNzBfIiBkPSJtNDEyIDM3NXYtNjBjMC0yNC44MTQtMTkuNjg2LTQ1LTQ0LjUtNDVoLTQ1LjV2MTUwaDQ1LjVjMjQuODE0IDAgNDQuNS0yMC4xODYgNDQuNS00NXptLTYwLTc1aDE1LjVjOC4yNzIgMCAxNC41IDYuNzI4IDE0LjUgMTV2NjBjMCA4LjI3Mi02LjIyOCAxNS0xNC41IDE1aC0xNS41eiIgZmlsbD0iIzA2MGE3ZCIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiIgY2xhc3M9IiI+PC9wYXRoPjxwYXRoIGlkPSJYTUxJRF8yMzcxXyIgZD0ibTE3MiAzOTBoLTQ1di0zMGgzMHYtMzBoLTMwdi0zMGg0NXYtMzBoLTc1djE1MGg3NXoiIGZpbGw9IiMwNjBhN2QiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIHN0eWxlPSIiIGNsYXNzPSIiPjwvcGF0aD48cGF0aCBpZD0iWE1MSURfMjM3Ml8iIGQ9Im00MTIgMjEwaC00NXYtMzBoMzB2LTMwaC0zMHYtMzBoNDV2LTMwaC03NXYxNTBoNzV6IiBmaWxsPSIjMDYwYTdkIiBkYXRhLW9yaWdpbmFsPSIjMDAwMDAwIiBzdHlsZT0iIiBjbGFzcz0iIj48L3BhdGg+PHBhdGggaWQ9IlhNTElEXzIzNzNfIiBkPSJtMTI3IDI0MGgzMHYtMTIwaDMwdi0zMGgtOTB2MzBoMzB6IiBmaWxsPSIjMDYwYTdkIiBkYXRhLW9yaWdpbmFsPSIjMDAwMDAwIiBzdHlsZT0iIiBjbGFzcz0iIj48L3BhdGg+PHBhdGggaWQ9IlhNTElEXzIzNzRfIiBkPSJtMjQ3IDE4MGgzMHY2MGgzMHYtMTUwaC0zMHY2MGgtMzB2LTYwaC0zMHYxNTBoMzB6IiBmaWxsPSIjMDYwYTdkIiBkYXRhLW9yaWdpbmFsPSIjMDAwMDAwIiBzdHlsZT0iIiBjbGFzcz0iIj48L3BhdGg+PHBhdGggaWQ9IlhNTElEXzIzNzdfIiBkPSJtMCAwdjUxMGg1MTB2LTUxMHptNDgwIDQ4MGgtNDUwdi00NTBoNDUweiIgZmlsbD0iIzA2MGE3ZCIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiIgY2xhc3M9IiI+PC9wYXRoPjwvZz48L2c+PC9zdmc+"
+                                            />
+                                        </button>
+                                    )}
 
-                                <button className="editContentBtn curBtn" onClick={editContent}>
-                                    <img
-                                        id="editContent"
-                                        src="https://cdn.discordapp.com/attachments/881710985335934979/881927360398655518/edit.png"></img>
-                                </button>
-                                <button className="deleteContentBtn curBtn" onClick={deleteContent}>
-                                    <img
-                                        id="deleteContent"
-                                        src="https://cdn.discordapp.com/attachments/837593576955052072/881931904486621204/delete.png"></img>
-                                </button>
+                                    <button className="editContentBtn curBtn" onClick={editContent}>
+                                        <img
+                                            id="editContent"
+                                            src="https://cdn.discordapp.com/attachments/881710985335934979/881927360398655518/edit.png"></img>
+                                    </button>
+                                    <button className="deleteContentBtn curBtn" onClick={deleteContent}>
+                                        <img
+                                            id="deleteContent"
+                                            src="https://cdn.discordapp.com/attachments/837593576955052072/881931904486621204/delete.png"></img>
+                                    </button>
+                                </div>
                             </>
                         ) : null}
                     </div>

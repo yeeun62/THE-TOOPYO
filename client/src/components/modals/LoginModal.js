@@ -3,13 +3,12 @@ import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
 import './Modal.css';
 
-function Login({ isOpen, close, loginHandler }) {
+function Login({ isOpen, close, loginHandler, getUserinfo }) {
     const history = useHistory();
     const [loginInfo, setLoginInfo] = useState({
         email: '',
         password: '',
     });
-    console.log(loginInfo);
 
     const inputHandler = (e) => {
         setLoginInfo({ ...loginInfo, [e.target.name]: e.target.value });

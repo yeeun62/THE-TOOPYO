@@ -1,11 +1,16 @@
 import './Thumbnail.css';
 
-import { Link } from 'react-router-dom';
-
-function Thumbnail({ list, getContentDetail, writerId }) {
+function Thumbnail({ list, getContentDetail, writerId, isLogin }) {
+    const pleaseLogin = () => {
+        if (isLogin) {
+            return null;
+        } else {
+            alert('로그인 부탁드립니다.');
+        }
+    };
     return (
         <div>
-            <div className="container">
+            <div className="container" onClick={pleaseLogin}>
                 <h1 className="thumbTitle">{list.title}</h1>
                 <div className="thumbPicContainer">
                     <img className="thumbPicture thumbPicture_1" src={`/upload/${list.picture_1}`}></img>
